@@ -101,7 +101,7 @@ Although you can use them, for a more unique website, replace these images with 
       <div class="container">
         <div class="row">
           <div class="col-sm-6"> <img class="img-responsive img-circle center-block"
-              src="images/mic.png" alt=""> </div>
+              src="images/microphone.jpg" alt=""> </div>
           <div class="col-sm-6">
             <h2 class="section-header">Call for Papers</h2>
             <p class="lead text-muted">We are excited to announce that we are
@@ -167,22 +167,22 @@ Although you can use them, for a more unique website, replace these images with 
               src="images/team.png" alt="Team"></div>
           <div class="col-sm-6">
             <h2 class="section-header">Team</h2>
-            <p class="lead text-light">Main organisation</p>
+            <p class="lead text-light">Orga</p>
             <ul>
               <li>Alexander Georgiev</li>
             </ul>
             <p class="lead text-light">CFP Review Team</p>
             <ul>
-              <li>Alexander J&auml;ger</li>
+              <li>Alexander Jäger</li>
               <li>Andreas Fleck</li>
               <li>Axel Rengstorf ("Gamma")</li>
               <li>Hristiyan Lazarov</li>
-              <li>J&ouml;rg Pawlitzky</li>
+              <li>Jörg Pawlitzky</li>
               <li>Peter Massini</li>
             </ul>
           </div>
         </div>
-         </div>
+      </div>
     </section>
     <!-- Content Sponsors -->
     <!--<section class="content content-2">
