@@ -8,6 +8,26 @@ Although you can use them, for a more unique website, replace these images with 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Join us at the first BSides conference in Germany for 2023! Learn from top experts in offensive and defensive security on network, cryptography, mobile, wireless, and more. Don't miss it!">
+    <meta name="keywords" content="cyber security, information security, network security, IT security, offensive security, defensive security, cryptography, embedded devices, mobile security, wireless security, incident response, threat intelligence, penetration testing, red teaming, blue teaming, purple teaming, IT risk management, cyber threat analysis, data protection, GDPR compliance, compliance frameworks, security awareness training, vulnerability management, identity and access management, cloud security, application security, DevSecOps, cybersecurity career development, cybersecurity education, cybersecurity certification, bsides, BSidesFrankfurt, bsidesfra, bsides frankfurt">
+    <meta property="og:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
+    <meta property="og:site_name" content="Security BSidesFrankfurt">
+    <meta property="og:url" content="https://bsidesfrankfurt.org">
+    <meta property="og:description" content="Security BSidesFrankfurt is an Information Security conference, by the community, for the community. Follow: @BSidesFRA">
+    <meta property="og:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="Security BSidesFrankfurt">
+    <meta name="twitter:creator" content="@BSidesFRA">
+    <meta name="twitter:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
+    <meta name="twitter:description" content="Security BSidesFrankfurt is an Information Security conference by the community for the community. Follow: @BSidesFRA">
+    <meta name="twitter:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
+    <meta name="twitter:domain" content="bsidesfrankfurt.org">
+    <meta name="AUTHOR" content="bongoalex">
+    <meta name="GENERATOR" content="bongoalex">
+    <meta name="COPYRIGHT" content="© 2023 bsidesfrankfurt.org">
+    <meta name="ProgId" content="notepad">
     <title>BSidesFrankfurt</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +38,7 @@ Although you can use them, for a more unique website, replace these images with 
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>    <![endif]-->
     <!-- Custom Fonts from Google -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
       rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -92,7 +112,7 @@ Although you can use them, for a more unique website, replace these images with 
               information on this exciting event, and we hope to see you there!</p>
             <!--<a href="#" class="btn btn-default btn-lg">Test It</a>--> </div>
           <div class="col-sm-6"> <img class="img-responsive img-circle center-block"
-              src="images/hacker1.png" alt=""> </div>
+              src="images/hacker1.png" alt="hacker on a conference"> </div>
         </div>
       </div>
     </section>
@@ -101,7 +121,7 @@ Although you can use them, for a more unique website, replace these images with 
       <div class="container">
         <div class="row">
           <div class="col-sm-6"> <img class="img-responsive img-circle center-block"
-              src="images/microphone.jpg" alt=""> </div>
+              src="images/mic.png" alt="cyberpunk style mic"> </div>
           <div class="col-sm-6">
             <h2 class="section-header">Call for Papers</h2>
             <p class="lead text-muted">We are excited to announce that we are
@@ -155,7 +175,7 @@ Although you can use them, for a more unique website, replace these images with 
               <a href="images/ooo/OOO_SAC_Anfahrt_DE.pdf">Anfahrt (German)</a> </p>
           </div>
           <div class="col-sm-6"><img class="img-responsive img-circle center-block"
-              src="images/ooo/OOO_SAC_Entrance.jpg" alt="Location"></div>
+              src="images/ooo/OOO_SAC_Entrance.jpg" alt="Location OutOfOffice Sachsenhausen"></div>
         </div>
       </div>
     </section>
@@ -164,10 +184,10 @@ Although you can use them, for a more unique website, replace these images with 
       <div class="container">
         <div class="row">
           <div class="col-sm-6"><img class="img-responsive img-circle center-block"
-              src="images/team.png" alt="Team"></div>
+              src="images/team.png" alt="bsidesfrankfurt Team"></div>
           <div class="col-sm-6">
             <h2 class="section-header">Team</h2>
-            <p class="lead text-light">Orga</p>
+            <p class="lead text-light">Main organisation</p>
             <ul>
               <li>Alexander Georgiev</li>
             </ul>
@@ -185,18 +205,37 @@ Although you can use them, for a more unique website, replace these images with 
       </div>
     </section>
     <!-- Content Sponsors -->
-    <!--<section class="content content-2">
-      <div class="container-fluid">        <div class="row promo">          <a href="#"><div class="col-md-4 promo-item"><h3>Sponsor 1</h3></div></a>          <a href="#"><div class="col-md-4 promo-item"><h3>Sponsor 2</h3></div></a>          <a href="#"><div class="col-md-4 promo-item"><h3>Sponsor 3</h3></div></a>          <a href="#"><div class="col-md-4 promo-item"><h3>Sponsor 4</h3></div></a>        </div>    </div>    </section>-->
-    <!-- Content 3 -->
     <section class="content content-2">
       <div class="container">
-        <h2 class="section-header"><span class="glyphicon glyphicon-pushpin text-primary"></span><br>
-          Sponsors</h2>
-        <p class="lead text-muted">Feel free to reach out via mail if you
-          can/want to sponsor us!</p>
-        <a href="#contactus" class="btn btn-default btn-lg">Please contact us</a>
+        <div class="row">
+          <div class="col-sm-6">
+            <h2 class="section-header">Silver Sponsors</h2>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row promo"><a href="https://mogwailabs.de/">
+              <div class="col-md-4 promo-item"> <img class="img-responsive center-block"
+                  src="images/sponsors/mogwailabs.png" alt="Mogwai Labs GmbH">
+                <!--<h3>Mogwai Labs GmbH</h3>--> </div>
+            </a> <!--<a href="https://mogwailabs.de/">
+              <div class="col-md-4 promo-item"> <img class="img-responsive center-block"
+                  src="images/sponsors/mogwailabs.png" alt="Mogwai Labs GmbH">
+                <!--<h3>Mogwai Labs GmbH</h3>--> </div>
+            <!--</a> <a href="https://mogwailabs.de/">
+              <div class="col-md-4 promo-item"> <img class="img-responsive center-block"
+                  src="images/sponsors/mogwailabs.png" alt="Mogwai Labs GmbH">
+                <!--<h3>Mogwai Labs GmbH</h3>--> </div>
+            <!--</a>-->
+            <!--<a href="https://2.de/">
+            <div class="col-md-4 promo-item">              <h3>Sponsor Silver</h3>            </div>          </a> <a href="#">            <div class="col-md-6 promo-item">              <h3>Sponsor Gold</h3>            </div>          </a> <a href="#">
+            <div class="col-md-12 promo-item">              <h3>Sponsor Platin</h3>            </div>          </a>-->
+          </div>
+        </div>
       </div>
     </section>
+    <!-- Content 3 
+    <section class="content content-2">      <div class="container">        <h2 class="section-header"><span class="glyphicon glyphicon-pushpin text-primary"></span><br>          Sponsorship</h2>        <p class="lead text-muted">Feel free to reach out via mail if you          can/want to sponsor us!</p>        <a href="#contactus" class="btn btn-default btn-lg">Please contact us</a>      </div>
+    </section>-->
     <!-- Footer -->
     <footer class="page-footer content-2">
       <!-- Contact Us -->
@@ -218,7 +257,7 @@ Although you can use them, for a more unique website, replace these images with 
                     contactDetails=('Alex'+'ander Geo'+'rgiev, Ta'+'citu'+'sstr.'+' 68'+', 6043'+'9 Frankf'+'urt '+'a'+'m Main'
 )                    document.write(contactDetails)
                     //-->
-                </script> <noscript>Our contact details are scripted to prevent spam. If you cannot see it, please enable JavaScript.</noscript>
+          </script> <noscript>Our contact details are scripted to prevent spam. If you cannot see it, please enable JavaScript.</noscript>
           <p><font size="1">Text and pictures were up to 100% AI generated &lt;3</font></p>
         </div>
       </div>
