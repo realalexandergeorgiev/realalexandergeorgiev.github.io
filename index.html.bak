@@ -221,14 +221,18 @@ Although you can use them, for a more unique website, replace these images with 
                   src="images/sponsors/mogwailabs.png" alt="Mogwai Labs GmbH">
                 <!--<h3>Mogwai Labs GmbH</h3>--> </div>
             </a> 
+
             <a href="https://www.siemens-energy.com/de/de.html">
               <div class="col-md-4 promo-item"> <img class="img-responsive center-block"
-                  src="images/sponsors/SE_Logo_Color_CMYK_whitebg.png" alt="Siemens Energy AG">
-                <!--<h3>Mogwai Labs GmbH</h3>--> </div>
+                  src="images/sponsors/SE_Logo_Color_CMYK_whitebg.png" alt="Siemens Energy Global GmbH & Co. KG">
             </a>
+            <!--
             <div class="col-md-4 promo-item">              <h3>Sponsor Silver</h3>            </div>          </a> <a href="#">            <div class="col-md-6 promo-item">              <h3>Sponsor Gold</h3>            </div>          </a> <a href="#">            <div class="col-md-12 promo-item">              <h3>Sponsor Platin</h3>            </div>          </a>-->
-          </a></div>
-        <a href="https://www.siemens-energy.com/de/de.html"> </a></div>
+          <!--</a></div>
+        -->
+      
+          </div>
+      </div>
     </section>
     
       
