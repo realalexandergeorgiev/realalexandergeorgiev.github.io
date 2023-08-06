@@ -126,6 +126,13 @@ header .header-content .header-content-inner p {
     text-decoration: none;
 }
 
+.center-block-bsides {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-height: 100%;
+}
+
 .promo-item {
     height: 200px;
     line-height: 180px;
