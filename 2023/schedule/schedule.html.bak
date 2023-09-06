@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Join us at the first BSides conference in Germany for 2023! Learn from top experts in offensive and defensive security on network, cryptography, mobile, wireless, and more. Don't miss it!">
+    <meta name="keywords" content="cyber security, information security, network security, IT security, offensive security, defensive security, cryptography, embedded devices, mobile security, wireless security, incident response, threat intelligence, penetration testing, red teaming, blue teaming, purple teaming, IT risk management, cyber threat analysis, data protection, GDPR compliance, compliance frameworks, security awareness training, vulnerability management, identity and access management, cloud security, application security, DevSecOps, cybersecurity career development, cybersecurity education, cybersecurity certification, bsides, BSidesFrankfurt, bsidesfra, bsides frankfurt">
+    <meta property="og:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
+    <meta property="og:site_name" content="Security BSidesFrankfurt">
+    <meta property="og:url" content="https://bsidesfrankfurt.org">
+    <meta property="og:description" content="Security BSidesFrankfurt is an Information Security conference, by the community, for the community. Follow: @BSidesFRA">
+    <meta property="og:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="Security BSidesFrankfurt">
+    <meta name="twitter:creator" content="@BSidesFRA">
+    <meta name="twitter:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
+    <meta name="twitter:description" content="Security BSidesFrankfurt is an Information Security conference by the community for the community. Follow: @BSidesFRA">
+    <meta name="twitter:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
+    <meta name="twitter:domain" content="bsidesfrankfurt.org">
+    <meta name="AUTHOR" content="bongoalex">
+    <meta name="GENERATOR" content="bongoalex">
+    <meta name="COPYRIGHT" content="© 2023 bsidesfrankfurt.org">
+    <meta name="ProgId" content="notepad">
+    <title>BSidesFrankfurt 2023 Schedule</title>
+    <!-- Custom Fonts from Google -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+      rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+
+<div class="text">
+	<h1>BSidesFrankfurt 2023-09-15</h1>
+	<p>Please be advised that the schedule is subject to slight changes without prior notification. Therefore, we kindly request that you regularly check the designated page for any updates.<p>
+	<!--<p><i><small>By <a href="https://MRWweb.com">Mark Root-Wiley</a>.</small></i></p>-->
+	<hr>
+</div>
+
+<center>
+    <h2 id="schedule-heading">Conference Schedule</h2>
+</center>
+<div class="schedule" aria-labelledby="schedule-heading">
+	<span class="track-slot" aria-hidden="true" style="grid-column: track-1; grid-row: tracks;">Track 1</span>
+
+	<h2 class="time-slot" style="grid-row: time-0900;">9:00</h2>
+	<div class="session session-1 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-0900 / time-1000;">
+		<h3 class="session-title">Registration & Coffee</h3>
+		<span class="session-time">9:00 - 10:00</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1000;">10:00</h2>
+	<div class="session session-2 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1000 / time-1100;">
+		<h3 class="session-title"><a href="#">SIEM Slam: Tricking Modern SIEMs with Fake Logs and Confusing Blue Teams</a></h3>
+		<span class="session-time">10:00 - 11:00</span>
+		<span class="session-presenter">Presenter: &Ouml;zg&uuml;n K&uuml;ltekin</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1100;">11:00</h2>
+	<div class="session session-3 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1100 / time-1200;">
+		<h3 class="session-title"><a href="#">Breaking Barriers: A Deep Dive into Bypassing Next-Gen 2FA and MFA Security Measures</a></h3>
+		<span class="session-time">11:00 - 12:00</span>
+		<span class="session-presenter">Presenter: Muhammad Shahmeer</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1200;">12:00</h2>
+	<div class="session session-4 track-all" style="grid-column: track-1-start / track-4-end; grid-row: time-1200 / time-1330;">
+		<h3 class="session-title">Lunch break!</h3>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1330;">13:30</h2>
+	<div class="session session-5 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1330 / time-1400;">
+		<h3 class="session-title"><a href="#">Detecting the Human: An Introduction to User-Interaction Detection in Malware</a></h3>
+		<span class="session-time">13:30 - 14:00</span>
+		<span class="session-presenter">Presenter: Kyle Cucci (@d4rksystem)</span>
+	</div>
+
+	<h2 class="time-slot" style="grid-row: time-1400;">14:00</h2>
+	<div class="session session-5 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1400 / time-1500;">
+		<h3 class="session-title"><a href="#">AWS Attack based on Misconfiguration</a></h3>
+		<span class="session-time">14:00 - 15:00</span>
+		<span class="session-presenter">Presenter: Filipi Pires</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1500;">15:00</h2>
+	<div class="session session-6 track-all" style="grid-column: track-1-start / track-4-end; grid-row: time-1500 / time-1530;">
+		<h3 class="session-title">Coffee & Snack break!</h3>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1530;">15:30</h2>
+	<div class="session session-7 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1530 / time-1630;">
+		<h3 class="session-title"><a href="#">Real world detection engineering in a multi-cloud environment</a></h3>
+		<span class="session-time">15:30 - 16:30</span>
+		<span class="session-presenter">Presenter: Aaron Jewitt</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1630;">16:30</h2>
+	<div class="session session-8 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1630 / time-1730;">
+		<h3 class="session-title"><a href="#">Zero-Touch-Pwn: Abusing Zoom's Zero Touch Provisioning for remote attacks on desk phones</a></h3>
+		<span class="session-time">16:30 - 17:30</span>
+		<span class="session-presenter">Presenter: Moritz Abrell</span>
+	</div>
+	
+	<h2 class="time-slot" style="grid-row: time-1730;">17:30</h2>
+	<div class="session session-9 track-1" style="grid-column: track-1-start / track-4-end; grid-row: time-1730 / time-1800;">
+		<h3 class="session-title">Closing</h3>
+		<span class="session-time">17:30 - 18:00</span>
+	</div>
+</div>
+
+</body>
