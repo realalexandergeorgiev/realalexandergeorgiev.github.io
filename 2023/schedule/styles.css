@@ -87,8 +87,11 @@ body {
 	margin: 0 auto;
 	line-height: 1.5;
 	background-color: #fff;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;"
+	/* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;" */
 	font-size: 14px;
+}
+header {
+	min-height: 50%;
 }
 
 .session {
