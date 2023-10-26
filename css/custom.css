@@ -2,7 +2,8 @@ html,
 body {
     width: 100%;
     height: 100%;
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    /* font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif; */
+    font-family: 'Poppins';
 }
 
 a {
@@ -102,12 +103,12 @@ header .header-content .header-content-inner p {
 }
 
 .content {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .content-2 {
 	color: #fff;
-    background-color: #222;
+    background-color: #011023;;
 }
 
 .content-3 {
@@ -175,15 +176,18 @@ header .header-content .header-content-inner p {
 	}
 
 .page-footer .contact {
-	padding: 100px 0;
-	background-color: yellowgreen;
-	color: #fff;
+	color: white;
 	}
 
 .page-footer .contact p {
 	font-size: 22px;
 	font-weight: 300;
 	}
+
+    .page-footer .contact a {
+        color: white;
+        
+    }
 	
 .content-3 .glyphicon,	
 .page-footer .contact .glyphicon {
@@ -436,3 +440,121 @@ img::-moz-selection {
 .bg-primary {
     background-color: yellowgreen;
 }
+
+.ml-3 {
+    margin-left: 15px;
+}
+.mr-3{
+    margin-right: 15px;
+}
+.mb-5 {
+    margin-bottom: 25px;
+}
+.mt-5 {
+    margin-top: 25px;
+}
+.img-responsive-logo {
+     max-height: 80%;
+     height: auto;
+     max-width: 700px;
+}
+.d-none{
+    display: none;
+}
+.section-header{
+    text-align: center;
+}
+.shadow {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        border: 2px;
+}
+.blue-grey{
+    background: #242c3b;
+}
+
+.main-team{
+position: relative;
+text-align: center;
+color: #fff;
+background-image: url(../images/team.png);
+background-color: #0110231c;
+height: 400px; /* You must set a specified height */
+background-position: center; /* Center the image */
+background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover; /* Resize the background image to cover the entire container */
+
+}
+
+.main-container {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slick {
+    text-align: center;
+}
+.slick img {
+    max-height: 25vh;
+    margin: auto;
+    margin-bottom: 12px;
+}
+.slick div {
+    padding: 20px;
+}
+
+.item-gold {
+    position: relative;
+
+  }
+  .item-gold .column-content{
+    margin: 12px;
+    box-shadow: rgba(64, 82, 112, 0.25) 0px 4px 8px -2px, rgba(82, 103, 139, 0.08) 0px 0px 0px 1px;
+    background-color: #121314;
+    padding: 20px;
+    min-height: 50vh;
+    text-align: center;
+    display: table;
+width: 100%;
+  }
+
+  .item-silver .div-content{
+    box-shadow: rgba(64, 82, 112, 0.25) 0px 4px 8px -2px, rgba(82, 103, 139, 0.08) 0px 0px 0px 1px;
+    background-color: #121314;
+    min-height: 25vh;
+  }
+
+  .div-content {
+    display: table;
+  }
+  .div-content a {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .div-content a:hover {
+    
+  }
+  .item-gold .column-content a {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .item-gold .column-content .text {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .modal-content {
+    background-color: #121314;
+  }
+
+  .modal-content .close{
+    color: #eb3812;
+  }
