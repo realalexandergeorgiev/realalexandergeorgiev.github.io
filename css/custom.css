@@ -522,7 +522,18 @@ width: 100%;
 
   .item-silver .div-content{
     box-shadow: rgba(64, 82, 112, 0.25) 0px 4px 8px -2px, rgba(82, 103, 139, 0.08) 0px 0px 0px 1px;
-    background-color: #121314;
+    background-color: #000000;
+    min-height: 25vh;
+  }
+
+  .item-community-white .div-content{
+    box-shadow: rgba(122, 147, 191, 0.25) 0px 4px 8px -2px, rgba(124, 155, 208, 0.08) 0px 0px 0px 1px;
+    background-color: #ffffff;
+    min-height: 25vh;
+  }
+  .item-community-black .div-content{
+    box-shadow: rgba(122, 147, 191, 0.25) 0px 4px 8px -2px, rgba(124, 155, 208, 0.08) 0px 0px 0px 1px;
+    background-color: #000000;
     min-height: 25vh;
   }
 
