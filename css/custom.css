@@ -37,58 +37,73 @@ header {
     -o-background-size: cover;
 }
 
-header .header-content {
-    position: relative;
-    width: 100%;
-    padding: 100px 15px 70px;
-    text-align: center;
-}
+.full-height-header {
+    height: calc(100vh - 60px); /* Adjust 60px to match your nav height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
 
-header .header-content .header-content-inner h1 {
-    margin-top: 0;
+
+  .header-date {
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    font-size: 50px;
-    font-weight: 400;
-}
+  }
 
-header .header-content .header-content-inner p {
-    margin-bottom: 50px;
-    font-size: 18px;
-    font-weight: 600;
-    color: rgba(255,255,255,.7);
-}
+  .header-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
 
-@media(min-width:768px) {
-    header {
-        min-height: 100%;
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header-image-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 70vh; /* Adjust this value to control maximum image height */
+  }
+
+  .img-header {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+
+  @media (max-width: 768px) {
+    .full-height-header {
+      height: auto;
+      min-height: calc(100vh - 60px);
     }
 
-    header .header-content {
-        position: absolute;
-        top: 50%;
-        padding: 0 50px;
-        -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
+    .header-image-container {
+      max-height: 50vh;
     }
 
-    header .header-content .header-content-inner {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 1000px;
+    .header-date {
+      font-size: 1.2rem;
     }
 
-	header .header-content .header-content-inner h1 {
-    	font-size: 100px;
-		}
-
-    header .header-content .header-content-inner p {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 80%;
-        font-size: 28px;
+    .btn-lg {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
     }
-}
+  }
 
 .section-heading {
     margin-top: 0;
@@ -498,7 +513,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 }
 .slick img {
     max-height: 25vh;
-    margin: auto;
+   /* margin: auto;*/
     margin-bottom: 12px;
 }
 .slick div {
@@ -529,8 +544,28 @@ background-size: cover; /* Resize the background image to cover the entire conta
   .item-community-white .div-content {
     box-shadow: rgba(122, 147, 191, 0.25) 0px 4px 8px -2px, rgba(124, 155, 208, 0.08) 0px 0px 0px 1px;
     background-color: #ffffff;
-    min-height: 25vh;
+    height: 250px; /* Adjust this value to your desired height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
   }
+
+  .item-community-white .div-content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .img-responsive {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+
   .item-community-black .div-content {
     box-shadow: rgba(122, 147, 191, 0.25) 0px 4px 8px -2px, rgba(124, 155, 208, 0.08) 0px 0px 0px 1px;
     background-color: #000000;
