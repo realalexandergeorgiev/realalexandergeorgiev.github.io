@@ -558,18 +558,29 @@ background-size: cover; /* Resize the background image to cover the entire conta
     width: 100%;
     height: 100%;
   }
-  
-  .img-responsive {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
 
   .item-community-black .div-content {
     box-shadow: rgba(122, 147, 191, 0.25) 0px 4px 8px -2px, rgba(124, 155, 208, 0.08) 0px 0px 0px 1px;
     background-color: #000000;
-    min-height: 25vh;
+    height: 250px; /* Adjust this value to your desired height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+  }
+
+  .item-community-black .div-content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .img-responsive {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .div-content {
