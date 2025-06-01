@@ -569,6 +569,11 @@ background-size: cover; /* Resize the background image to cover the entire conta
     border-radius: 2px;
   }
 
+  /* Make contact details font smaller */
+  .contact-details {
+    font-size: 0.9em;
+  }
+  
   .item-community-black .div-content a {
     display: flex;
     justify-content: center;
