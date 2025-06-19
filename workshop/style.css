@@ -1,0 +1,232 @@
+/* --- Global Body Styling (Background and Centering) --- */
+body {
+    background-color: #011023; /* Matches the content-2 background from custom.css */
+    display: flex; /* Use flexbox for overall page layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    margin: 0; /* Remove default body margin */
+    width: 100%; /* Ensure body takes full width */
+}
+
+/* --- Footer background to match body background --- */
+.page-footer.content-2 {
+    background-color: #011023; /* Matches the content-2 background from custom.css */
+}
+
+/* --- Container for all 6 boxes (Single column grid, centered within body flex) --- */
+.terminal-grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* This stacks them below each other */
+    gap: 30px; /* Space between the boxes */
+    max-width: 800px; /* New box width (760px) + 2*20px padding = 800px */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin-top: 20px; /* Add some margin from the top to separate from header */
+    margin-bottom: 20px; /* Add some margin from the bottom to separate from footer */
+    /* margin: 0 auto; Removed as body flex handles horizontal centering */
+}
+
+/* --- Wrapper for each box and its title --- */
+.box-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack title and box vertically */
+    align-items: flex-start; /* Align title to the left of its box */
+}
+
+/* --- Box Title Styling (Terminal Look) --- */
+.box-title {
+    width: 760px; /* Double width */
+    color: #00FF00; /* Green text color */
+    font-family: "Courier New", Courier, monospace; /* Terminal-like font */
+    font-size: 1.5em;
+    text-align: left;
+    padding-left: 2px;
+    margin: 0 0 5px 0; /* Adjusted margin to fit within wrapper's flex context */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle glow for the title */
+}
+
+/* --- Main Container Box Styling (Terminal Look, Rounded Edges, Outer Glow) --- */
+.container-box {
+    width: 760px; /* Double width */
+    /* height: 400px;  REMOVED FIXED HEIGHT */
+    border: 2px solid #fff; /* White outer border */
+    box-shadow: 0 0 10px #fff; /* White outer glow */
+    display: flex;
+    flex-direction: column;
+    background-color: #000; /* Black background */
+    /* overflow: hidden; Removed as it would hide content if it overflows */
+    margin: 0; /* No external margins, grid handles spacing */
+    border-radius: 15px; /* Rounded edges */
+}
+
+/* --- Description Half Styling (Terminal Look) --- */
+.description-half {
+    /* flex: 1;  Changed to auto sizing */
+    flex: 0 0 auto; /* Allow content to define height, don't grow/shrink */
+    padding: 20px;
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    text-align: center;
+    color: #00FF00; /* Green text color */
+    font-family: "Courier New", Courier, monospace; /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle text glow */
+}
+
+/* --- Lower Half Container --- */
+.lower-half {
+    /* flex: 1; Changed to auto sizing */
+    flex: 0 0 auto; /* Allow content to define height, don't grow/shrink */
+    display: flex; /* Enables horizontal division */
+}
+
+/* --- Lower Half Left Section (Terminal Look) --- */
+.lower-half-left {
+    flex: 1; /* Takes up 50% of the lower half's width */
+    padding: 20px;
+    background-color: #000; /* Black background */
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    justify-content: flex-start; /* Changed to flex-start for consistent top alignment */
+    align-items: flex-start; /* Align rows to the left */
+    color: #00FF00; /* Green text color */
+    font-family: "Courier New", Courier, monospace; /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle text glow */
+}
+
+/* --- Lower Half Right Section (Terminal Look) --- */
+.lower-half-right {
+    flex: 1; /* Takes up 50% of the lower half's width */
+    padding: 20px;
+    background-color: #000; /* Black background */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Changed to flex-start for consistent top alignment */
+    align-items: flex-start; /* Align rows to the left */
+    color: #00FF00; /* Green text color */
+    font-family: "Courier New", Courier, monospace; /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle text glow */
+}
+
+/* --- Row List Styling (No bullets, Indentation Controlled by LI) --- */
+.row-list {
+    list-style: none; /* Removes bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    width: 100%; /* Ensure the list takes full width of its parent */
+}
+
+/* --- Individual Row Styling --- */
+.row-list li {
+    /* All rows start 1cm from the edge of their parent's padding */
+    padding: 5px 0 5px 1cm;
+    font-size: 1em;
+    color: #00FF00; /* Green text color */
+    position: relative; /* Needed for pseudo-elements */
+    font-family: "Courier New", Courier, monospace; /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle text glow */
+}
+
+/* --- Specific Styling for Every Second Row (Additional Indent) --- */
+.row-list li:nth-child(even) {
+    /* Adds an additional 1cm left padding for text in even rows (total 2cm) */
+    padding-left: 2cm;
+}
+
+/* --- Arrow Styling for Every Second Row (Positioned in front of text) --- */
+.row-list li:nth-child(even)::before {
+    content: "▶"; /* Unicode character for a right-pointing triangle */
+    position: absolute;
+    /* Positions the arrow in the padding space, just before the text starts */
+    left: calc(1cm - 12px); /* 1cm is where the LI's base padding starts. 12px is approximate arrow width. */
+    color: #00FF00; /* Green arrow color */
+    font-size: 0.8em; /* Adjust arrow size */
+    top: 50%; /* Vertically center the arrow */
+    transform: translateY(-50%); /* Adjust for perfect vertical centering */
+    text-shadow: 0 0 5px #C8C8C8; /* Subtle arrow glow */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 800px) {
+    /* Adjust general container width for smaller screens */
+    .terminal-grid-container {
+        max-width: 100%; /* Allow container to take full width */
+        padding: 10px; /* Reduce padding for smaller screens */
+        gap: 20px; /* Slightly reduce gap */
+    }
+
+    .box-title,
+    .container-box {
+        width: 100%; /* Make boxes take full width of their parent container */
+        box-sizing: border-box; /* Include padding/border in width */
+    }
+
+    /* Stack lower halves vertically on smaller screens */
+    .lower-half {
+        flex-direction: column;
+    }
+
+    .lower-half-left,
+    .lower-half-right {
+        /* Adjust padding for vertical stacking if needed */
+        padding: 15px; /* Slightly reduce padding */
+    }
+
+    /* Adjust list item padding and arrow position for narrower screens */
+    .row-list li {
+        padding: 5px 0 5px 0.5cm; /* Reduce initial padding */
+        font-size: 0.9em; /* Slightly reduce font size for readability */
+    }
+
+    .row-list li:nth-child(even) {
+        padding-left: 1cm; /* Reduce additional padding for even rows */
+    }
+
+    .row-list li:nth-child(even)::before {
+        left: calc(0.5cm - 12px); /* Adjust arrow position based on new padding */
+    }
+
+    /* Adjust font sizes in description for better fit */
+    .description-half p {
+        font-size: 0.9em;
+    }
+
+    /* Smaller header text for mobile */
+    header .header-content-inner h2 {
+        font-size: 2em; /* Smaller than desktop */
+    }
+
+    header .header-content-inner h4 {
+        font-size: 1em; /* Smaller than desktop */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    .terminal-grid-container {
+        padding: 5px; /* Minimal padding */
+    }
+
+    .box-title {
+        font-size: 1.2em; /* Even smaller title */
+    }
+
+    .description-half p {
+        font-size: 0.8em; /* Even smaller description */
+    }
+
+    .row-list li {
+        padding: 3px 0 3px 0.3cm; /* Further reduce padding */
+        font-size: 0.85em; /* Further reduce font size */
+    }
+
+    .row-list li:nth-child(even) {
+        padding-left: 0.6cm; /* Further reduce additional padding */
+    }
+
+    .row-list li:nth-child(even)::before {
+        left: calc(0.3cm - 10px); /* Adjust arrow position */
+        font-size: 0.7em; /* Smaller arrow */
+    }
+}
