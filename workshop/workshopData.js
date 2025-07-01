@@ -19,7 +19,8 @@ const workshopDetails = [
             "laptop with admin rights, a copy of the Internet",
             "Audience level:",
             "beginner / intermediate / advanced"
-        ]
+        ],
+        registrationLink: "https://example.com/register/workshop1" // Add this line
     },
     {
         title: "Box 2 Title",
@@ -41,7 +42,8 @@ const workshopDetails = [
             "laptop with admin rights, a copy of the Internet",
             "Audience level:",
             "beginner / intermediate / advanced"
-        ]
+        ],
+        registrationLink: "https://example.com/register/workshop2" // Add this line
     },
     {
         title: "Box 3 Title",
@@ -63,7 +65,8 @@ const workshopDetails = [
             "laptop with admin rights, a copy of the Internet",
             "Audience level:",
             "beginner / intermediate / advanced"
-        ]
+        ],
+        registrationLink: "https://example.com/register/workshop3" // Add this line
     },
     {
         title: "Box 4 Title",
@@ -85,7 +88,8 @@ const workshopDetails = [
             "laptop with admin rights, a copy of the Internet",
             "Audience level:",
             "beginner / intermediate / advanced"
-        ]
+        ],
+        registrationLink: "https://example.com/register/workshop4" // Add this line
     },
     {
         title: "Box 5 Title",
@@ -107,6 +111,7 @@ const workshopDetails = [
             "laptop with admin rights, a copy of the Internet",
             "Audience level:",
             "beginner / intermediate / advanced"
-        ]
+        ],
+        registrationLink: "https://example.com/register/workshop5" // Add this line
     }
 ];
