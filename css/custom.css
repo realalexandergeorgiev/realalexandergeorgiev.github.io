@@ -29,7 +29,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url('../images/header-dark1.png');
+    background-image: url('../images/header-dark1.webp');
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -491,7 +491,7 @@ img::-moz-selection {
 position: relative;
 text-align: center;
 color: #fff;
-background-image: url(../images/team.png);
+background-image: url(../images/team.webp);
 background-color: #0110231c;
 height: 400px; /* You must set a specified height */
 background-position: center; /* Center the image */
