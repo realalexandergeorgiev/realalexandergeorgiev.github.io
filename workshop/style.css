@@ -1,0 +1,550 @@
+/* --- Global Body Styling (Background and Centering) --- */
+body {
+    background-color: #011023;
+    /* Matches the content-2 background from custom.css */
+    display: flex;
+    /* Use flexbox for overall page layout */
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center content horizontally */
+    min-height: 100vh;
+    /* Ensure body takes at least full viewport height */
+    margin: 0;
+    /* Remove default body margin */
+    width: 100%;
+    /* Ensure body takes full width */
+}
+
+/* --- Footer background to match body background --- */
+.page-footer.content-2 {
+    background-color: #011023;
+    /* Matches the content-2 background from custom.css */
+}
+
+/* --- Container for all 6 boxes (Single column grid, centered within body flex) --- */
+.terminal-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* This stacks them below each other */
+    gap: 30px;
+    /* Space between the boxes */
+    max-width: 800px;
+    /* New box width (760px) + 2*20px padding = 800px */
+    padding: 20px;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    margin-top: 20px;
+    /* Add some margin from the top to separate from header */
+    margin-bottom: 20px;
+    /* Add some margin from the bottom to separate from footer */
+    /* margin: 0 auto; Removed as body flex handles horizontal centering */
+}
+
+/* --- Wrapper for each box and its title --- */
+.box-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Stack title and box vertically */
+    align-items: flex-start;
+    /* Align title to the left of its box */
+}
+
+/* --- Box Title Styling (Terminal Look) --- */
+.box-title {
+    width: 760px;
+    /* Double width */
+    color: #00FF00;
+    /* Green text color */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    font-size: 1.5em;
+    text-align: left;
+    padding-left: 2px;
+    margin: 0 0 5px 0;
+    /* Adjusted margin to fit within wrapper's flex context */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle glow for the title */
+}
+
+/* --- Main Container Box Styling (Terminal Look, Rounded Edges, Outer Glow) --- */
+.container-box {
+    width: 760px;
+    /* Double width */
+    /* height: 400px;  REMOVED FIXED HEIGHT */
+    border: 2px solid #fff;
+    /* White outer border */
+    box-shadow: 0 0 10px #fff;
+    /* White outer glow */
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    /* Black background */
+    /* overflow: hidden; Removed as it would hide content if it overflows */
+    margin: 0;
+    /* No external margins, grid handles spacing */
+    border-radius: 15px;
+    /* Rounded edges */
+}
+
+/* --- Description Half Styling (Terminal Look) --- */
+.description-half {
+    /* flex: 1;  Changed to auto sizing */
+    flex: 0 0 auto;
+    /* Allow content to define height, don't grow/shrink */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    /* Vertically center content */
+    justify-content: center;
+    /* Horizontally center content */
+    color: #00FF00;
+    /* Green text color */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle text glow */
+}
+
+/* Formatting for the description paragraph */
+.description-half p {
+    white-space: pre-wrap;
+    /* Preserves newlines and spaces from the source string */
+    text-align: left;
+    /* Aligns text to the left for readability */
+    word-wrap: break-word;
+    /* Prevents long strings from overflowing the container */
+}
+
+/* --- Lower Half Container --- */
+.lower-half {
+    /* flex: 1; Changed to auto sizing */
+    flex: 0 0 auto;
+    /* Allow content to define height, don't grow/shrink */
+    display: flex;
+    /* Enables horizontal division */
+}
+
+/* --- Lower Half Left Section (Terminal Look) --- */
+.lower-half-left {
+    flex: 1;
+    /* Takes up 50% of the lower half's width */
+    padding: 20px;
+    background-color: #000;
+    /* Black background */
+    display: flex;
+    flex-direction: column;
+    /* Stack rows vertically */
+    justify-content: flex-start;
+    /* Changed to flex-start for consistent top alignment */
+    align-items: flex-start;
+    /* Align rows to the left */
+    color: #00FF00;
+    /* Green text color */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle text glow */
+}
+
+/* --- Lower Half Right Section (Terminal Look) --- */
+.lower-half-right {
+    flex: 1;
+    /* Takes up 50% of the lower half's width */
+    padding: 20px;
+    background-color: #000;
+    /* Black background */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Changed to flex-start for consistent top alignment */
+    align-items: flex-start;
+    /* Align rows to the left */
+    color: #00FF00;
+    /* Green text color */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle text glow */
+}
+
+/* --- Row List Styling (No bullets, Indentation Controlled by LI) --- */
+.row-list {
+    list-style: none;
+    /* Removes bullet points */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+    width: 100%;
+    /* Ensure the list takes full width of its parent */
+}
+
+/* --- Individual Row Styling --- */
+.row-list li {
+    /* All rows start 1cm from the edge of their parent's padding */
+    padding: 5px 0 5px 1cm;
+    font-size: 1em;
+    color: #00FF00;
+    /* Green text color */
+    position: relative;
+    /* Needed for pseudo-elements */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle text glow */
+}
+
+/* --- Specific Styling for Every Second Row (Additional Indent) --- */
+.row-list li:nth-child(even) {
+    /* Adds an additional 1cm left padding for text in even rows (total 2cm) */
+    padding-left: 2cm;
+}
+
+/* --- Arrow Styling for Every Second Row (Positioned in front of text) --- */
+.row-list li:nth-child(even)::before {
+    content: "▶";
+    /* Unicode character for a right-pointing triangle */
+    position: absolute;
+    /* Positions the arrow in the padding space, just before the text starts */
+    left: calc(1cm - 12px);
+    /* 1cm is where the LI's base padding starts. 12px is approximate arrow width. */
+    color: #00FF00;
+    /* Green arrow color */
+    font-size: 0.8em;
+    /* Adjust arrow size */
+    top: 50%;
+    /* Vertically center the arrow */
+    transform: translateY(-50%);
+    /* Adjust for perfect vertical centering */
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle arrow glow */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 800px) {
+
+    /* Adjust general container width for smaller screens */
+    .terminal-grid-container {
+        max-width: 100%;
+        /* Allow container to take full width */
+        padding: 10px;
+        /* Reduce padding for smaller screens */
+        gap: 20px;
+        /* Slightly reduce gap */
+    }
+
+    .box-title,
+    .container-box {
+        width: 100%;
+        /* Make boxes take full width of their parent container */
+        box-sizing: border-box;
+        /* Include padding/border in width */
+    }
+
+    /* Stack lower halves vertically on smaller screens */
+    .lower-half {
+        flex-direction: column;
+    }
+
+    .lower-half-left,
+    .lower-half-right {
+        /* Adjust padding for vertical stacking if needed */
+        padding: 15px;
+        /* Slightly reduce padding */
+    }
+
+    /* Adjust list item padding and arrow position for narrower screens */
+    .row-list li {
+        padding: 5px 0 5px 0.5cm;
+        /* Reduce initial padding */
+        font-size: 0.9em;
+        /* Slightly reduce font size for readability */
+    }
+
+    .row-list li:nth-child(even) {
+        padding-left: 1cm;
+        /* Reduce additional padding for even rows */
+    }
+
+    .row-list li:nth-child(even)::before {
+        left: calc(0.5cm - 12px);
+        /* Adjust arrow position based on new padding */
+    }
+
+    /* Adjust font sizes in description for better fit */
+    .description-half p {
+        font-size: 0.9em;
+    }
+
+    /* Smaller header text for mobile */
+    header .header-content-inner h2 {
+        font-size: 2em;
+        /* Smaller than desktop */
+    }
+
+    header .header-content-inner h4 {
+        font-size: 1em;
+        /* Smaller than desktop */
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Further adjustments for very small screens */
+    .terminal-grid-container {
+        padding: 5px;
+        /* Minimal padding */
+    }
+
+    .box-title {
+        font-size: 1.2em;
+        /* Even smaller title */
+    }
+
+    .description-half p {
+        font-size: 0.8em;
+        /* Even smaller description */
+    }
+
+    .row-list li {
+        padding: 3px 0 3px 0.3cm;
+        /* Further reduce padding */
+        font-size: 0.85em;
+        /* Further reduce font size */
+    }
+
+    .row-list li:nth-child(even) {
+        padding-left: 0.6cm;
+        /* Further reduce additional padding */
+    }
+
+    .row-list li:nth-child(even)::before {
+        left: calc(0.3cm - 10px);
+        /* Adjust arrow position */
+        font-size: 0.7em;
+        /* Smaller arrow */
+    }
+}
+
+/* --- Register Box Styling --- */
+.register-box {
+    width: 760px;
+    /* Match container-box width */
+    margin-top: 10px;
+    /* Space between the main box and the register box */
+    padding: 10px 20px;
+    background-color: #00FF00;
+    /* Green background */
+    border: 2px solid #00CC00;
+    /* Slightly darker green border */
+    border-radius: 10px;
+    /* Slightly rounded edges */
+    text-align: center;
+    box-shadow: 0 0 8px #00FF00;
+    /* Green glow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    /* Include padding/border in width */
+}
+
+.register-box a {
+    color: #000;
+    /* Black text color */
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2em;
+    text-decoration: none;
+    /* Remove underline */
+    font-weight: bold;
+    text-shadow: none;
+    /* No text glow for contrast */
+}
+
+.register-box:hover {
+    background-color: #00CC00;
+    /* Darker green on hover */
+    box-shadow: 0 0 15px #00FF00;
+    /* More intense glow on hover */
+}
+
+.register-box a:hover {
+    color: #333;
+    /* Slightly darker text on hover */
+}
+
+/* --- Responsive Adjustments for Register Box --- */
+@media (max-width: 800px) {
+    .register-box {
+        width: 100%;
+        /* Make it full width on smaller screens */
+        padding: 8px 15px;
+        /* Adjust padding */
+    }
+
+    .register-box a {
+        font-size: 1.1em;
+        /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .register-box {
+        padding: 5px 10px;
+        /* Further reduce padding */
+    }
+
+    .register-box a {
+        font-size: 1em;
+        /* Further reduce font size */
+    }
+}
+
+/* --- Info Box Styling --- */
+.info-box {
+    max-width: 800px;
+    /* Match the max-width of your grid container */
+    margin: 30px auto 20px auto;
+    /* Top margin, auto horizontal centering, bottom margin */
+    padding: 20px;
+    background-color: #000;
+    /* Black background */
+    border: 2px solid #fff;
+    /* White border */
+    box-shadow: 0 0 10px #fff;
+    /* White glow */
+    border-radius: 15px;
+    /* Rounded corners */
+    text-align: left;
+    color: #00FF00;
+    /* Green text color */
+    font-family: "Courier New", Courier, monospace;
+    /* Terminal-like font */
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-shadow: 0 0 5px #C8C8C8;
+    /* Subtle text glow */
+    box-sizing: border-box;
+    /* Include padding/border in width */
+}
+
+/* Responsive adjustments for the info box */
+@media (max-width: 800px) {
+    .info-box {
+        padding: 15px;
+        /* Adjust padding for smaller screens */
+        font-size: 1em;
+        /* Slightly smaller font */
+    }
+}
+
+@media (max-width: 480px) {
+    .info-box {
+        padding: 10px;
+        /* Further reduce padding */
+        font-size: 0.9em;
+        /* Even smaller font for very small screens */
+    }
+}
+
+/* --- Info Box Styling (from previous turn) --- */
+.info-box {
+    max-width: 800px;
+    margin: 30px auto 20px auto;
+    padding: 20px;
+    background-color: #000;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px #fff;
+    border-radius: 15px;
+    text-align: center;
+    color: #00FF00;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-shadow: 0 0 5px #C8C8C8;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments for the info box */
+@media (max-width: 800px) {
+    .info-box {
+        padding: 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-box {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+
+/* --- Countdown Box Styling --- */
+.countdown-box {
+    max-width: 800px;
+    margin: 20px auto;
+    /* Space between info-box and terminal-grid-container */
+    padding: 20px;
+    background-color: #000;
+    /* Black background */
+    border: 2px solid #ffffff;
+    /* Cyan border */
+    box-shadow: 0 0 10px #ffffff;
+    /* Cyan glow */
+    border-radius: 15px;
+    text-align: center;
+    color: #ffffff;
+    /* Cyan text for countdown header */
+    font-family: "Courier New", Courier, monospace;
+    box-sizing: border-box;
+}
+
+.countdown-box h3 {
+    color: #ffffff;
+    /* Cyan for the header text */
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #00FFFF;
+}
+
+#countdown {
+    font-size: 2.2em;
+    /* Larger font for the countdown numbers */
+    color: #00FF00;
+    /* Green for the actual countdown */
+    font-weight: bold;
+    text-shadow: 0 0 8px #00FF00;
+    /* Stronger green glow */
+    letter-spacing: 2px;
+}
+
+/* Responsive adjustments for the countdown box */
+@media (max-width: 800px) {
+    .countdown-box {
+        padding: 15px;
+    }
+
+    .countdown-box h3 {
+        font-size: 1.2em;
+    }
+
+    #countdown {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-box {
+        padding: 10px;
+    }
+
+    .countdown-box h3 {
+        font-size: 1.1em;
+    }
+
+    #countdown {
+        font-size: 1.5em;
+        letter-spacing: 1px;
+    }
+}
