@@ -7,6 +7,7 @@ $('#siteNav').affix({
 
 $('.slick').slick({
 	infinite: true,
+	lazyLoad: 'ondemand', // or 'progressive'
 	slidesToShow: 4,
 	slidesToScroll: 1,
 	autoplay: true,
