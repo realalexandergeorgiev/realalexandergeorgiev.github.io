@@ -1,6 +1,6 @@
 const workshopDetails = [
     {
-        title: "A brief introduction to Rust",
+        title: "A Rusteacean Introduction to Shellcoding",
         description: `During this enjoyable afternoon workshop, you will learn how to implement your next shellcode or implant using the Rust programming language.
 
  
