@@ -20,9 +20,9 @@ The workshop will cover the following:
             "Language of the workshops:",
             "English",
             "Location:",
-            "Artic Wolf, Messeturm, 19th Floor,  Friedrich-Ebert-Anlage 49, You WILL need ID or a passport to enter the workshop area.",
-            "Start", "08:45",
-            "End", "12:45"
+            "Arctic Wolf, Messeturm, 19th Floor,  Friedrich-Ebert-Anlage 49, You WILL need ID or a passport to enter the workshop area.",
+            "Start", "14:15",
+            "End", "18:15"
         ],
         rightContent: [
             "Duration:",
@@ -54,9 +54,9 @@ Key Topics:
             "Language of the workshops:",
             "English",
             "Location:",
-            "Artic Wolf, Messeturm, 19th Floor,  Friedrich-Ebert-Anlage 49, You WILL need ID or a passport to enter the workshop area.",
-            "Start", "14:15",
-            "End", "18:15"
+            "Arctic Wolf, Messeturm, 19th Floor,  Friedrich-Ebert-Anlage 49, You WILL need ID or a passport to enter the workshop area.",
+            "Start", "08:45",
+            "End", "12:45"
         ],
         rightContent: [
             "Duration:",
