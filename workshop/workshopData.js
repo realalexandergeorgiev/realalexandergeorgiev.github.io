@@ -33,7 +33,7 @@ You will also need the ability to transfer files from and to it. A development c
             "Audience level:",
             "intermediate"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop1" 
+        registrationLink: "https://www.eventbrite.com/e/1469347631319/" 
     },
     {
         title: "Automated Purple Teaming - where offense meets defense with fine-grained CTI",
@@ -66,7 +66,7 @@ Key Topics:
             "Audience level:",
             "intermediate"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop2" 
+        registrationLink: "https://www.eventbrite.com/e/1469348483869/" 
     },
     {
         title: "Forensics Workshop - An introduction to forensic artifacts on Windows systems and tools to analyze them.",
@@ -91,7 +91,7 @@ Key Topics:
             "Audience level:",
             "beginner - intermediate"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop3" 
+        registrationLink: "https://www.eventbrite.com/e/1469381271939/" 
     },
     {
         title: "Challenges when automating Agentic AI Red Teaming",
@@ -116,7 +116,7 @@ Key Topics:
             "Audience level:",
             "beginner"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop4" 
+        registrationLink: "https://www.eventbrite.com/e/1469389195639/"
     },
 
     {
@@ -142,7 +142,7 @@ Key Topics:
             "Audience level:",
             "beginner - intermediate"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop5" 
+        registrationLink: "https://www.eventbrite.com/e/1469341553139/"
     },
 
     {
@@ -168,7 +168,7 @@ Key Topics:
             "Audience level:",
             "beginner"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop5" 
+        registrationLink: "https://www.eventbrite.com/e/1469305023879/"
     },
 
     {
@@ -197,7 +197,7 @@ The workshop concludes with a recap session, summarizing key learnings and discu
             "Audience level:",
             "beginner"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop5" 
+        registrationLink: "https://www.eventbrite.com/e/1469304863399/"
     },
 
     {
@@ -223,7 +223,7 @@ The workshop concludes with a recap session, summarizing key learnings and discu
             "Audience level:",
             "beginner"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop5" 
+        registrationLink: "https://www.eventbrite.com/e/1421931759169/"
     },
 
     {
@@ -249,7 +249,7 @@ The workshop concludes with a recap session, summarizing key learnings and discu
             "Audience level:",
             "beginner"
         ],
-        registrationLink: "https://registrationwillopensoon.local/register/workshop5" 
+        registrationLink: "https://www.eventbrite.com/e/1469340179029/"
     }
     
 ];
