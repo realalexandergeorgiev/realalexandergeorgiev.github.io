@@ -1,0 +1,111 @@
+[
+  {
+    "startTime": "8:30",
+    "endTime": "9:00",
+    "title": "Registration & Coffee",
+    "presenter": "",
+    "description": "Scan your code and grab a coffee! We have some breakfast bites as well!",
+    "modalId": "1",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "9:00",
+    "endTime": "10:00",
+    "title": "Keynote",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "2",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "10:00",
+    "endTime": "11:00",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "3",
+    "isBreak": false,
+    "speakerImages": ["https://coenterprises.com.au/wp-content/uploads/2018/02/male-placeholder-image.jpeg"],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "11:00",
+    "endTime": "12:00",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "4",
+    "isBreak": false,
+    "speakerImages": ["https://coenterprises.com.au/wp-content/uploads/2018/02/male-placeholder-image.jpeg"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "12:00",
+    "endTime": "13:30",
+    "title": "Lunch break",
+    "isBreak": true,
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "13:30",
+    "endTime": "14:30",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "5",
+    "isBreak": false,
+    "speakerImages": ["https://coenterprises.com.au/wp-content/uploads/2018/02/male-placeholder-image.jpeg"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "14:30",
+    "endTime": "15:30",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "6",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "15:30",
+    "endTime": "16:00",
+    "title": "Coffee & Snack break!",
+    "isBreak": true,
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "16:00",
+    "endTime": "17:00",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "7",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "17:00",
+    "endTime": "18:00",
+    "title": "tba",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "8",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "18:00",
+    "endTime": "18:00",
+    "title": "Closing",
+    "isBreak": true,
+    "animation": "animate__slideInLeft"
+  }
+]
