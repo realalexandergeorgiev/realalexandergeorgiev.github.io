@@ -40,7 +40,7 @@
     "description": "This presentation, led by expert Red Team professionals, dives into physical Red Teaming in corporate and critical infrastructure environments, covering stealthy infiltration techniques like 802.1x bypass, rogue device deployment (e.g., Raspberry Pis), social engineering, and ID card cloning, while sharing real-world insights through engaging case studies, such as a speedrun operation in a European SEVESO plant, to highlight high-pressure scenarios, challenges, and prevention strategies, equipping participants with a clear understanding of physical Red Team dynamics and practical network security and ID cloning countermeasures.",
     "modalId": "4",
     "isBreak": false,
-    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/placeholder-male.webp"],
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/MoritzThomas.webp"],
     "animation": "animate__slideInLeft"
   },
   {
