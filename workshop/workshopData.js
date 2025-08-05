@@ -1,5 +1,6 @@
 const workshopDetails = [
     {
+        id: "a-rusteacean-introduction-to-shellcoding",
         title: "A Rusteacean Introduction to Shellcoding",
         description: `During this enjoyable afternoon workshop, you will learn how to implement your next shellcode or implant using the Rust programming language.
 
@@ -36,6 +37,7 @@ You will also need the ability to transfer files from and to it. A development c
         registrationLink: "https://www.eventbrite.com/e/1469347631319/" 
     },
     {
+        id: "automated-purple-teaming-where-offense-meets-defense-with-fine-grained-cti",
         title: "Automated Purple Teaming - where offense meets defense with fine-grained CTI",
         description: `In this hands-on session, we'll focus on the practical side of automated adversary emulation to get the most benefit for our cyber defense.
 
@@ -69,6 +71,7 @@ Key Topics:
         registrationLink: "https://www.eventbrite.com/e/1469348483869/" 
     },
     {
+        id: "forensics-workshop-an-introduction-to-forensic-artifacts-on-windows-systems-and-tools-to-analyze-them",
         title: "Forensics Workshop - An introduction to forensic artifacts on Windows systems and tools to analyze them.",
         description: "Filesystem Artifacts and Evidence of Execution on Windows Systems. A description of the artifacts and the tools to analyze them, with a subsequent guided analysis",
         leftContent: [
@@ -94,6 +97,7 @@ Key Topics:
         registrationLink: "https://www.eventbrite.com/e/1469381271939/" 
     },
     {
+        id: "challenges-when-automating-agentic-ai-red-teaming",
         title: "Challenges when automating Agentic AI Red Teaming",
         description: "Intro to Agentic AI Red Teaming and AI Transparency, Hands-on demo of tooling (agentic-radar and some others) that help automate Agentic AI Red Teaming, what is required for remediation and compliance reporting.",
         leftContent: [
@@ -120,6 +124,7 @@ Key Topics:
     },
 
     {
+        id: "exploring-defender-for-endpoint-response-features-endpoint-logs-and-some-kql",
         title: "Exploring Defender for Endpoint response features, endpoint logs, and some KQL",
         description: "This session covers the features of Defender for Endpoint, which analysts might benefit from during investigations and IR. We'll also review the log data MDE provides to analysts and interesting detection use cases. Attendees will access a test tenant to write and execute KQL queries.",
         leftContent: [
@@ -146,6 +151,7 @@ Key Topics:
     },
 
     {
+        id: "introduction-to-physical-security-testing",
         title: "Introduction to Physical Security Testing",
         description: "Join us for an interactive half-day workshop where you'll learn the essential techniques of physical security testing. This session covers key skills such as lock picking, door bypass methods, and cloning insecure access cards. Gain hands-on experience as you practice these techniques and hear real-world access attempts from experienced Red Teamers. Enhance your understanding of physical security measures and test your newfound skills on our Cover Access Vault (CAV).",
         leftContent: [
@@ -172,6 +178,7 @@ Key Topics:
     },
 
     {
+        id: "bank-under-siege-red-and-blue-team-tactics",
         title: "Bank Under Siege: Red and Blue Team Tactics",
         description: `This workshop offers an immersive cybersecurity experience through a gamified scenario focused on financial institutions. Participants will be divided into Red and Blue Teams. The game board simulates a financial environment, where the Red Team aims to compromise systems, while the Blue Team defends them.
 The session begins with an interactive setup phase, where the Red Team selects tactics to achieve their objectives, and the Blue Team focuses on understanding the environment and choosing initial defenses. The core of the workshop involves a game loop, with teams alternating between planning and executing actions. The Red Team explores attack vectors like breached credentials or malware deployment, while the Blue Team implements countermeasures such as enhanced network monitoring or access controls.
@@ -201,6 +208,7 @@ The workshop concludes with a recap session, summarizing key learnings and discu
     },
 
     {
+        id: "treasure-hunt-a-beginners-voyage-into-pentesting",
         title: "Treasure Hunt - A Beginner's Voyage into Pentesting",
         description: `Set sail on a hands-on journey into the basics of penetration testing and join the hunt for flags. You will learn how to wield powerful tools like Nmap to chart unknown waters - err, networks -, plunder badly guarded ports, uncover hidden treasures within vulnerable systems and use the right grappling hooks to exploit web applications. Whether you're seeking to understand the fundamentals or gain first-hand experience in pentesting techniques, this workshop is your compass for navigating the essentials of network and application security testing.`,
         leftContent: [
@@ -219,7 +227,9 @@ The workshop concludes with a recap session, summarizing key learnings and discu
             "Duration:",
             "4h",
             "Requirements:",
-            "Laptop, Hypervisor (VirtualBox 🪟, UTM 🍏)",
+            "Laptop, Hypervisor (VirtualBox ",
+            "UTM ",
+            ")",
             "Audience level:",
             "beginner"
         ],
@@ -227,6 +237,7 @@ The workshop concludes with a recap session, summarizing key learnings and discu
     },
 
     {
+        id: "the-hitchhackers-guide-to-the-mobile-galaxy",
         title: "The Hitchhacker's Guide to the Mobile Galaxy",
         description: `Grab your towel and embark on a journey through the intricacies of the Android operating system. Uncover the secrets and vulnerabilities of mobile apps through static analysis. Ignite the infinite improbability drive and delve deeper with dynamic analysis to gain the skills and knowledge to outwit the Vogons. In this workshop, not only the Ultimate Question of Life, the Universe, and Everything will be answered but also most of your questions regarding Android application security.`,
         leftContent: [
