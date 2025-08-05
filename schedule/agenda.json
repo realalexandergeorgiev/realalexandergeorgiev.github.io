@@ -1,0 +1,122 @@
+[
+  {
+    "startTime": "9:00",
+    "endTime": "9:00",
+    "title": "Registration & Coffee",
+    "presenter": "",
+    "description": "Scan your code and grab a coffee! We have some breakfast bites as well!",
+    "modalId": "1",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "9:30",
+    "endTime": "10:00",
+    "title": "Keynote",
+    "presenter": "tba",
+    "description": "tba",
+    "modalId": "2",
+    "isBreak": false,
+    "speakerImages": [],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "10:00",
+    "endTime": "11:00",
+    "title": "Versus Killnet",
+    "presenter": "Alex Holden",
+    "description": "The infamous Russian hacktivist group, Killnet, operated as a clandestine cyber army, orchestrated by a select few to create chaos and inflict harm. Despite its notoriety, investigating the true operators behind Killnet proved to be a significant challenge, given its checkered history and inconsistent behavior. However, through an in-depth investigation and direct confrontation with the gang, we shed the veil of secrecy shrouding the group and will share a compelling personal account detailing how we disrupted Killnet, plunging it into a death spiral. Our strategy to dismantle this cyber army hinged on identifying a critical vulnerability – its connection to the Russian illegal drug marketplace - Solaris. By exposing this nefarious link and diverting proceeds from the Russian drug operation to support a Ukrainian charity, we triggered widespread questioning of Killnet's leadership and actions. This created an instability and within the group and beyond, ultimately leading to loss of support of the Russian government and breaking of financial ties. Delving deeper, we will explore the true identity of Killnet's leader, KillMilk, and explore his dark and criminal past. This will allow you to see some of the Killnet’s actions in a different light and interpret the public events and actions associated with Killnet. Our successful efforts to undermine Killnet's leadership have led to a spectacular downfall and disintegration of the entire collective. As of the beginning of this year, Killnet changed drastically, leaving behind remnants of a group once synonymous with disruptive hacktivism. Our small push against Killnet set forth a chain of events changing the trajectory of the group and leaving it far removed from its former destructive pursuits. Join me as I unravel the complex narrative of Killnet, offering insights into the evolution of cyber warfare and the enduring struggle to combat malicious actors in the world of cyber warfare and disruptive hacktivism.",
+    "modalId": "3",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/alexholden.jpg"],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "11:00",
+    "endTime": "12:00",
+    "title": "Behind Closed Doors: Physical Red Team Tactics",
+    "presenter": "Moritz Thomas",
+    "description": "This presentation, led by expert Red Team professionals, dives into physical Red Teaming in corporate and critical infrastructure environments, covering stealthy infiltration techniques like 802.1x bypass, rogue device deployment (e.g., Raspberry Pis), social engineering, and ID card cloning, while sharing real-world insights through engaging case studies, such as a speedrun operation in a European SEVESO plant, to highlight high-pressure scenarios, challenges, and prevention strategies, equipping participants with a clear understanding of physical Red Team dynamics and practical network security and ID cloning countermeasures.",
+    "modalId": "4",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/MoritzThomas.webp"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "12:00",
+    "endTime": "13:30",
+    "title": "Lunch break",
+    "isBreak": true,
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "14:00",
+    "endTime": "15:00",
+    "title": "Subverting the Windows Kernel with exploits and rootkits",
+    "presenter": "Juan Sacco",
+    "description": "Deep dive into the journey of writing rootkits and exploits to subvert the windows kernel. Discover undocumented functions alongside novel and creative ways to find vulnerable drivers and break the barrier between user-mode, kernel-mode. - Rootkit development and the latest techniques - Exploits for Kernel and how they work - Protections overview and what to use/code to bypass EDRs and Patchguard - Exploitation of drivers write-what-where and more - Hunting for vulnerable drivers and defeating trusted drivers",
+    "modalId": "5",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/juansacco.webp"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "15:00",
+    "endTime": "15:30",
+    "title": "Hunter vs. Hunted: A Ransomware Showdown with Hunters International",
+    "presenter": "Anna-Mariya Mateyna",
+    "description": "In this presentation, we will dive into a gripping ransomware investigation involving the notorious group Hunters International. We'll walk you through the initial detection of the attack, the swift and coordinated response efforts, and the critical steps taken to isolate and mitigate the threat. By carefully examining the clues left behind, we uncovered how the attackers infiltrated the system and identified the source of the breach. The session will share valuable insights from a real-world ransomware investigation and practical tips for effective incident response.",
+    "modalId": "9",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/AnnaMariyaMateyna.webp"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "15:30",
+    "endTime": "16:00",
+    "title": "Breaking Entra: Real-World Cloud Identity Attacks You Can Recreate",
+    "presenter": "Tomer Nahum, Jonathan Elkabas",
+    "description": "Identity has become the new perimeter — and in Microsoft Entra ID (formerly Azure Active Directory), it`s also the easiest one to break. Misconfigured apps, over-scoped permissions, and weak conditional access open the door to attackers who know where to look. In this talk, we`ll walk through real-world Entra ID misconfigurations that led to privilege escalation and domain-wide compromise — all of which have been reproduced in EntraGoat, a new open-source lab that simulates these attack paths in a CTF-style environment. You`ll see step-by-step demos of how attackers exploit these flaws, how defenders can detect them, and how you can use the lab to train, teach, or test in your own environment. Whether you`re red team, blue team, or just Entra-curious, you`ll walk away with practical techniques and a tool to keep practicing.",
+    "modalId": "6",
+    "isBreak": false,
+    "speakerImages":  ["https://www.bsidesfrankfurt.org/images/speakers/tomernahum.webp", "https://www.bsidesfrankfurt.org/images/speakers/jonathanelkabas.webp"],
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "16:00",
+    "endTime": "16:30",
+    "title": "Coffee & Snack break!",
+    "isBreak": true,
+    "animation": "animate__slideInLeft"
+  },
+  {
+    "startTime": "16:30",
+    "endTime": "17:30",
+    "title": "THE PROXY WARFARE: UNMASKING RUSSIAN AND CHINESE EXTERNALIZED CYBER CAPABILITIES",
+    "presenter": "Alixia Rutayisire",
+    "description": "This presentation examines how Russia and China increasingly outsource their cyber and influence operations to private entities and individuals, uncovering the strategic motivations, doctrinal basis, and the models behind this trend. We explore how both states leverage eCrime groups, contractors, and tech providers to, accelerate capability growth, and achieve operational flexibility. By contrasting the more decentralized environment in Russia with China's tightly integrated military-civil fusion approach, this presentation offers a in depth look at the evolving ecosystem of state-backed cyber actors.",
+    "modalId": "7",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/AlixiaRUTAYISIRE.webp"],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "17:30",
+    "endTime": "18:00",
+    "title": "Living on the Edge – Evicting threat actors from perimeter appliances",
+    "presenter": "Evgen Blohm, Marius Genheimer",
+    "description": "This presentation will showcase highlights from our past forensic investigations into different compromised edge devices (primarily network equipment), manufactured by Cisco, Fortinet, Citrix and Ivanti. Analyzing these appliances is not as straight forward as on normal endpoints and sometimes requires a bit of creativity. I will include information on the utilized exploits, the targets and motivation of the nation-state or cybercriminal perpetrators and practical tips to investigate and protect these appliances.",
+    "modalId": "8",
+    "isBreak": false,
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/BlohmEvgen.webp", "https://www.bsidesfrankfurt.org/images/speakers/GenheimerMarius.webp"],
+    "animation": "animate__slideInRight"
+  },
+  {
+    "startTime": "18:00",
+    "endTime": "18:00",
+    "title": "Closing",
+    "isBreak": true,
+    "animation": "animate__slideInLeft"
+  }
+]
