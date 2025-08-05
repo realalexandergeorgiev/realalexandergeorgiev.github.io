@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create box-wrapper
         const boxWrapper = document.createElement('div');
         boxWrapper.classList.add('box-wrapper');
+        boxWrapper.id = workshop.id;
 
         // Create box-title
         const boxTitle = document.createElement('h2');
@@ -112,4 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial call to display the countdown immediately
     updateCountdown();
+
+    // Scroll to workshop if ID is in URL
+    const workshopId = window.location.hash.substring(1);
+    if (workshopId) {
+        const workshopElement = document.getElementById(workshopId);
+        if (workshopElement) {
+            workshopElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 });

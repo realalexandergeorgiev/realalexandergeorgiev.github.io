@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item.isBreak) {
                     const timeRange = item.endTime ? `<p>${item.startTime} - ${item.endTime}</p>` : '';
                     itemHtml = `
-                        <div class="col-md-12 col-sm-12 schedule animate__animated ${item.animation} text-center break">
+                        <div id="${item.id}" class="col-md-12 col-sm-12 schedule animate__animated ${item.animation} text-center break">
                             <p class="time"><i class="fa-solid fa-clock"></i> ${item.startTime}</p>
                             <p class="title">${item.title}</p>
                             ${timeRange}
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Create HTML for the session entry and its corresponding modal
                     itemHtml = `
-                        <div class="col-md-12 col-sm-12 schedule animate__animated ${item.animation}" data-toggle="modal" data-target="#${item.modalId}">
+                        <div id="${item.id}" class="col-md-12 col-sm-12 schedule animate__animated ${item.animation}" data-toggle="modal" data-target="#${item.modalId}">
                             <div class="front">
                                 <p class="time"><i class="fa-solid fa-clock"></i> ${item.startTime}</p>
                                 <p class="title">${item.title}</p>
@@ -71,6 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add the newly created HTML to the container
                 scheduleContainer.innerHTML += itemHtml;
             });
+
+            // Scroll to session if ID is in URL
+            const sessionId = window.location.hash.substring(1);
+            if (sessionId) {
+                const sessionElement = document.getElementById(sessionId);
+                if (sessionElement) {
+                    sessionElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
         })
         .catch(error => {
             console.error('Error fetching schedule:', error);

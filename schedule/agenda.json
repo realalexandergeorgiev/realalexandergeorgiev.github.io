@@ -1,5 +1,6 @@
 [
   {
+    "id": "registration-and-coffee",
     "startTime": "9:00",
     "endTime": "9:00",
     "title": "Registration & Coffee",
@@ -11,6 +12,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "keynote",
     "startTime": "9:30",
     "endTime": "10:00",
     "title": "Keynote",
@@ -22,6 +24,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "versus-killnet",
     "startTime": "10:00",
     "endTime": "11:00",
     "title": "Versus Killnet",
@@ -33,6 +36,7 @@
     "animation": "animate__slideInRight"
   },
   {
+    "id": "behind-closed-doors-physical-red-team-tactics",
     "startTime": "11:00",
     "endTime": "12:00",
     "title": "Behind Closed Doors: Physical Red Team Tactics",
@@ -44,6 +48,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "lunch-break",
     "startTime": "12:00",
     "endTime": "13:30",
     "title": "Lunch break",
@@ -51,6 +56,7 @@
     "animation": "animate__slideInRight"
   },
   {
+    "id": "subverting-the-windows-kernel-with-exploits-and-rootkits",
     "startTime": "14:00",
     "endTime": "15:00",
     "title": "Subverting the Windows Kernel with exploits and rootkits",
@@ -62,6 +68,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "hunter-vs-hunted-a-ransomware-showdown-with-hunters-international",
     "startTime": "15:00",
     "endTime": "15:30",
     "title": "Hunter vs. Hunted: A Ransomware Showdown with Hunters International",
@@ -73,6 +80,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "breaking-entra-real-world-cloud-identity-attacks-you-can-recreate",
     "startTime": "15:30",
     "endTime": "16:00",
     "title": "Breaking Entra: Real-World Cloud Identity Attacks You Can Recreate",
@@ -84,6 +92,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "coffee-and-snack-break",
     "startTime": "16:00",
     "endTime": "16:30",
     "title": "Coffee & Snack break!",
@@ -91,6 +100,7 @@
     "animation": "animate__slideInLeft"
   },
   {
+    "id": "the-proxy-warfare-unmasking-russian-and-chinese-externalized-cyber-capabilities",
     "startTime": "16:30",
     "endTime": "17:30",
     "title": "THE PROXY WARFARE: UNMASKING RUSSIAN AND CHINESE EXTERNALIZED CYBER CAPABILITIES",
@@ -102,6 +112,7 @@
     "animation": "animate__slideInRight"
   },
   {
+    "id": "living-on-the-edge-evicting-threat-actors-from-perimeter-appliances",
     "startTime": "17:30",
     "endTime": "18:00",
     "title": "Living on the Edge – Evicting threat actors from perimeter appliances",
@@ -113,6 +124,7 @@
     "animation": "animate__slideInRight"
   },
   {
+    "id": "closing",
     "startTime": "18:00",
     "endTime": "18:00",
     "title": "Closing",
