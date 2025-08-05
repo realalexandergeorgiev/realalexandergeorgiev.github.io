@@ -29,7 +29,7 @@
     <meta name="GENERATOR" content="bongoalex">
     <meta name="COPYRIGHT" content="© 2025 bsidesfrankfurt.org">
     <meta name="ProgId" content="notepad">
-    <title>Conference Workshope</title>
+    <title>BSidesFrankfurt 2025 Workshops</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
@@ -40,7 +40,9 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/6.7.1/animate.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js"
+        integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -52,21 +54,38 @@
                     data-target="#navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
                     <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand"
                     href="#"> <span class="glyphicon glyphicon-fire"></span> BSIDESFRANKFURT </a> </div>
+
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li> <a href="../index.html">Home</a> </li>
-                    <li> <a href="https://forms.gle/nxVRZv8pYHkoZVWc6">CFP</a> </li>
-                    <li class="active"> <a href="./workshop.html">Workshop</a></li>
-                    <li> <a href="https://bsidesfrankfurt.eventbrite.de/">Tickets</a> </li>
+                    <!--<li> <a href="https://forms.gle/omRZ5UwZra8V5cYR8">CFP</a> </li>-->
+                    <!--<li> <a href="https://bsfra.ctfbazaar.com/">CTF</a> </li>-->
+                    <li> <a href="./schedule/schedule.html">Schedule</a></li>
+                    <li class="active"> <a href="#">Workshop Registration</a> </li>
+                    <li> <a href="https://bsidesfrankfurt.eventbrite.de">Tickets</a> </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Archive <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="about-us">
+                            <li><a href="../2023/index.html">2023</a></li>
+                            <li><a href="../2024/index.html">2024</a></li>
+                            <!--<li><a href="#">-</a></li>
+                              <li><a href="#">-</a></li>-->
+                        </ul>
+                    </li>
                     <li> <a href="#contactus">Contact</a> </li>
                 </ul>
             </div>
-            </div>
-        </nav>
+            <!-- /.navbar-collapse -->
+
+        </div>
+    </nav>
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h2>Workshops</h2>
+                <br><br>
+                <h2>Workshops (in random order)</h2>
                 <br>
                 <h4>The list of this years Workshops provided a day befor the conference.</h4>
             </div>
@@ -75,17 +94,28 @@
 
     <div class="info-box">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            This year's conference introduces a separate workshop day on Thursday, August 28, 2025, one day before the
+            main event. As this is our first time organizing this, things may feel a bit hectic—please bear with us! We
+            promise to make it even better next year.<br><br>
+            <li>Workshop Registration: Separate tickets are required for workshops and the conference. A workshop ticket
+                is needed each workshop attendance, and a conference ticket is required for the main conference.</li>
+            <li>Location: Workshops will be hosted by various partners at their offices in central Frankfurt, not at the
+                main conference venue.</li>
+            <li>Workshop Ticket Cost: A €30 ticket is required to cover food, drinks, and venue costs.</li>
+            <li>Food and Drinks: Complimentary food and soft drinks are included with your workshop ticket.</li>
+            <li>Schedule: Workshops are divided into morning and afternoon sessions, with ample time to attend two
+                workshops in a single day.</li>
+            <li>Limited capacity - first come, first serve</li>
         </p>
     </div>
 
     <div class="countdown-box">
-        <h3>Countdown to Workshop Start:</h3>
+        <h3>Countdown to Workshop Registration Start:</h3>
         <div id="countdown"></div>
     </div>
 
     <div class="terminal-grid-container">
-        </div>
+    </div>
 
 
     <footer class="page-footer content-2">
@@ -95,15 +125,17 @@
                 <h2 class="section-heading"><b>Contact Us</b> </h2>
 
                 <p><i class="fa-solid fa-envelope"></i>
-                    <a href="mailto:info@bsidesfrankfurt.org">info@bsidesfrankfurt.org</a> </p>
-                <p><i class="fa-brands fa-x-twitter"></i> <a
-                    href="https://x.com/BSidesFRA">https://x.com/BSidesFRA</a> </p>
+                    <a href="mailto:info@bsidesfrankfurt.org">info@bsidesfrankfurt.org</a>
+                </p>
+                <p><i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/BSidesFRA">https://x.com/BSidesFRA</a>
+                </p>
                 <p><i class="fa-brands fa-instagram"></i> <a
-                    href="https://instagram.com/BSidesFRA">https://instagram.com/BSidesFRA</a> </p>
+                        href="https://instagram.com/BSidesFRA">https://instagram.com/BSidesFRA</a> </p>
                 <p><i class="fa-brands fa-mastodon"></i> <a
-                    href="https://infosec.exchange/@bsidesfra">https://infosec.exchange/@bsidesfra</a> </p>
+                        href="https://infosec.exchange/@bsidesfra">https://infosec.exchange/@bsidesfra</a> </p>
                 <p><i class="fa-brands fa-linkedin"></i> <a
-                    href="https://www.linkedin.com/company/bsides-frankfurt/">https://www.linkedin.com/company/bsides-frankfurt/</a> </p>
+                        href="https://www.linkedin.com/company/bsides-frankfurt/">https://www.linkedin.com/company/bsides-frankfurt/</a>
+                </p>
             </div>
         </div>
         <div class="small-print">
