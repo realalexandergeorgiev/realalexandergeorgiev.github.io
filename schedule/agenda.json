@@ -15,12 +15,12 @@
     "id": "keynote",
     "startTime": "9:30",
     "endTime": "10:00",
-    "title": "Keynote",
+    "title": "Keynote: Winning the AI Race: Verifiability is All You Need",
     "presenter": "Sergej Epp",
-    "description": "tba",
+    "description": "Dive into the hot debate on verifiers, dominant genAI use cases, and where reinforcement learning shines. Discover insights from AIxCC progress and why offensive strategies are leading the charge. Unlock the key to verifiable AI dominance in this must-attend talk!",
     "modalId": "2",
     "isBreak": false,
-    "speakerImages": [],
+    "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/SergejEppSmall.webp"],
     "animation": "animate__slideInLeft"
   },
   {
