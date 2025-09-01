@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerBox.classList.add('register-box');
         const registerLink = document.createElement('a');
         registerLink.href = workshop.registrationLink || '#'; // Use registrationLink or a fallback
-        registerLink.textContent = 'Register here';
+        registerLink.textContent = '<s>Register here</s>';
         registerBox.appendChild(registerLink);
         boxWrapper.appendChild(registerBox);
 
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (distance < 0) {
             clearInterval(countdownInterval);
-            countdownElement.innerHTML = "WORKSHOP REGISTRATION IS LIVE!";
+            countdownElement.innerHTML = "WORKSHOP REGISTRATION WAS LIVE! BUT ITS OVER NOW.";
             countdownElement.style.color = "#FF0000"; // Red text for "Live"
             countdownElement.style.textShadow = "0 0 10px #FF0000"; // Red glow
         } else {
