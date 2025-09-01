@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerBox.classList.add('register-box');
         const registerLink = document.createElement('a');
         registerLink.href = workshop.registrationLink || '#'; // Use registrationLink or a fallback
-        registerLink.textContent = '<s>Register here</s>';
+        registerLink.textContent = 'Register here';
         registerBox.appendChild(registerLink);
         boxWrapper.appendChild(registerBox);
 
