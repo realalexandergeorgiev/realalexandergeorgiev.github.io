@@ -50,7 +50,7 @@
   {
     "id": "lunch-break",
     "startTime": "12:00",
-    "endTime": "13:30",
+    "endTime": "14:00",
     "title": "Lunch break",
     "isBreak": true,
     "animation": "animate__slideInRight"
