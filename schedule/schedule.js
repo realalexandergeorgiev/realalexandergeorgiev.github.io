@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="modal-body text-center">
                                         ${speakerImagesHtml}
                                         <p class="description">${item.description}</p>
+                                        ${item.slidesLink ? `<a href="${item.slidesLink}" target="_blank" class="btn btn-primary">View Slides</a>` : ''}
                                     </div>
                                 </div>
                             </div>

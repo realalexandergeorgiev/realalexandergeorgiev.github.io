@@ -65,7 +65,9 @@
     "modalId": "5",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/juansacco.webp"],
-    "animation": "animate__slideInLeft"
+    "animation": "animate__slideInLeft",
+    "slidesLink": "../files/Subverting the Windows Kernel.pdf",
+    "videoLink": ""
   },
   {
     "id": "hunter-vs-hunted-a-ransomware-showdown-with-hunters-international",
