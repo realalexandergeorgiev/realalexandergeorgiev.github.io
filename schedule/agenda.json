@@ -21,7 +21,9 @@
     "modalId": "2",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/SergejEppSmall.webp"],
-    "animation": "animate__slideInLeft"
+    "animation": "animate__slideInLeft",
+    "slidesLink": "../files/2025 Keynote BSIDES Frankfurt.pdf",
+    "videoLink": ""
   },
   {
     "id": "versus-killnet",
