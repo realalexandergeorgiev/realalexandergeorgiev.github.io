@@ -47,7 +47,9 @@
     "modalId": "4",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/MoritzThomas.webp", "https://www.bsidesfrankfurt.org/images/speakers/FiratAcar.webp"],
-    "animation": "animate__slideInLeft"
+    "animation": "animate__slideInLeft",
+    "slidesLink": "../files/2025-08 - BSides FFM - Behind Closed Doors - Physical Red Team Tactics.pdf",
+    "videoLink": ""
   },
   {
     "id": "lunch-break",
@@ -93,7 +95,9 @@
     "modalId": "6",
     "isBreak": false,
     "speakerImages":  ["https://www.bsidesfrankfurt.org/images/speakers/tomernahum.webp", "https://www.bsidesfrankfurt.org/images/speakers/jonathanelkabas.webp"],
-    "animation": "animate__slideInLeft"
+    "animation": "animate__slideInLeft",
+    "slidesLink": "../files/EntraGoat_BSidesFrankfurt25.pptx",
+    "videoLink": ""
   },
   {
     "id": "coffee-and-snack-break",
@@ -113,7 +117,9 @@
     "modalId": "7",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/AlixiaRUTAYISIRE.webp"],
-    "animation": "animate__slideInRight"
+    "animation": "animate__slideInRight",
+    "slidesLink": "../files/BSidesFRA_ProxyWarfare_Final.pptx",
+    "videoLink": ""
   },
   {
     "id": "living-on-the-edge-evicting-threat-actors-from-perimeter-appliances",
@@ -125,7 +131,9 @@
     "modalId": "8",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/BlohmEvgen.webp", "https://www.bsidesfrankfurt.org/images/speakers/GenheimerMarius.webp"],
-    "animation": "animate__slideInRight"
+    "animation": "animate__slideInRight",
+    "slidesLink": "../files/SECUINFRA-BSidesFRA25-Publish.pdf",
+    "videoLink": ""
   },
   {
     "id": "closing",
