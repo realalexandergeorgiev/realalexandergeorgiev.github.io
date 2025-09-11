@@ -35,7 +35,9 @@
     "modalId": "3",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/alexholden.jpg"],
-    "animation": "animate__slideInRight"
+    "animation": "animate__slideInRight",
+    "slidesLink": "../files/Versus Killnet - Frankfurt.pptx.pdf",
+    "videoLink": ""
   },
   {
     "id": "behind-closed-doors-physical-red-team-tactics",
