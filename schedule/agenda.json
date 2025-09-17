@@ -85,7 +85,9 @@
     "modalId": "9",
     "isBreak": false,
     "speakerImages": ["https://www.bsidesfrankfurt.org/images/speakers/AnnaMariyaMateyna.webp"],
-    "animation": "animate__slideInLeft"
+    "animation": "animate__slideInLeft",
+    "slidesLink": "../files/Final_Hunter vs. Hunted A Ransomware Showdown with Hunters International.pdf",
+    "videoLink": ""
   },
   {
     "id": "breaking-entra-real-world-cloud-identity-attacks-you-can-recreate",
