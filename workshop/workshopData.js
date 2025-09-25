@@ -2,7 +2,9 @@ const workshopDetails = [
     {
         id: "a-rusteacean-introduction-to-shellcoding",
         title: "A Rusteacean Introduction to Shellcoding",
-        description: `During this enjoyable afternoon workshop, you will learn how to implement your next shellcode or implant using the Rust programming language.
+        description: `Download the workshop material here: https://bsidesfrankfurt.org/files/shellcode-workshop-master.zip
+        
+        During this enjoyable afternoon workshop, you will learn how to implement your next shellcode or implant using the Rust programming language.
 
  
 
