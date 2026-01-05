@@ -1,89 +1,59 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const scheduleContainer = document.getElementById('dynamic-schedule');
-    
-    // Use the Fetch API to get the agenda data
-    fetch('agenda.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(agendaData => {
-            // Clear the loading message
-            scheduleContainer.innerHTML = ''; 
-            
-            // Loop through each item in the agenda and create the HTML
-            agendaData.forEach(item => {
-                let itemHtml = '';
+function renderSchedule() {
+    const list = document.getElementById('schedule-list');
+    const schedule = window.BSidesData ? window.BSidesData.schedule : [];
 
-                // Check if the item is a break or a regular session
-                if (item.isBreak) {
-                    const timeRange = item.endTime ? `<p>${item.startTime} - ${item.endTime}</p>` : '';
-                    itemHtml = `
-                        <div id="${item.id}" class="col-md-12 col-sm-12 schedule animate__animated ${item.animation} text-center break">
-                            <p class="time"><i class="fa-solid fa-clock"></i> ${item.startTime}</p>
-                            <p class="title">${item.title}</p>
-                            ${timeRange}
-                        </div>`;
-                } else {
-                    // Build presenter line
-                    let presenterLine = `${item.startTime} - ${item.endTime}`;
-                    if (item.presenter) {
-                        presenterLine += `, Presenter: ${item.presenter}`;
-                    }
+    if (!list) return;
 
-                    // Build speaker images HTML
-                    let speakerImagesHtml = '';
-                    if (item.speakerImages && item.speakerImages.length > 0) {
-                        item.speakerImages.forEach(src => {
-                            speakerImagesHtml += `<img src="${src}" width="200px" alt="speaker photo" style="margin: 0 5px;" /> `;
-                        });
-                        speakerImagesHtml += '<br><br>';
-                    }
+    if (!schedule || schedule.length === 0) {
+        list.innerHTML = '<div class="text-center" style="color:#eb3812; font-style:italic; opacity:0.7;">Agenda not yet announced</div>';
+        return;
+    }
 
-                    // Create HTML for the session entry and its corresponding modal
-                    itemHtml = `
-                        <div id="${item.id}" class="col-md-12 col-sm-12 schedule animate__animated ${item.animation}" data-toggle="modal" data-target="#${item.modalId}">
-                            <div class="front">
-                                <p class="time"><i class="fa-solid fa-clock"></i> ${item.startTime}</p>
-                                <p class="title">${item.title}</p>
-                                <p class="presenter">${presenterLine}</p>
-                            </div>
-                        </div>
+    list.innerHTML = ''; // Clear loading
 
-                        <div class="modal fade" id="${item.modalId}" tabindex="-1" role="dialog" aria-labelledby="${item.modalId}Label">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title title" id="${item.modalId}Label">${item.title}</h4>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        ${speakerImagesHtml}
-                                        <p class="description">${item.description}</p>
-                                        ${item.slidesLink ? `<a href="${item.slidesLink}" target="_blank" class="btn btn-primary">View Slides</a>` : ''}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
-                // Add the newly created HTML to the container
-                scheduleContainer.innerHTML += itemHtml;
+    schedule.forEach(item => {
+        const isBreak = item.isBreak;
+        const cssClass = isBreak ? 'session-item break-item' : 'session-item';
+        const timeRange = item.endTime ? `${item.startTime} - ${item.endTime}` : item.startTime;
+
+        // Social Links Logic for Schedule
+        let speakerSocial = '';
+        if (item.speakerLinks) {
+            speakerSocial = '<div class="speaker-social-small" style="display:inline-block; margin-left:10px;">';
+            if (item.speakerLinks.linkedin) speakerSocial += `<a href="${item.speakerLinks.linkedin}" target="_blank" style="color:var(--color-primary); margin-right:5px;"><i class="fab fa-linkedin"></i></a>`;
+            if (item.speakerLinks.twitter) speakerSocial += `<a href="${item.speakerLinks.twitter}" target="_blank" style="color:var(--color-primary); margin-right:5px;"><i class="fab fa-x-twitter"></i></a>`;
+            if (item.speakerLinks.github) speakerSocial += `<a href="${item.speakerLinks.github}" target="_blank" style="color:var(--color-primary); margin-right:5px;"><i class="fab fa-github"></i></a>`;
+            speakerSocial += '</div>';
+        }
+
+        const div = document.createElement('div');
+        div.className = cssClass;
+        div.innerHTML = `
+            <div class="session-time">${timeRange}</div>
+            <div class="session-details">
+                <h3 class="session-title">${item.title}</h3>
+                ${item.presenter ? `<div class="session-presenter"><i class="fas fa-user-secret"></i> ${item.presenter} ${speakerSocial}</div>` : ''}
+            </div>
+        `;
+
+        if (!isBreak) {
+            div.addEventListener('click', (e) => {
+                // Prevent modal if clicking directly on a link
+                if (e.target.closest('a')) return;
+                openSessionModal(item);
             });
+        }
 
-            // Scroll to session if ID is in URL
-            const sessionId = window.location.hash.substring(1);
-            if (sessionId) {
-                const sessionElement = document.getElementById(sessionId);
-                if (sessionElement) {
-                    sessionElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching schedule:', error);
-            scheduleContainer.innerHTML = '<p class="text-center text-danger">Could not load the conference schedule. Please check back later.</p>';
-        });
+        list.appendChild(div);
+    });
+}
+
+// Expose to window
+window.renderSchedule = renderSchedule;
+
+// Auto-run if data is already present (e.g. from sync load)
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.BSidesData && window.BSidesData.schedule) {
+        renderSchedule();
+    }
 });

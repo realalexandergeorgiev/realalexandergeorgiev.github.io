@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team | BSidesFrankfurt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <!-- Restored Theme -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .team-grid {
+            display: flex;
+            /* Switched to flex for better centering behavior */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 32px;
+        }
+
+        .team-card {
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-img-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--color-primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .team-badges-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.3s;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .team-card:hover .team-badges-overlay {
+            opacity: 1;
+        }
+
+        /* Mobile/Touch support for click */
+        .team-card.active .team-badges-overlay {
+            opacity: 1;
+        }
+
+        .team-badge {
+            background: var(--color-primary);
+            color: #000;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 90%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .team-name {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .team-role {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Nav Extras */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            top: 100%;
+            left: 0;
+            min-width: 120px;
+            list-style: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+
+        .dropdown-menu li {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 5px 20px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #eee;
+            color: var(--color-primary);
+        }
+
+        .dropdown-trigger:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-btn-link {
+            color: var(--color-secondary) !important;
+            font-weight: 700 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+            <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule/schedule.html">Schedule</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="workshop/workshop.html">Workshops</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li style="position: relative;" class="dropdown-trigger">
+                    <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="2025/index.html">2025</a></li>
+            <li><a href="2024/index.html">2024</a></li>
+                        <li><a href="2023/index.html">2023</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="#" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header similar to Hero but smaller -->
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom:10px;">Meet the Team</h1>
+            <p style="font-size: 1.2rem;">The dedicated individuals behind BSidesFrankfurt.</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <h2 class="mb-4 text-center"
+                style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Main
+                Organization</h2>
+            <div id="team-main" class="team-grid mb-4" style="margin-bottom: 80px;">
+                <!-- Main Org injected here -->
+            </div>
+
+            <h2 class="mb-4 text-center"
+                style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">The Crew
+            </h2>
+            <div id="team-crew" class="team-grid">
+                <!-- Team injected here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="social-links" id="social-links"></div>
+            <p>&copy; <span id="year">2025</span> BSidesFrankfurt.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="data/data.js"></script>
+    <script src="data/team.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu
+            const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            const data = window.BSidesData || {};
+
+            // Footer
+            if (data.config) {
+                document.getElementById('year').textContent = data.config.event.year;
+                const links = data.config.social;
+                let socialHtml = '';
+                if (links.twitter) socialHtml += `<a href="${links.twitter}"><i class="fa-brands fa-x-twitter"></i></a>`;
+                if (links.instagram) socialHtml += `<a href="${links.instagram}"><i class="fa-brands fa-instagram"></i></a>`;
+                if (links.mastodon) socialHtml += `<a href="${links.mastodon}"><i class="fa-brands fa-mastodon"></i></a>`;
+                if (links.linkedin) socialHtml += `<a href="${links.linkedin}"><i class="fa-brands fa-linkedin"></i></a>`;
+                if (links.email) socialHtml += `<a href="${links.email}"><i class="fas fa-envelope"></i></a>`;
+
+                const footerSocial = document.getElementById('social-links');
+                if (footerSocial) footerSocial.innerHTML = socialHtml;
+
+                // Dynamic Nav Links
+                const tBtn = document.getElementById('nav-tickets');
+                if (tBtn) tBtn.href = data.config.links.tickets;
+                const cBtn = document.getElementById('nav-cfp');
+                if (cBtn) cBtn.href = data.config.links.cfp;
+            }
+
+            // Load Team Members (from Global Data)
+            const teamDataRaw = data.team || [];
+            const teamData = [...teamDataRaw];
+
+            // Randomize order
+            if (teamData.length > 0) {
+                for (let i = teamData.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [teamData[i], teamData[j]] = [teamData[j], teamData[i]];
+                }
+            }
+
+            const mainContainer = document.getElementById('team-main');
+            const crewContainer = document.getElementById('team-crew');
+
+            if (mainContainer && crewContainer && teamData.length > 0) {
+                mainContainer.innerHTML = '';
+                crewContainer.innerHTML = '';
+
+                teamData.forEach(member => {
+                    let socialHtml = '';
+                    if (member.links) {
+                        socialHtml = '<div style="margin-top:10px;">';
+                        if (member.links.linkedin) socialHtml += `<a href="${member.links.linkedin}" target="_blank" style="margin:0 5px; color:var(--color-primary);"><i class="fab fa-linkedin"></i></a>`;
+                        if (member.links.twitter) socialHtml += `<a href="${member.links.twitter}" target="_blank" style="margin:0 5px; color:var(--color-primary);"><i class="fab fa-x-twitter"></i></a>`;
+                        if (member.links.github) socialHtml += `<a href="${member.links.github}" target="_blank" style="margin:0 5px; color:var(--color-primary);"><i class="fab fa-github"></i></a>`;
+                        socialHtml += '</div>';
+                    }
+
+                    // Badge Rendering
+                    let badgeHtml = '';
+                    if (member.badges && member.badges.length > 0) {
+                        badgeHtml = '<div class="team-badges-overlay">';
+                        member.badges.forEach(badge => {
+                            badgeHtml += `<span class="team-badge">${badge}</span>`;
+                        });
+                        badgeHtml += '</div>';
+                    }
+
+                    const card = `
+                        <div class="team-card" onclick="this.classList.toggle('active')">
+                            <div class="team-img-wrapper">
+                                <img src="${member.image}" alt="${member.name}" class="team-img">
+                                ${badgeHtml}
+                            </div>
+                            <h3 class="team-name">${member.name}</h3>
+                            <div class="team-role">${member.role}</div>
+                            ${socialHtml}
+                        </div>
+                    `;
+
+                    if (member.role.toLowerCase().includes('main organisation')) {
+                        mainContainer.innerHTML += card;
+                    } else {
+                        crewContainer.innerHTML += card;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
+```

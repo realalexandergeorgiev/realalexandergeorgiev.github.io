@@ -1,85 +1,431 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Join us at the BSides conference in Germany! Learn from top experts in offensive and defensive security on network, cryptography, mobile, wireless, and more. Don't miss it!">
-    <meta name="keywords"
-        content="cyber security, information security, network security, IT security, offensive security, defensive security, cryptography, embedded devices, mobile security, wireless security, incident response, threat intelligence, penetration testing, red teaming, blue teaming, purple teaming, IT risk management, cyber threat analysis, data protection, GDPR compliance, compliance frameworks, security awareness training, vulnerability management, identity and access management, cloud security, application security, DevSecOps, cybersecurity career development, cybersecurity education, cybersecurity certification, bsides, BSidesFrankfurt, bsidesfra, bsides frankfurt">
-    <meta property="og:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
-    <meta property="og:site_name" content="Security BSidesFrankfurt">
-    <meta property="og:url" content="https://bsidesfrankfurt.org">
-    <meta property="og:description"
-        content="Security BSidesFrankfurt is an Information Security conference, by the community, for the community. Follow: @BSidesFRA">
-    <meta property="og:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_GB">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="Security BSidesFrankfurt">
-    <meta name="twitter:creator" content="@BSidesFRA">
-    <meta name="twitter:title" content="Security BSidesFrankfurt : #BSidesFRA #BSidesFrankfurt">
-    <meta name="twitter:description"
-        content="Security BSidesFrankfurt is an Information Security conference by the community for the community. Follow: @BSidesFRA">
-    <meta name="twitter:image" content="https://bsidesfrankfurt.org/images/header-dark1.png">
-    <meta name="twitter:domain" content="bsidesfrankfurt.org">
-    <meta name="AUTHOR" content="bongoalex">
-    <meta name="GENERATOR" content="bongoalex">
-    <meta name="COPYRIGHT" content="© 2025 bsidesfrankfurt.org">
-    <meta name="ProgId" content="notepad">
-    <title>Conference Schedule</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/custom.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
-
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-        rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule | BSidesFrankfurt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
-        .header-content-inner {
-            max-width: 900px; /* Adjust this value to make it wider or narrower */
-            margin-left: auto;
-            margin-right: auto;
+        .schedule-container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        .header-content-inner h2 {
-            margin-bottom: 30px; /* Adds space below "Conference Schedule" */
+
+        .session-item {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            /* Slight transparent white on dark blue */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .session-item:hover {
+            border-color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .session-time {
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--color-primary);
+            font-weight: 700;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .session-details {
+            padding: 24px;
+            flex-grow: 1;
+        }
+
+        .session-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #fff;
+            text-transform: none;
+            /* Provide better readability */
+            font-weight: 600;
+        }
+
+        .session-presenter {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        .break-item {
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            cursor: default;
+        }
+
+        .break-item:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: transparent;
+        }
+
+        .break-item .session-time {
+            background: transparent;
+            color: #fff;
+        }
+
+        .break-item .session-title {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 16, 35, 0.95);
+            /* Deep Blue Overlay */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #121314;
+            border: 1px solid var(--color-primary);
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-secondary);
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .speaker-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-primary);
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .speaker-img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .session-item {
+                flex-direction: column;
+            }
+
+            .session-time {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                justify-content: flex-start;
+                padding: 15px 20px;
+            }
+        }
+
+        /* Nav Extras */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            top: 100%;
+            left: 0;
+            min-width: 120px;
+            list-style: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+
+        .dropdown-menu li {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 5px 20px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #eee;
+            color: var(--color-primary);
+        }
+
+        .dropdown-trigger:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-btn-link {
+            color: var(--color-secondary) !important;
+            font-weight: 700 !important;
+        }
+
+        /* Image Lightbox */
+        .img-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            /* Higher than modal */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-lightbox.active {
+            display: flex;
+        }
+
+        .img-lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .img-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <nav id="siteNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
-        </nav>
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <h2>Conference Schedule </h2>
-                <h4>Please be advised that the schedule is subject to slight changes without prior notification. Therefore, we kindly request that you regularly check the designated page for any updates.</h4>
-            </div>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+            <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="../team.html">Team</a></li>
+                <li><a href="../gallery.html">Gallery</a></li>
+                <li><a href="../workshop/workshop.html">Workshops</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li style="position: relative;" class="dropdown-trigger">
+                    <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../2025/index.html">2025</a></li>
+                        <li><a href="../2024/index.html">2024</a></li>
+                        <li><a href="../2023/index.html">2023</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="#" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom:10px;">Conference Schedule</h1>
+            <p id="conference-date">Loading date...</p>
         </div>
     </header>
 
-    <section class="content content-2">
-        <div class="container">
-            <div id="dynamic-schedule" class="row schedule-container">
-                <p style="text-align: center;">Loading schedule...</p>
-            </div>
+    <section>
+        <div class="container schedule-container" id="schedule-list">
+            <div class="text-center" id="schedule-loading">Loading Schedule...</div>
         </div>
     </section>
 
-    <footer class="page-footer content-2">
-        </footer>
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
+    <!-- Image Lightbox -->
+    <div class="img-lightbox" id="img-lightbox" onclick="closeImageLightbox()">
+        <span class="img-lightbox-close">&times;</span>
+        <img id="img-lightbox-content" src="" alt="Full Size">
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="social-links" id="social-links"></div>
+            <p>&copy; <span id="year">2025</span> BSidesFrankfurt.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="../js/jquery-1.11.3.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.easing.min.js"></script>
-    <script src="../js/custom.js"></script>
-    <script src="./schedule.js"></script>
+    <script src="../data/data.js"></script>
+    <script src="../data/schedule.js"></script>
+    <script src="schedule.js"></script>
+    <script>
+        // Mobile Menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+
+        // Config Load and Dynamic Content
+        const data = window.BSidesData || {};
+        const config = data.config;
+
+        if (config) {
+            // Dynamic Date
+            const dateHeader = document.getElementById('conference-date');
+            if (dateHeader && config.event && config.event.dates) {
+                dateHeader.innerHTML = `${config.event.dates.conference}<br><span style="font-size: 0.9rem; opacity: 0.7; display:block; margin-top: 10px;">(Subject to changes)</span>`;
+            }
+
+            // Schedule Empty State
+            const scheduleList = document.getElementById('schedule-list');
+            const scheduleLoading = document.getElementById('schedule-loading');
+            const scheduleData = data.schedule || [];
+
+            if (scheduleList && scheduleLoading) {
+                // schedule.js handles rendering.
+                // If scheduleData is empty, schedule.js puts "Agenda not yet announced" in the list.
+                // We just need to ensure loader is gone if schedule.js ran.
+                if (scheduleData.length > 0) {
+                    scheduleLoading.style.display = 'none';
+                }
+            }
+
+            // Footer & Social
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = config.event.year;
+
+            const links = config.social;
+            let socialHtml = '';
+            if (links.twitter) socialHtml += `<a href="${links.twitter}"><i class="fa-brands fa-x-twitter"></i></a>`;
+            if (links.instagram) socialHtml += `<a href="${links.instagram}"><i class="fa-brands fa-instagram"></i></a>`;
+            if (links.mastodon) socialHtml += `<a href="${links.mastodon}"><i class="fa-brands fa-mastodon"></i></a>`;
+            if (links.linkedin) socialHtml += `<a href="${links.linkedin}"><i class="fa-brands fa-linkedin"></i></a>`;
+            if (links.email) socialHtml += `<a href="${links.email}"><i class="fas fa-envelope"></i></a>`;
+
+            const socialLinks = document.getElementById('social-links');
+            if (socialLinks) socialLinks.innerHTML = socialHtml;
+
+            // Dynamic Nav Links
+            const tBtn = document.getElementById('nav-tickets');
+            if (tBtn) tBtn.href = config.links.tickets;
+            const cBtn = document.getElementById('nav-cfp');
+            if (cBtn) cBtn.href = config.links.cfp;
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.querySelector('.modal-close');
+
+        if (modalClose) {
+            modalClose.onclick = () => { modal.classList.remove('active'); };
+        }
+        window.onclick = (e) => {
+            if (e.target == modal) modal.classList.remove('active');
+        };
+
+        function openSessionModal(item) {
+            let speakersHtml = '';
+            if (item.speakerImages && item.speakerImages.length > 0) {
+                item.speakerImages.forEach(img => {
+                    let path = img;
+                    if (!path.startsWith('../') && !path.startsWith('http')) {
+                        path = '../' + path;
+                    }
+                    speakersHtml += `<img src="${path}" class="speaker-img" onclick="openImageLightbox('${path}')" title="Click to enlarge">`;
+                });
+            }
+
+            let slideBtn = '';
+            if (item.slidesLink) {
+                slideBtn = `<div class="text-center mt-4"><a href="${item.slidesLink}" target="_blank" class="btn">View Slides</a></div>`;
+            }
+
+            modalBody.innerHTML = `
+            <h2 class="text-center mb-2" style="color:white; text-transform:none;">${item.title}</h2>
+            <div class="text-center mb-4" style="color:var(--color-primary); font-size:1.1rem; font-weight:600;">
+                ${item.presenter || ''}
+                ${(() => {
+                    if (item.speakerLinks) {
+                        let links = '<span style="margin-left: 10px;">';
+                        if (item.speakerLinks.linkedin) links += `<a href="${item.speakerLinks.linkedin}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-linkedin"></i></a>`;
+                        if (item.speakerLinks.twitter) links += `<a href="${item.speakerLinks.twitter}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-x-twitter"></i></a>`;
+                        if (item.speakerLinks.github) links += `<a href="${item.speakerLinks.github}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-github"></i></a>`;
+                        links += '</span>';
+                        return links;
+                    }
+                    return '';
+                })()}
+            </div>
+            ${speakersHtml}
+            <div style="margin-top: 20px; line-height: 1.8; color: #ddd; text-align: left;">${item.description || 'No description available.'}</div>
+            ${slideBtn}
+            `;
+            modal.classList.add('active');
+        }
+
+        // Image Lightbox Logic
+        const imgLightbox = document.getElementById('img-lightbox');
+        const imgLightboxContent = document.getElementById('img-lightbox-content');
+
+        function openImageLightbox(src) {
+            imgLightboxContent.src = src;
+            imgLightbox.classList.add('active');
+        }
+
+        function closeImageLightbox() {
+            imgLightbox.classList.remove('active');
+        }
+    </script>
 </body>
 
 </html>

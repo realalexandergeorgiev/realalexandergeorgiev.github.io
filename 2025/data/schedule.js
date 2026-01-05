@@ -1,0 +1,210 @@
+if (!window.BSidesData) window.BSidesData = {};
+window.BSidesData.agenda = [
+    {
+        "id": "registration-and-coffee",
+        "startTime": "9:00",
+        "endTime": "9:30",
+        "title": "Registration & Coffee",
+        "presenter": "",
+        "description": "Scan your code and grab a coffee! We have some breakfast bites as well!",
+        "modalId": "1",
+        "isBreak": false,
+        "speakerImages": [],
+        "speakerLinks": {
+            "linkedin": "",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "keynote",
+        "startTime": "9:30",
+        "endTime": "10:00",
+        "title": "Keynote: Winning the AI Race: Verifiability is All You Need",
+        "presenter": "Sergej Epp",
+        "description": "Hackers love AI because offense is easy to score: either you pop a shell or you don’t. Defense? Messier. Sergej Epp (Sysdig) dives into why verifiers are the real currency of AI in security, how RL turned pen-testing into a CTF playground, and what defenders must build to fight back.",
+        "modalId": "2",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/SergejEppSmall.webp"
+        ],
+        "slidesLink": "files/2025 Keynote BSIDES Frankfurt.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/sergejepp/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "versus-killnet",
+        "startTime": "10:00",
+        "endTime": "11:00",
+        "title": "Versus Killnet",
+        "presenter": "Alex Holden",
+        "description": "The infamous Russian hacktivist group, Killnet, operated as a clandestine cyber army, orchestrated by a select few to create chaos and inflict harm. Despite its notoriety, investigating the true operators behind Killnet proved to be a significant challenge, given its checkered history and inconsistent behavior. However, through an in-depth investigation and direct confrontation with the gang, we shed the veil of secrecy shrouding the group and will share a compelling personal account detailing how we disrupted Killnet, plunging it into a death spiral. Our strategy to dismantle this cyber army hinged on identifying a critical vulnerability – its connection to the Russian illegal drug marketplace - Solaris. By exposing this nefarious link and diverting proceeds from the Russian drug operation to support a Ukrainian charity, we triggered widespread questioning of Killnet's leadership and actions. This created an instability and within the group and beyond, ultimately leading to loss of support of the Russian government and breaking of financial ties. Delving deeper, we will explore the true identity of Killnet's leader, KillMilk, and explore his dark and criminal past. This will allow you to see some of the Killnet’s actions in a different light and interpret the public events and actions associated with Killnet. Our successful efforts to undermine Killnet's leadership have led to a spectacular downfall and disintegration of the entire collective. As of the beginning of this year, Killnet changed drastically, leaving behind remnants of a group once synonymous with disruptive hacktivism. Our small push against Killnet set forth a chain of events changing the trajectory of the group and leaving it far removed from its former destructive pursuits. Join me as I unravel the complex narrative of Killnet, offering insights into the evolution of cyber warfare and the enduring struggle to combat malicious actors in the world of cyber warfare and disruptive hacktivism.",
+        "modalId": "3",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/alexholden.jpg"
+        ],
+        "slidesLink": "files/Versus Killnet - Frankfurt.pptx.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/alex-holden-4050b1/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "behind-closed-doors-physical-red-team-tactics",
+        "startTime": "11:00",
+        "endTime": "12:00",
+        "title": "Behind Closed Doors: Physical Red Team Tactics",
+        "presenter": "Moritz Thomas, Firat Acar",
+        "description": "This presentation, led by expert Red Team professionals, dives into physical Red Teaming in corporate and critical infrastructure environments, covering stealthy infiltration techniques like 802.1x bypass, rogue device deployment (e.g., Raspberry Pis), social engineering, and ID card cloning, while sharing real-world insights through engaging case studies, such as a speedrun operation in a European underground facility, to highlight high-pressure scenarios, challenges, and prevention strategies, equipping participants with a clear understanding of physical Red Team dynamics and practical network security and ID cloning countermeasures.",
+        "modalId": "4",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/MoritzThomas.webp",
+            "images/speakers/FiratAcar.webp"
+        ],
+        "slidesLink": "files/2025-08 - BSides FFM - Behind Closed Doors - Physical Red Team Tactics.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/moritz-thomas-640a97166/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "lunch-break",
+        "startTime": "12:00",
+        "endTime": "14:00",
+        "title": "Lunch break",
+        "isBreak": true,
+        "speakerLinks": {
+            "linkedin": "",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "subverting-the-windows-kernel-with-exploits-and-rootkits",
+        "startTime": "14:00",
+        "endTime": "15:00",
+        "title": "Subverting the Windows Kernel with exploits and rootkits",
+        "presenter": "Juan Sacco",
+        "description": "Deep dive into the journey of writing rootkits and exploits to subvert the windows kernel. Discover undocumented functions alongside novel and creative ways to find vulnerable drivers and break the barrier between user-mode, kernel-mode. - Rootkit development and the latest techniques - Exploits for Kernel and how they work - Protections overview and what to use/code to bypass EDRs and Patchguard - Exploitation of drivers write-what-where and more - Hunting for vulnerable drivers and defeating trusted drivers",
+        "modalId": "5",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/juansacco.webp"
+        ],
+        "slidesLink": "files/Subverting the Windows Kernel.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/juan-sacco-8b65672a/",
+            "twitter": "https://x.com/capitan_alfa",
+            "github": ""
+        }
+    },
+    {
+        "id": "hunter-vs-hunted-a-ransomware-showdown-with-hunters-international",
+        "startTime": "15:00",
+        "endTime": "15:30",
+        "title": "Hunter vs. Hunted: A Ransomware Showdown",
+        "presenter": "Anna-Mariya Mateyna",
+        "description": "In this presentation, we will dive into a gripping ransomware investigation involving the notorious group Hunters International. We'll walk you through the initial detection of the attack, the swift and coordinated response efforts, and the critical steps taken to isolate and mitigate the threat. By carefully examining the clues left behind, we uncovered how the attackers infiltrated the system and identified the source of the breach. The session will share valuable insights from a real-world ransomware investigation and practical tips for effective incident response.",
+        "modalId": "9",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/AnnaMariyaMateyna.webp"
+        ],
+        "slidesLink": "files/Final_Hunter vs. Hunted A Ransomware Showdown with Hunters International.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/anna-mariya-mateyna/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "breaking-entra-real-world-cloud-identity-attacks-you-can-recreate",
+        "startTime": "15:30",
+        "endTime": "16:00",
+        "title": "Breaking Entra: Real-World Cloud Identity Attacks",
+        "presenter": "Tomer Nahum, Jonathan Elkabas",
+        "description": "Identity has become the new perimeter — and in Microsoft Entra ID (formerly Azure Active Directory), it`s also the easiest one to break. Misconfigured apps, over-scoped permissions, and weak conditional access open the door to attackers who know where to look. In this talk, we`ll walk through real-world Entra ID misconfigurations that led to privilege escalation and domain-wide compromise — all of which have been reproduced in EntraGoat, a new open-source lab that simulates these attack paths in a CTF-style environment. You`ll see step-by-step demos of how attackers exploit these flaws, how defenders can detect them, and how you can use the lab to train, teach, or test in your own environment. Whether you`re red team, blue team, or just Entra-curious, you`ll walk away with practical techniques and a tool to keep practicing.",
+        "modalId": "6",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/tomernahum.webp",
+            "images/speakers/jonathanelkabas.webp"
+        ],
+        "slidesLink": "files/EntraGoat_BSidesFrankfurt25.pptx",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/tomernahum/",
+            "twitter": "https://x.com/TomerNahum",
+            "github": ""
+        }
+    },
+    {
+        "id": "coffee-and-snack-break",
+        "startTime": "16:00",
+        "endTime": "16:30",
+        "title": "Coffee & Snack break!",
+        "isBreak": true,
+        "speakerLinks": {
+            "linkedin": "",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "the-proxy-warfare",
+        "startTime": "16:30",
+        "endTime": "17:30",
+        "title": "The Proxy Warfare",
+        "presenter": "Alixia Rutayisire",
+        "description": "This presentation examines how Russia and China increasingly outsource their cyber and influence operations to private entities and individuals, uncovering the strategic motivations, doctrinal basis, and the models behind this trend. We explore how both states leverage eCrime groups, contractors, and tech providers to, accelerate capability growth, and achieve operational flexibility. By contrasting the more decentralized environment in Russia with China's tightly integrated military-civil fusion approach, this presentation offers a in depth look at the evolving ecosystem of state-backed cyber actors.",
+        "modalId": "7",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/AlixiaRUTAYISIRE.webp"
+        ],
+        "slidesLink": "files/BSidesFRA_ProxyWarfare_Final.pptx",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/alixia-r-80a56a165/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "living-on-the-edge",
+        "startTime": "17:30",
+        "endTime": "18:00",
+        "title": "Living on the Edge",
+        "presenter": "Evgen Blohm, Marius Genheimer",
+        "description": "This presentation will showcase highlights from past forensic investigations into different compromised edge devices (primarily network equipment), manufactured by Cisco, Fortinet, Citrix and Ivanti. Analyzing these appliances is not as straight forward as on normal endpoints and sometimes requires a bit of creativity. I will include information on the utilized exploits, the targets and motivation of the nation-state or cybercriminal perpetrators and practical tips to investigate and protect these appliances.",
+        "modalId": "8",
+        "isBreak": false,
+        "speakerImages": [
+            "images/speakers/BlohmEvgen.webp",
+            "images/speakers/GenheimerMarius.webp"
+        ],
+        "slidesLink": "files/SECUINFRA-BSidesFRA25-Publish.pdf",
+        "speakerLinks": {
+            "linkedin": "https://www.linkedin.com/in/evgen-blohm/",
+            "twitter": "",
+            "github": ""
+        }
+    },
+    {
+        "id": "closing",
+        "startTime": "18:00",
+        "endTime": "18:00",
+        "title": "Closing",
+        "isBreak": true,
+        "speakerLinks": {
+            "linkedin": "",
+            "twitter": "",
+            "github": ""
+        }
+    }
+];

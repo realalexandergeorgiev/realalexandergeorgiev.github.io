@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | BSidesFrankfurt</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+
+        .faq-question i {
+            color: var(--color-primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding-bottom: 20px;
+            max-height: 500px;
+            /* Arbitrary large height */
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+            <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule/schedule.html">Schedule</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="workshop/workshop.html">Workshops</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li style="position: relative;" class="dropdown-trigger">
+                    <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../2024/index.html">2024</a></li>
+                        <li><a href="../2023/index.html">2023</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="#" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Mini) -->
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom:10px;">FAQ</h1>
+            <p style="font-size: 1.2rem;">Frequently Asked Questions</p>
+        </div>
+    </header>
+
+    <!-- FAQ Content -->
+    <section>
+        <div class="container">
+            <div class="faq-container" id="faq-list">
+                <div class="text-center">Loading FAQ...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="social-links" id="social-links">
+                <!-- Injected -->
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="mailto:info@bsidesfrankfurt.org" class="btn btn-secondary">info@bsidesfrankfurt.org</a>
+            </div>
+
+            <div style="margin-top: 32px; font-size: 0.8rem; color: var(--color-text-muted);">
+                <p>&copy; <span id="year">2025</span> BSidesFrankfurt. All rights reserved.</p>
+                <p>Text and pictures were up to 100% AI generated &lt;3</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="data/data.js"></script>
+    <script src="data/faq.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Toggle
+            document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+
+            // Config Data
+            const config = window.BSidesData && window.BSidesData.config ? window.BSidesData.config : null;
+
+            if (config) {
+                // Year
+                document.getElementById('year').textContent = config.event.year;
+
+                // Links
+                if (config.links.tickets) {
+                    document.getElementById('nav-tickets').href = config.links.tickets;
+                }
+                if (config.links.cfp) {
+                    document.getElementById('nav-cfp').href = config.links.cfp;
+                }
+
+                // Social
+                // Hardcoded fallback for debugging
+                console.log("Forcing social links render");
+                const socialContainer = document.getElementById('social-links');
+                if (socialContainer) {
+                    socialContainer.innerHTML = `
+                        <a href="https://x.com/BSidesFRA"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://instagram.com/BSidesFRA"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://infosec.exchange/@bsidesfra"><i class="fa-brands fa-mastodon"></i></a>
+                        <a href="https://www.linkedin.com/company/bsides-frankfurt/"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="mailto:info@bsidesfrankfurt.org"><i class="fas fa-envelope"></i></a>
+                    `;
+                }
+
+                // Render FAQ
+                const faqContainer = document.getElementById('faq-list');
+                const faqData = window.BSidesData && window.BSidesData.faq ? window.BSidesData.faq : [];
+
+                if (faqContainer && faqData.length > 0) {
+                    faqContainer.innerHTML = '';
+                    faqData.forEach((item, index) => {
+                        faqContainer.innerHTML += `
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                ${item.question}
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                ${item.answer}
+                            </div>
+                        </div>
+                    `;
+                    });
+                } else {
+                    faqContainer.innerHTML = '<div class="text-center">No questions found.</div>';
+                }
+            } // Close if(config)
+        });
+
+        function toggleFaq(element) {
+            // Close others (accordion style) - optional, let's keep it allowing multiple open
+            // element.classList.toggle('active');
+
+            // For closer/cleaner behavior:
+            const isActive = element.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

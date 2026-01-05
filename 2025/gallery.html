@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | BSidesFrankfurt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- Restored Theme -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            height: 250px;
+            background: #000;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--color-primary);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Nav Extras */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            top: 100%;
+            left: 0;
+            min-width: 120px;
+            list-style: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+
+        .dropdown-menu li {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 5px 20px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #eee;
+            color: var(--color-primary);
+        }
+
+        .dropdown-trigger:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-btn-link {
+            color: var(--color-secondary) !important;
+            font-weight: 700 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+            <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule/schedule.html">Schedule</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="workshop/workshop.html">Workshops</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li style="position: relative;" class="dropdown-trigger">
+                    <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../2024/index.html">2024</a></li>
+                        <li><a href="../2023/index.html">2023</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="#" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom:10px;">Event Gallery</h1>
+            <p>Highlights from previous years.</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="gallery-grid" id="gallery">
+                <!-- Dynamic Content -->
+                <div class="text-center">Loading Gallery...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="social-links" id="social-links"></div>
+            <p>&copy; <span id="year">2025</span> BSidesFrankfurt.</p>
+            <!-- Scripts -->
+            <script src="js/jquery-1.11.3.min.js"></script>
+            <script src="data/data.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Mobile Menu
+                    document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
+                        document.querySelector('.nav-links').classList.toggle('active');
+                    });
+
+                    const data = window.BSidesData;
+                    document.getElementById('year').textContent = data.config.event.year;
+
+                    const social = data.config.social;
+                    let html = '';
+                    if (social.twitter) html += `<a href="${social.twitter}"><i class="fa-brands fa-x-twitter"></i></a>`;
+                    if (social.instagram) html += `<a href="${social.instagram}"><i class="fa-brands fa-instagram"></i></a>`;
+                    if (social.mastodon) html += `<a href="${social.mastodon}"><i class="fa-brands fa-mastodon"></i></a>`;
+                    if (social.linkedin) html += `<a href="${social.linkedin}"><i class="fa-brands fa-linkedin"></i></a>`;
+                    if (social.email) html += `<a href="${social.email}"><i class="fas fa-envelope"></i></a>`;
+                    document.getElementById('social-links').innerHTML = html;
+
+                    // Dynamic Nav Links
+                    document.getElementById('nav-tickets').href = data.config.links.tickets;
+                    document.getElementById('nav-cfp').href = data.config.links.cfp;
+
+                    // Gallery Rendering
+                    const galleryContainer = document.getElementById('gallery');
+                    if (data.gallery && data.gallery.length > 0) {
+                        let galleryHtml = '';
+                        data.gallery.forEach(img => {
+                            galleryHtml += `
+                        <div class="gallery-item" onclick="openLightbox(this)">
+                            <img src="${img}" alt="Event Photo">
+                        </div>
+                    `;
+                        });
+                        galleryContainer.innerHTML = galleryHtml;
+                    } else {
+                        galleryContainer.innerHTML = '<div class="text-center">No images found.</div>';
+                    }
+                });
+
+                // Lightbox
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+
+                function openLightbox(element) {
+                    const img = element.querySelector('img');
+                    lightboxImg.src = img.src;
+                    lightbox.classList.add('active');
+                }
+
+                function closeLightbox() {
+                    lightbox.classList.remove('active');
+                }
+            </script>
+</body>
+
+</html>

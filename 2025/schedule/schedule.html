@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule | BSidesFrankfurt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .schedule-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .session-item {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            /* Slight transparent white on dark blue */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .session-item:hover {
+            border-color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .session-time {
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--color-primary);
+            font-weight: 700;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .session-details {
+            padding: 24px;
+            flex-grow: 1;
+        }
+
+        .session-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #fff;
+            text-transform: none;
+            /* Provide better readability */
+            font-weight: 600;
+        }
+
+        .session-presenter {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        .break-item {
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            cursor: default;
+        }
+
+        .break-item:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: transparent;
+        }
+
+        .break-item .session-time {
+            background: transparent;
+            color: #fff;
+        }
+
+        .break-item .session-title {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 16, 35, 0.95);
+            /* Deep Blue Overlay */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #121314;
+            border: 1px solid var(--color-primary);
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-secondary);
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .speaker-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-primary);
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .speaker-img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .session-item {
+                flex-direction: column;
+            }
+
+            .session-time {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                justify-content: flex-start;
+                padding: 15px 20px;
+            }
+        }
+
+        /* Nav Extras */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            top: 100%;
+            left: 0;
+            min-width: 120px;
+            list-style: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+
+        .dropdown-menu li {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 5px 20px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #eee;
+            color: var(--color-primary);
+        }
+
+        .dropdown-trigger:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-btn-link {
+            color: var(--color-secondary) !important;
+            font-weight: 700 !important;
+        }
+
+        /* Image Lightbox */
+        .img-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            /* Higher than modal */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-lightbox.active {
+            display: flex;
+        }
+
+        .img-lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .img-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+            <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="../team.html">Team</a></li>
+                <li><a href="../gallery.html">Gallery</a></li>
+                <li><a href="../workshop/workshop.html">Workshops</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li style="position: relative;" class="dropdown-trigger">
+                    <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../2024/index.html">2024</a></li>
+                        <li><a href="../../2023/index.html">2023</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="#" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom:10px;">Conference Schedule</h1>
+            <p>Friday, August 29th, 2025</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">(Subject to changes)</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container schedule-container" id="schedule-list">
+            <!-- Dynamic Schedule -->
+            <div class="text-center">Loading Schedule...</div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div class="img-lightbox" id="img-lightbox" onclick="closeImageLightbox()">
+        <span class="img-lightbox-close">&times;</span>
+        <img id="img-lightbox-content" src="" alt="Full Size">
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="social-links" id="social-links"></div>
+            <p>&copy; <span id="year">2025</span> BSidesFrankfurt.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="../data/data.js"></script>
+    <script src="../data/schedule.js"></script>
+    <script src="schedule.js"></script>
+    <script>
+        // Mobile Menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Schedule is handled by schedule.js which auto-runs if data exists
+
+        });
+
+        // Config Load
+        const data = window.BSidesData;
+        if (data && data.config) {
+            document.getElementById('year').textContent = data.config.event.year;
+            const links = data.config.social;
+            let socialHtml = '';
+            if (links.twitter) socialHtml += `<a href="${links.twitter}"><i class="fa-brands fa-x-twitter"></i></a>`;
+            if (links.instagram) socialHtml += `<a href="${links.instagram}"><i class="fa-brands fa-instagram"></i></a>`;
+            if (links.mastodon) socialHtml += `<a href="${links.mastodon}"><i class="fa-brands fa-mastodon"></i></a>`;
+            if (links.linkedin) socialHtml += `<a href="${links.linkedin}"><i class="fa-brands fa-linkedin"></i></a>`;
+            if (links.email) socialHtml += `<a href="${links.email}"><i class="fas fa-envelope"></i></a>`;
+            document.getElementById('social-links').innerHTML = socialHtml;
+
+            // Dynamic Nav Links
+            document.getElementById('nav-tickets').href = data.config.links.tickets;
+            document.getElementById('nav-cfp').href = data.config.links.cfp;
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.querySelector('.modal-close');
+
+        modalClose.onclick = () => { modal.classList.remove('active'); };
+        window.onclick = (e) => {
+            if (e.target == modal) modal.classList.remove('active');
+        };
+
+        function openSessionModal(item) {
+            let speakersHtml = '';
+            if (item.speakerImages && item.speakerImages.length > 0) {
+                item.speakerImages.forEach(img => {
+                    // Path fix
+                    let path = img;
+                    if (!path.startsWith('../') && !path.startsWith('http')) {
+                        path = '../' + path;
+                    }
+                    speakersHtml += `<img src="${path}" class="speaker-img" onclick="openImageLightbox('${path}')" title="Click to enlarge">`;
+                });
+            }
+
+            let slideBtn = '';
+            if (item.slidesLink) {
+                slideBtn = `<div class="text-center mt-4"><a href="${item.slidesLink}" target="_blank" class="btn">View Slides</a></div>`;
+            }
+
+            modalBody.innerHTML = `
+                <h2 class="text-center mb-2" style="color:white; text-transform:none;">${item.title}</h2>
+                <div class="text-center mb-4" style="color:var(--color-primary); font-size:1.1rem; font-weight:600;">
+                    ${item.presenter || ''}
+                    ${(() => {
+                    if (item.speakerLinks) {
+                        let links = '<span style="margin-left: 10px;">';
+                        if (item.speakerLinks.linkedin) links += `<a href="${item.speakerLinks.linkedin}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-linkedin"></i></a>`;
+                        if (item.speakerLinks.twitter) links += `<a href="${item.speakerLinks.twitter}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-x-twitter"></i></a>`;
+                        if (item.speakerLinks.github) links += `<a href="${item.speakerLinks.github}" target="_blank" style="margin:0 5px; color:#fff;"><i class="fab fa-github"></i></a>`;
+                        links += '</span>';
+                        return links;
+                    }
+                    return '';
+                })()}
+                </div>
+                ${speakersHtml}
+                <div style="margin-top: 20px; line-height: 1.8; color: #ddd; text-align: left;">${item.description || 'No description available.'}</div>
+                ${slideBtn}
+             `;
+            modal.classList.add('active');
+        }
+
+        // Image Lightbox Logic
+        const imgLightbox = document.getElementById('img-lightbox');
+        const imgLightboxContent = document.getElementById('img-lightbox-content');
+
+        function openImageLightbox(src) {
+            imgLightboxContent.src = src;
+            imgLightbox.classList.add('active');
+        }
+
+        function closeImageLightbox() {
+            imgLightbox.classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>
