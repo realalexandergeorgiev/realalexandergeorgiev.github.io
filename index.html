@@ -300,6 +300,11 @@
       // Use Global Data
       const config = window.BSidesData.config;
 
+      // Set Dimming Speed
+      if (config.animations && config.animations.backgroundDimmingSpeed) {
+        document.documentElement.style.setProperty('--dimming-speed', config.animations.backgroundDimmingSpeed);
+      }
+
       // Update Dates & Year
       const dateEl = document.getElementById('event-date');
       if (dateEl) {
@@ -382,6 +387,9 @@
         }
         if (sponsorsData.silver) {
           sponsorsContainer.innerHTML += renderGroup('Silver Sponsors', '#c0c0c0', sponsorsData.silver, 'silver-sponsor');
+        }
+        if (sponsorsData.community) {
+          sponsorsContainer.innerHTML += renderGroup('Community Sponsors', '#cd7f32', sponsorsData.community, 'silver-sponsor');
         }
       }
     });

@@ -26,6 +26,9 @@ Object.assign(window.BSidesData, {
             "mastodon": "https://infosec.exchange/@bsidesfra",
             "linkedin": "https://www.linkedin.com/company/bsides-frankfurt/",
             "email": "mailto:info@bsidesfrankfurt.org"
+        },
+        "animations": {
+            "backgroundDimmingSpeed": "20s"
         }
     },
     gallery: [
