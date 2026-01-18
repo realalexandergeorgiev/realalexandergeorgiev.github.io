@@ -5,9 +5,9 @@ Object.assign(window.BSidesData, {
             "name": "BSidesFrankfurt",
             "year": "2026",
             "dates": {
-                "workshops": "TBA",
-                "conference": "TBA",
-                "display": "2026"
+                "workshops": "2026-09-11",
+                "conference": "2026-09-10",
+                "display": "2026-09-10 - 2026-09-11"
             },
             "location": {
                 "name": "Goethe University Frankfurt",
@@ -16,8 +16,8 @@ Object.assign(window.BSidesData, {
             }
         },
         "links": {
-            "tickets": "https://bsidesfrankfurt.eventbrite.de",
-            "cfp": "#",
+            "tickets": "#",
+            "cfp": "https://cfp.bsidesfrankfurt.org",
             "ctf": "#"
         },
         "social": {
