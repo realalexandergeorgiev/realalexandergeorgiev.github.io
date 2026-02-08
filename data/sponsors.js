@@ -20,6 +20,11 @@ Object.assign(window.BSidesData, {
                 url: "https://elbsides.de/"
             },
             {
+                name: "BSidesDresden",
+                logo: "images/sponsors/bsidesdresden.png",
+                url: "https://bsidesdresden.com/"
+            },
+            {
                 name: "BSidesTransylvania",
                 logo: "images/sponsors/bsidestransylvania.png",
                 url: "https://bsidestransylvania.com/"
