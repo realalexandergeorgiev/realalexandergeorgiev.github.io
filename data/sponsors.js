@@ -20,7 +20,7 @@ Object.assign(window.BSidesData, {
                 name: "Elbsides",
                 logo: "images/sponsors/Elbsides_Logo_2026.svg",
                 url: "https://elbsides.de/",
-                forceColor: false
+                forceColor: true
             },
             {
                 name: "BSidesDresden",
