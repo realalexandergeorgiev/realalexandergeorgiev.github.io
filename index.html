@@ -32,7 +32,8 @@
       transition: 0.3s;
     }
 
-    .sponsor-logo:hover {
+    .sponsor-logo:hover,
+    .sponsor-logo.active-color {
       filter: grayscale(0%);
     }
 
@@ -376,7 +377,13 @@
           let html = `<h3 class="text-center mb-2" style="color:${color}; margin-top: 40px;">${title}</h3>`;
           html += `<div class="sponsors-grid mb-4">`;
           items.forEach(sponsor => {
-            html += `<a href="${sponsor.url}" class="${cssClass}" target="_blank"><img src="${sponsor.logo}" class="sponsor-logo" alt="${sponsor.name}"></a>`;
+            // Check if this specific sponsor should force color
+            // We check sponsor.forceColor directly. 
+            const forceColor = sponsor.forceColor === true;
+
+            const extraClass = (title === 'Community Sponsors' && forceColor) ? 'active-color' : '';
+
+            html += `<a href="${sponsor.url}" class="${cssClass}" target="_blank"><img src="${sponsor.logo}" class="sponsor-logo ${extraClass}" alt="${sponsor.name}"></a>`;
           });
           html += `</div>`;
           return html;
