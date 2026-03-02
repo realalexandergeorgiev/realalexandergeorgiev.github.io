@@ -3,7 +3,7 @@ Object.assign(window.BSidesData, {
     sponsors: {
         gold: [],
         silver: [],
-        community: [
+        partners: [
             {
                 name: "BSidesMunich",
                 logo: "images/sponsors/BSidesMunich.svg.png",

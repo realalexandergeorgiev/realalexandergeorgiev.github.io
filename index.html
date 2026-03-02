@@ -381,7 +381,7 @@
             // We check sponsor.forceColor directly. 
             const forceColor = sponsor.forceColor === true;
 
-            const extraClass = (title === 'Community Sponsors' && forceColor) ? 'active-color' : '';
+            const extraClass = (title === 'Partners' && forceColor) ? 'active-color' : '';
 
             html += `<a href="${sponsor.url}" class="${cssClass}" target="_blank"><img src="${sponsor.logo}" class="sponsor-logo ${extraClass}" alt="${sponsor.name}"></a>`;
           });
@@ -395,8 +395,8 @@
         if (sponsorsData.silver) {
           sponsorsContainer.innerHTML += renderGroup('Silver Sponsors', '#c0c0c0', sponsorsData.silver, 'silver-sponsor');
         }
-        if (sponsorsData.community) {
-          sponsorsContainer.innerHTML += renderGroup('Community Sponsors', '#cd7f32', sponsorsData.community, 'silver-sponsor');
+        if (sponsorsData.partners) {
+          sponsorsContainer.innerHTML += renderGroup('Partners', '#cd7f32', sponsorsData.partners, 'silver-sponsor');
         }
       }
     });
