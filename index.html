@@ -320,12 +320,29 @@
       document.getElementById('year').textContent = config.event.year;
 
       // Update Links
-      const btnTickets = document.getElementById('btn-tickets');
-      if (config.links.tickets) {
-        btnTickets.href = config.links.tickets;
-        document.getElementById('nav-tickets').href = config.links.tickets;
+      const ticketLink = config.links.tickets;
+      const ticketEls = [document.getElementById('nav-tickets'), document.getElementById('btn-tickets')].filter(Boolean);
+      if (ticketLink && ticketLink !== '#') {
+        ticketEls.forEach(el => el.href = ticketLink);
       } else {
-        btnTickets.style.display = 'none';
+        ticketEls.forEach(el => {
+          el.href = '#';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!document.getElementById('ticket-alert-modal')) {
+              const modalHtml = `
+                <div class="modal active" id="ticket-alert-modal" style="display:flex; position:fixed; z-index:2000; top:0; left:0; width:100%; height:100%; background:rgba(1,16,35,0.95); justify-content:center; align-items:center;">
+                  <div class="modal-content" style="background:#121314; border:1px solid var(--color-primary); padding:40px; max-width:400px; width:90%; position:relative; box-shadow:0 0 50px rgba(0,0,0,0.5); border-radius:4px; text-align:center;">
+                    <span class="modal-close" onclick="document.getElementById('ticket-alert-modal').remove()" style="position:absolute; top:20px; right:25px; font-size:2rem; cursor:pointer; color:var(--color-secondary); transition:0.3s;">&times;</span>
+                    <h3 style="color:white; margin-top:10px; margin-bottom:20px;">Notice</h3>
+                    <p style="font-size:1.1rem; line-height:1.6; color:#ddd;">Ticket sales have not started yet.<br>Please check back later!</p>
+                  </div>
+                </div>
+              `;
+              document.body.insertAdjacentHTML('beforeend', modalHtml);
+            }
+          });
+        });
       }
 
       if (config.links.cfp) {
