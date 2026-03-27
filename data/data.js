@@ -16,7 +16,7 @@ Object.assign(window.BSidesData, {
             }
         },
         "links": {
-            "tickets": "https://tickets.bsidesfrankfurt.org",
+            "tickets": "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/",
             "cfp": "https://cfp.bsidesfrankfurt.org",
             "ctf": "#"
         },
