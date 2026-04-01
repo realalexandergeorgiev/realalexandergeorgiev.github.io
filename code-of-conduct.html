@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSidesFrankfurt - Code of Conduct</title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Sponsor Grid Fix */
+    .sponsors-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 32px;
+    }
+
+    .sponsor-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.5);
+      transition: 0.3s;
+    }
+
+    .sponsor-logo:hover,
+    .sponsor-logo.active-color {
+      filter: grayscale(0%);
+    }
+
+    .gold-sponsor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      height: 160px;
+    }
+
+    .gold-sponsor img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .silver-sponsor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 100px;
+    }
+
+    .silver-sponsor img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /* About Section Cards */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .about-card {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      background-color: var(--color-surface);
+      padding: 30px;
+      border-radius: 4px;
+      /* Slight roundness like bootstrap default */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--color-primary);
+    }
+
+    /* Nav Extras */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #fff;
+      top: 100%;
+      left: 0;
+      min-width: 120px;
+      list-style: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      padding: 10px 0;
+      z-index: 1001;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu li {
+      display: block;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 5px 20px;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .dropdown-menu li a:hover {
+      background: #eee;
+      color: var(--color-primary);
+    }
+
+    .dropdown-trigger:hover .dropdown-menu {
+      display: block;
+    }
+
+    .nav-btn-link {
+      color: var(--color-secondary) !important;
+      font-weight: 700 !important;
+    }
+
+    /* About Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 16, 35, 0.95);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #121314;
+      border: 1px solid var(--color-primary);
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--color-secondary);
+      transition: 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+            <a href="index.html" class="nav-logo"><i class="fas fa-fire"></i> BSidesFrankfurt</a>
+      <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule/schedule.html">Schedule</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="workshop/workshop.html">Workshops</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li style="position: relative;" class="dropdown-trigger">
+          <a href="#">Archive <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="2025/index.html">2025</a></li>
+            <li><a href="2024/index.html">2024</a></li>
+            <li><a href="2023/index.html">2023</a></li>
+          </ul>
+        </li>
+        <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+        <li><a href="https://cfp.bsidesfrankfurt.org" class="nav-btn-link" id="nav-cfp">CFP</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section style="padding: 60px 0;">
+    <div class="container">
+        <h2 class="section-title">Code of Conduct</h2>
+
+        <p class="mb-4">BSidesFrankfurt is a community-run security conference. Everyone is welcome — regardless of gender, age, nationality, religion, ethnicity, disability, or experience level. We expect all participants to treat each other with respect.</p>
+
+        <h3 class="mb-3">Expected behaviour</h3>
+        <ul>
+            <li>Be kind and professional</li>
+            <li>Respect personal boundaries and different viewpoints</li>
+            <li>Keep the event safe for everyone</li>
+        </ul>
+
+        <h3 class="mb-3">Not tolerated</h3>
+        <ul>
+            <li>Harassment, discrimination, or intimidation in any form</li>
+            <li>Unwanted physical contact or sexual attention</li>
+            <li>Disruptive or threatening behaviour</li>
+            <li>Unauthorised access, scanning, or attacks on conference infrastructure</li>
+        </ul>
+
+        <h3 class="mb-3">Consequences</h3>
+        <p class="mb-4">Violations may result in removal from the event without refund and, if necessary, involvement of law enforcement.</p>
+
+        <h3 class="mb-3">Report an incident</h3>
+        <p class="mb-4">Talk to any organiser on-site, or contact us at <a href="mailto:info@bsidesfrankfurt.de">info@bsidesfrankfurt.de</a>. All reports are handled confidentially.</p>
+
+        <p>Applies to all attendees, speakers, sponsors, and volunteers.</p>
+    </div>
+</section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="social-links" id="social-links">
+        <!-- Injected -->
+      </div>
+
+      <div style="margin-top: 32px;">
+        <a href="mailto:info@bsidesfrankfurt.org" class="btn btn-secondary">info@bsidesfrankfurt.org</a>
+      </div>
+
+      <div style="margin-top: 32px; font-size: 0.8rem; color: var(--color-text-muted);">
+        <p>&copy; <span id="year">2026</span> BSidesFrankfurt. All rights reserved.</p>
+        <p><a href="code-of-conduct.html" style="color: var(--color-text-muted);">Code of Conduct</a></p>
+        <p>Text and pictures were up to 100% AI generated &lt;3</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- About Modal -->
+  <div class="modal" id="about-modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+      <div id="about-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="data/data.js"></script>
+  <script src="data/about.js"></script>
+  <script src="data/sponsors.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile Toggle
+      document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('active');
+      });
+
+      // Use Global Data
+      const config = window.BSidesData.config;
+
+      // Set Dimming Speed
+      if (config.animations && config.animations.backgroundDimmingSpeed) {
+        document.documentElement.style.setProperty('--dimming-speed', config.animations.backgroundDimmingSpeed);
+      }
+
+      // Update Dates & Year
+      const dateEl = document.getElementById('event-date');
+      if (dateEl) {
+        // Split date text into spans for animation
+        const dateText = config.event.dates.display;
+        const animatedDate = dateText.split('').map((char, index) => {
+          return char === ' ' ? '&nbsp;' : `<span class="anim-char" style="--i:${index}">${char}</span>`;
+        }).join('');
+
+        dateEl.innerHTML = `${animatedDate}<br><span style="font-size:1.2rem; display:block; margin-top:10px; opacity:0.8;">${config.event.location.name}</span>`;
+      }
+      document.getElementById('year').textContent = config.event.year;
+
+      // Update Links
+      const ticketLink = config.links.tickets;
+      const ticketEls = [document.getElementById('nav-tickets'), document.getElementById('btn-tickets')].filter(Boolean);
+      if (ticketLink && ticketLink !== '#') {
+        ticketEls.forEach(el => el.href = ticketLink);
+      } else {
+        ticketEls.forEach(el => {
+          el.href = '#';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!document.getElementById('ticket-alert-modal')) {
+              const modalHtml = `
+                <div class="modal active" id="ticket-alert-modal" style="display:flex; position:fixed; z-index:2000; top:0; left:0; width:100%; height:100%; background:rgba(1,16,35,0.95); justify-content:center; align-items:center;">
+                  <div class="modal-content" style="background:#121314; border:1px solid var(--color-primary); padding:40px; max-width:400px; width:90%; position:relative; box-shadow:0 0 50px rgba(0,0,0,0.5); border-radius:4px; text-align:center;">
+                    <span class="modal-close" onclick="document.getElementById('ticket-alert-modal').remove()" style="position:absolute; top:20px; right:25px; font-size:2rem; cursor:pointer; color:var(--color-secondary); transition:0.3s;">&times;</span>
+                    <h3 style="color:white; margin-top:10px; margin-bottom:20px;">Notice</h3>
+                    <p style="font-size:1.1rem; line-height:1.6; color:#ddd;">Ticket sales have not started yet.<br>Please check back later!</p>
+                  </div>
+                </div>
+              `;
+              document.body.insertAdjacentHTML('beforeend', modalHtml);
+            }
+          });
+        });
+      }
+
+      if (config.links.cfp) {
+        document.getElementById('nav-cfp').href = config.links.cfp;
+      }
+
+      // Social
+      // Social
+      const social = config.social;
+      let html = '';
+      if (social.twitter) html += `<a href="${social.twitter}"><i class="fa-brands fa-x-twitter"></i></a>`;
+      if (social.instagram) html += `<a href="${social.instagram}"><i class="fa-brands fa-instagram"></i></a>`;
+      if (social.mastodon) html += `<a href="${social.mastodon}"><i class="fa-brands fa-mastodon"></i></a>`;
+      if (social.linkedin) html += `<a href="${social.linkedin}"><i class="fa-brands fa-linkedin"></i></a>`;
+      if (social.email) html += `<a href="${social.email}"><i class="fas fa-envelope"></i></a>`;
+
+      const socialContainer = document.getElementById('social-links');
+      if (socialContainer) {
+        socialContainer.innerHTML = html;
+      }
+
+      // About Section Dynamic Loading
+      const aboutContainer = document.getElementById('about-container');
+      const aboutData = window.BSidesData ? window.BSidesData.about : [];
+
+      if (aboutContainer && aboutData.length > 0) {
+        aboutContainer.innerHTML = '';
+        aboutData.forEach(item => {
+          aboutContainer.innerHTML += `
+                <div class="about-card text-center" onclick="openAboutModal('${item.id}')">
+                  <i class="${item.icon || 'fas fa-info-circle'} fa-3x text-primary mb-2"></i>
+                  <h3>${item.title}</h3>
+                  <p>${item.description.substring(0, 100)}... (Click to read more)</p>
+                </div>
+              `;
+        });
+      }
+
+      // Sponsors Dynamic Loading
+      const sponsorsContainer = document.getElementById('sponsors-container');
+      const sponsorsData = window.BSidesData ? window.BSidesData.sponsors : null;
+
+      if (sponsorsContainer && sponsorsData) {
+        sponsorsContainer.innerHTML = ''; // Clear loading
+
+        // Helper to render a group
+        const renderGroup = (title, color, items, cssClass) => {
+          if (!items || items.length === 0) return '';
+          let html = `<h3 class="text-center mb-2" style="color:${color}; margin-top: 40px;">${title}</h3>`;
+          html += `<div class="sponsors-grid mb-4">`;
+          items.forEach(sponsor => {
+            // Check if this specific sponsor should force color
+            // We check sponsor.forceColor directly. 
+            const forceColor = sponsor.forceColor === true;
+
+            const extraClass = (title === 'Partners' && forceColor) ? 'active-color' : '';
+
+            html += `<a href="${sponsor.url}" class="${cssClass}" target="_blank"><img src="${sponsor.logo}" class="sponsor-logo ${extraClass}" alt="${sponsor.name}"></a>`;
+          });
+          html += `</div>`;
+          return html;
+        };
+
+        if (sponsorsData.gold) {
+          sponsorsContainer.innerHTML += renderGroup('Gold Sponsors', '#d4af37', sponsorsData.gold, 'gold-sponsor');
+        }
+        if (sponsorsData.silver) {
+          sponsorsContainer.innerHTML += renderGroup('Silver Sponsors', '#c0c0c0', sponsorsData.silver, 'silver-sponsor');
+        }
+        if (sponsorsData.partners) {
+          sponsorsContainer.innerHTML += renderGroup('Partners', '#cd7f32', sponsorsData.partners, 'silver-sponsor');
+        }
+      }
+    });
+
+    // About Modal Logic
+    const aboutModal = document.getElementById('about-modal');
+    const aboutModalBody = document.getElementById('about-modal-body');
+
+    function openAboutModal(id) {
+      const data = window.BSidesData.about ? window.BSidesData.about.find(item => item.id === id) : null;
+      if (data) {
+        aboutModalBody.innerHTML = `
+                    <h2 class="mb-4" style="color:white;">${data.title}</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.6; color: #ddd;">${data.description}</p>
+                `;
+        aboutModal.classList.add('active');
+      }
+    }
+
+    function closeAboutModal() {
+      aboutModal.classList.remove('active');
+    }
+
+    window.onclick = function (event) {
+      if (event.target == aboutModal) {
+        closeAboutModal();
+      }
+    }
+  </script>
+</body>
+
+</html>
