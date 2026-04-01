@@ -1,7 +1,14 @@
 if (!window.BSidesData) window.BSidesData = {};
 Object.assign(window.BSidesData, {
     sponsors: {
-        gold: [],
+        gold: [
+            {
+                name: "Blaze Information Security",
+                logo: "images/sponsors/Blaze_Information_Security_Logo_Horizontal_Alternative_White_Vector.svg",
+                url: "https://www.blazeinfosec.com/",
+                forceColor: true
+            }
+        ],
         silver: [],
         partners: [
             {
