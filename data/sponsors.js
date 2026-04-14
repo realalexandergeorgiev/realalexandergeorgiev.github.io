@@ -9,7 +9,20 @@ Object.assign(window.BSidesData, {
                 forceColor: true
             }
         ],
-        silver: [],
+        silver: [
+            {
+                name: "SECUINFRA GmbH",
+                logo: "images/sponsors/secuinfra_01_SI_Primärlogo_Standard_RGB.png",
+                url: "https://www.secuinfra.com/",
+                forceColor: true
+            },
+            {
+                name: "OffSec",
+                logo: "images/sponsors/OffSec_Full_Color_White_Text_Horizontal.png",
+                url: "https://www.offsec.com/",
+                forceColor: true
+            }
+        ],
         partners: [
             {
                 name: "BSidesMunich",
