@@ -35,6 +35,7 @@ Object.assign(window.BSidesData, {
         "images/2025/1.webp",
         "images/2025/2.webp",
         "images/2025/3.webp",
-        "images/2025/4.webp"
+        "images/2025/4.webp",
+        "images/2025/5.webp"
     ]
 });
