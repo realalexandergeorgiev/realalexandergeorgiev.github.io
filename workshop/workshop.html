@@ -260,7 +260,8 @@
                         <li><a href="../2023/index.html">2023</a></li>
                     </ul>
                 </li>
-                <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+                <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="nav-btn-link"
+                        id="nav-tickets">Tickets</a></li>
                 <li><a href="https://cfp.bsidesfrankfurt.org" class="nav-btn-link" id="nav-cfp">CFP</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
             </ul>
@@ -404,7 +405,7 @@
             }
 
             // Countdown Logic
-            const targetDate = new Date('2025-07-09T17:00:00+02:00').getTime();
+            const targetDate = new Date('2026-06-15T17:00:00+02:00').getTime();
             const timer = setInterval(() => {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
@@ -417,7 +418,7 @@
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const cd = document.getElementById('countdown');
-                    if (cd) cd.innerText = `Registration opens in: ${days}d ${hours}h`;
+                    if (cd) cd.innerText = `Registration opens in: ${days}d ${hours}h CEST (maybe - we will keep you updated!)`;
                 }
             }, 1000);
         });
