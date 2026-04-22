@@ -200,7 +200,8 @@
             <li><a href="2023/index.html">2023</a></li>
           </ul>
         </li>
-        <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="nav-btn-link" id="nav-tickets">Tickets</a></li>
+        <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="nav-btn-link"
+            id="nav-tickets">Tickets</a></li>
         <li><a href="https://cfp.bsidesfrankfurt.org" class="nav-btn-link" id="nav-cfp">CFP</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -217,7 +218,8 @@
 
         <div class="hero-buttons">
           <!-- Adjusted buttons to better match original style context -->
-          <a id="btn-tickets" href="https://tickets.bsidesfrankfurt.org" class="btn btn-large mb-2" style="margin-right: 10px;">Get Tickets</a>
+          <a id="btn-tickets" href="https://tickets.bsidesfrankfurt.org" class="btn btn-large mb-2"
+            style="margin-right: 10px;">Get Tickets</a>
           <a href="workshop/workshop.html" class="btn btn-large btn-secondary mb-2">Workshops</a>
           <a href="faq.html" class="btn btn-large btn-secondary mb-2">FAQ</a>
         </div>
@@ -392,14 +394,16 @@
         // Helper to render a group
         const renderGroup = (title, color, items, cssClass) => {
           if (!items || items.length === 0) return '';
-          let html = `<h3 class="text-center mb-2" style="color:${color}; margin-top: 40px;">${title}</h3>`;
+          const isCommunityGroup = title === 'Partners' || title === 'Community Sponsors';
+          const marginTop = isCommunityGroup ? '100px' : '40px';
+          let html = `<h3 class="text-center mb-2" style="color:${color}; margin-top: ${marginTop};">${title}</h3>`;
           html += `<div class="sponsors-grid mb-4">`;
           items.forEach(sponsor => {
             // Check if this specific sponsor should force color
             // We check sponsor.forceColor directly. 
             const forceColor = sponsor.forceColor === true;
 
-            const extraClass = (title === 'Partners' && forceColor) ? 'active-color' : '';
+            const extraClass = (isCommunityGroup && forceColor) ? 'active-color' : '';
 
             html += `<a href="${sponsor.url}" class="${cssClass}" target="_blank"><img src="${sponsor.logo}" class="sponsor-logo ${extraClass}" alt="${sponsor.name}"></a>`;
           });
@@ -412,6 +416,9 @@
         }
         if (sponsorsData.silver) {
           sponsorsContainer.innerHTML += renderGroup('Silver Sponsors', '#c0c0c0', sponsorsData.silver, 'silver-sponsor');
+        }
+        if (sponsorsData.community) {
+          sponsorsContainer.innerHTML += renderGroup('Community Sponsors', '#c0c0c0', sponsorsData.community, 'silver-sponsor');
         }
         if (sponsorsData.partners) {
           sponsorsContainer.innerHTML += renderGroup('Partners', '#cd7f32', sponsorsData.partners, 'silver-sponsor');

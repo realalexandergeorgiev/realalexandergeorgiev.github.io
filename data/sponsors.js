@@ -7,6 +7,12 @@ Object.assign(window.BSidesData, {
                 logo: "images/sponsors/Blaze_Information_Security_Logo_Horizontal_Alternative_White_Vector.svg",
                 url: "https://www.blazeinfosec.com/",
                 forceColor: true
+            },
+            {
+                name: "Siemens Energy",
+                logo: "images/sponsors/SE_Logo_Color_CMYK.png",
+                url: "https://www.siemens-energy.com/de/de/home.html",
+                forceColor: true
             }
         ],
         silver: [
