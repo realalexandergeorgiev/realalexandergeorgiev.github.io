@@ -417,11 +417,14 @@
         if (sponsorsData.silver) {
           sponsorsContainer.innerHTML += renderGroup('Silver Sponsors', '#c0c0c0', sponsorsData.silver, 'silver-sponsor');
         }
+        if (sponsorsData.bronze) {
+          sponsorsContainer.innerHTML += renderGroup('Bronze Sponsors', '#e09c31', sponsorsData.bronze, 'silver-sponsor');
+        }
         if (sponsorsData.community) {
           sponsorsContainer.innerHTML += renderGroup('Community Sponsors', '#c0c0c0', sponsorsData.community, 'silver-sponsor');
         }
         if (sponsorsData.partners) {
-          sponsorsContainer.innerHTML += renderGroup('Partners', '#cd7f32', sponsorsData.partners, 'silver-sponsor');
+          sponsorsContainer.innerHTML += renderGroup('Partners', '#4d4a48', sponsorsData.partners, 'silver-sponsor');
         }
       }
     });

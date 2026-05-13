@@ -29,6 +29,14 @@ Object.assign(window.BSidesData, {
                 forceColor: true
             }
         ],
+        bronze: [
+            {
+                name: "USD AG",
+                logo: "images/sponsors/USD_more_security.usd_RGB_Weiss.svg",
+                url: "https://www.usd.de/",
+                forceColor: true
+            }
+        ],
         partners: [
             {
                 name: "BSidesMunich",
@@ -52,6 +60,12 @@ Object.assign(window.BSidesData, {
                 name: "BSidesDresden",
                 logo: "images/sponsors/bsidesdresden.png",
                 url: "https://bsidesdresden.com/",
+                forceColor: true
+            },
+            {
+                name: "BSidesPorto",
+                logo: "images/sponsors/bsides_porto.svg",
+                url: "https://bsidesporto.org/",
                 forceColor: true
             },
             {
