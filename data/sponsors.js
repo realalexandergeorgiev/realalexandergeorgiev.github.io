@@ -27,6 +27,12 @@ Object.assign(window.BSidesData, {
                 logo: "images/sponsors/OffSec_Full_Color_White_Text_Horizontal.png",
                 url: "https://www.offsec.com/",
                 forceColor: true
+            },
+            {
+                name: "Red Cyber Security GmbH",
+                logo: "images/sponsors/Red-CS_Logo.png",
+                url: "https://red-cyber-security.com",
+                forceColor: true
             }
         ],
         bronze: [
