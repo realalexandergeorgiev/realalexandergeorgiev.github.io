@@ -405,7 +405,7 @@
             }
 
             // Countdown Logic
-            const targetDate = new Date('2026-06-15T17:00:00+02:00').getTime();
+            const targetDate = new Date('2026-08-07T17:00:00+02:00').getTime();
             const timer = setInterval(() => {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
@@ -418,7 +418,7 @@
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const cd = document.getElementById('countdown');
-                    if (cd) cd.innerText = `Registration opens in: ${days}d ${hours}h CEST (maybe - we will keep you updated!)`;
+                    if (cd) cd.innerText = `Registration opens in ~ ${days}d ${hours}h CEST (we will keep you updated on LinkedIn!)`;
                 }
             }, 1000);
         });
