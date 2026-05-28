@@ -2,15 +2,15 @@
 partners:
   - name: "Women in Tech by heise"
     logo: "/images/women/women-in-tech-heise.svg"
-    website: ""
+    website: "https://www.women-heise.tech/"
     linkedin: "https://www.linkedin.com/groups/13300324/"
   - name: "Women4Cyber Germany"
     logo: "/images/women/women4cyber-germany.png"
-    website: ""
+    website: "https://www.eurobits.de/projekte/women4cyber/"
     linkedin: "https://www.linkedin.com/company/women4cybergermany/"
   - name: "SheLeadsTech - ISACA Germany Chapter"
     logo: "/images/women/sheleadstech-isaca.jpg"
-    website: ""
+    website: "https://www.isaca.de/sheatisaca.html"
     linkedin: "https://www.linkedin.com/showcase/she-isaca-germany-chapter"
 
 # Lead contact for BSides Women - discount code requests etc.
