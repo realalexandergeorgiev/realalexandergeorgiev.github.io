@@ -1,0 +1,22 @@
+{{ $all := slice }}
+{{ with .Site.Data.sponsors.gold }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+{{ with .Site.Data.sponsors.silver }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+{{ with .Site.Data.sponsors.partners }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+
+{{ if $all }}
+<div class="sponsor-carousel" aria-label="Sponsors carousel">
+  <div class="sponsor-carousel__track">
+    {{/* duplicate for seamless scroll */}}
+    {{ range $i, $s := $all }}
+      <a class="sponsor-carousel__item" href="{{ $s.url }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ $s.logo | relURL }}" alt="{{ $s.name }}" loading="lazy">
+      </a>
+    {{ end }}
+    {{ range $i, $s := $all }}
+      <a class="sponsor-carousel__item" href="{{ $s.url }}" target="_blank" rel="noopener noreferrer" aria-hidden="true">
+        <img src="{{ $s.logo | relURL }}" alt="" loading="lazy">
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

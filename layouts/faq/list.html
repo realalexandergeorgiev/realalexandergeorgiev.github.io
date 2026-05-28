@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "FAQ"
+  "title" "Frequently asked <span style=\"color: var(--color-primary);\">questions</span>"
+  "lead" "If you can't find the answer you're looking for, email info@bsidesfrankfurt.org.")
+}}
+
+<section>
+  <div class="container" style="max-width: 860px;">
+    <div class="faq">
+      {{ range .Site.Data.faq }}
+        <details class="faq__item">
+          <summary class="faq__question">
+            <span>{{ .question }}</span>
+            <i class="fas fa-plus faq__icon" aria-hidden="true"></i>
+          </summary>
+          <div class="faq__answer">
+            {{ .answer | markdownify }}
+          </div>
+        </details>
+      {{ end }}
+    </div>
+
+    <div class="text-center" style="margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--color-border);">
+      <p class="lead" style="margin: 0 auto var(--space-4);">Still have questions?</p>
+      <a href="mailto:info@bsidesfrankfurt.org" class="btn btn--outline">Email us</a>
+    </div>
+  </div>
+</section>
+{{ end }}

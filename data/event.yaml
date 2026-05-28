@@ -1,0 +1,16 @@
+name: BSidesFrankfurt
+year: 2026
+dates:
+  conference: 2026-09-10
+  workshops: 2026-09-11
+  display: "10–11 September 2026"
+location:
+  name: Goethe University Frankfurt
+  address: "Theodor-W.-Adorno-Platz 1, 60323 Frankfurt am Main"
+  mapUrl: "https://maps.app.goo.gl/GcqTCP2SCqvs8YZe6"
+social:
+  twitter: "https://x.com/BSidesFRA"
+  instagram: "https://instagram.com/BSidesFRA"
+  mastodon: "https://infosec.exchange/@bsidesfra"
+  linkedin: "https://www.linkedin.com/company/bsides-frankfurt/"
+  email: "info@bsidesfrankfurt.org"

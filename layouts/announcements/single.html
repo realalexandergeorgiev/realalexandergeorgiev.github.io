@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="article">
+  <header class="article__header">
+    <div class="container" style="max-width: 760px;">
+      <a href="{{ "/announcements/" | relURL }}" class="article__back">
+        <i class="fas fa-arrow-left"></i> All announcements
+      </a>
+      {{ with .Params.tag }}
+        <div class="article__tags">
+          <span class="article__tag">{{ . }}</span>
+        </div>
+      {{ end }}
+      <h1 class="article__title">{{ .Title }}</h1>
+      <div class="article__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      </div>
+    </div>
+  </header>
+
+  <div class="container" style="max-width: 760px;">
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+  </div>
+</article>
+{{ end }}

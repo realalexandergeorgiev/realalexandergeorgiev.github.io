@@ -1,0 +1,53 @@
+{{ $sponsors := .Site.Data.sponsors }}
+
+{{ with $sponsors.gold }}
+<div class="sponsors__tier sponsors__tier--gold">
+  <h3 class="sponsors__tier-title">Gold Sponsors</h3>
+  <div class="sponsors__grid">
+    {{ range . }}
+      <a href="{{ .url }}" class="sponsor-card sponsor-card--gold" target="_blank" rel="noopener noreferrer">
+        <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ with $sponsors.silver }}
+<div class="sponsors__tier sponsors__tier--silver">
+  <h3 class="sponsors__tier-title">Silver Sponsors</h3>
+  <div class="sponsors__grid">
+    {{ range . }}
+      <a href="{{ .url }}" class="sponsor-card" target="_blank" rel="noopener noreferrer">
+        <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ with $sponsors.bronze }}
+<div class="sponsors__tier sponsors__tier--bronze">
+  <h3 class="sponsors__tier-title">Bronze Sponsors</h3>
+  <div class="sponsors__grid">
+    {{ range . }}
+      <a href="{{ .url }}" class="sponsor-card" target="_blank" rel="noopener noreferrer">
+        <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ with $sponsors.partners }}
+<div class="sponsors__tier sponsors__tier--partners">
+  <h3 class="sponsors__tier-title">Community Partners</h3>
+  <div class="sponsors__grid">
+    {{ range . }}
+      <a href="{{ .url }}" class="sponsor-card" target="_blank" rel="noopener noreferrer">
+        <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

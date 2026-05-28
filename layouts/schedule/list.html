@@ -1,0 +1,38 @@
+{{ define "main" }}
+{{ $event := .Site.Data.event }}
+
+{{ partial "page-header.html" (dict
+  "eyebrow" "2026 Conference"
+  "title" "Schedule"
+  "lead" (printf "%s · %s" $event.dates.display $event.location.name))
+}}
+
+<section>
+  <div class="container text-center">
+    <div style="max-width: 720px; margin: 0 auto; padding: var(--space-7) var(--space-5); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
+      <i class="fas fa-calendar-plus fa-3x text-primary" style="margin-bottom: var(--space-4);"></i>
+      <h2 class="section-title section-title--center">Full schedule coming soon</h2>
+      <p class="lead" style="margin: 0 auto var(--space-5);">
+        The Call for Papers is still open. Once the review committee has finalised the
+        program, the full schedule - talks, workshops, and breaks - will be published here.
+      </p>
+      <div class="btn-row" style="justify-content: center;">
+        <a href="https://cfp.bsidesfrankfurt.org" class="btn">Submit a Talk</a>
+        <a href="{{ "/" | relURL }}" class="btn btn--outline">Back to home</a>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-7);">
+      <span class="eyebrow">Past editions</span>
+      <h3 style="text-transform: none; letter-spacing: -0.01em; margin: var(--space-2) 0 var(--space-3);">
+        Looking for previous schedules?
+      </h3>
+      <div class="btn-row" style="justify-content: center;">
+        <a href="https://2025.bsidesfrankfurt.org/schedule/" class="btn btn--outline btn--sm">2025</a>
+        <a href="https://2024.bsidesfrankfurt.org/schedule/" class="btn btn--outline btn--sm">2024</a>
+        <a href="https://2023.bsidesfrankfurt.org/schedule/" class="btn btn--outline btn--sm">2023</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

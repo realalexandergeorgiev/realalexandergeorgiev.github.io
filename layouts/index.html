@@ -1,0 +1,125 @@
+{{ define "main" }}
+{{ $event := .Site.Data.event }}
+
+<section class="hero">
+  <div class="container hero__inner">
+    <img src="{{ "images/bsides-frankfurt-logo-main.svg" | relURL }}" alt="BSidesFrankfurt" class="hero__logo">
+    <span class="hero__date">
+      <i class="fas fa-calendar-days"></i> {{ $event.dates.display }}
+    </span>
+    <h1 class="hero__title">Germany's community InfoSec conference</h1>
+    <p class="hero__location">
+      <i class="fas fa-location-dot"></i>
+      {{ with $event.location.mapUrl }}
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $event.location.name }}</a>
+      {{ else }}
+        {{ $event.location.name }}
+      {{ end }}
+    </p>
+    <div class="btn-row" style="justify-content: center;">
+      <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="btn btn--lg">
+        <i class="fas fa-ticket"></i> Get Tickets
+      </a>
+      <a href="https://cfp.bsidesfrankfurt.org" class="btn btn--lg btn--outline">Submit a Talk</a>
+      <a href="{{ "/workshops/" | relURL }}" class="btn btn--lg btn--ghost">Workshops</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section style="padding-top: 0; padding-bottom: var(--space-7);">
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><span class="stat__value" data-count-to="300">0</span><span class="stat__label">Attendees</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="8">0</span><span class="stat__label">Talks</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="12">0</span><span class="stat__label">Workshops</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="4">0</span><span class="stat__label">Editions</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Sponsors - grid only (spotlight removed; speaker section hidden until lineup confirmed) -->
+<section class="sponsors">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Our Sponsors</span>
+      <h2 class="section-title section-title--center">Made possible by</h2>
+      <p class="lead" style="margin: 0 auto;">
+        BSidesFrankfurt wouldn't exist without the generous backing of our sponsors and partners.
+      </p>
+    </div>
+
+    {{ partial "sponsors-grid.html" . }}
+
+    <div class="text-center mt-5">
+      <a href="mailto:sponsors@bsidesfrankfurt.org" class="btn btn--outline">Become a Sponsor</a>
+    </div>
+  </div>
+</section>
+
+<!-- BSides Women callout -->
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="women-callout">
+      <div class="women-callout__sponsor">
+        <a href="https://www.nviso.eu/" target="_blank" rel="noopener noreferrer" aria-label="NVISO">
+          <img src="{{ "images/sponsors/NVISO_Logo 1.svg" | relURL }}" alt="NVISO">
+        </a>
+        <span class="women-callout__sponsor-label">Made possible by</span>
+      </div>
+      <div class="women-callout__content">
+        <span class="women-callout__eyebrow">★ Community initiative</span>
+        <h2 class="women-callout__title">BSides Women</h2>
+        <p class="women-callout__body">
+          A BSides Frankfurt initiative supporting more women in cybersecurity - discounted
+          tickets thanks to NVISO, plus a welcoming space for speakers, attendees, and partner
+          communities.
+        </p>
+        <a href="{{ "/women/" | relURL }}" class="btn">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Announcements (reads from content/announcements/) -->
+<section>
+  <div class="container">
+    <div class="mb-5" style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: var(--space-3);">
+      <div>
+        <span class="eyebrow">Latest</span>
+        <h2 class="section-title" style="margin: 0;">Announcements</h2>
+      </div>
+      <a href="{{ "/blog/" | relURL }}" class="btn btn--sm btn--outline">All posts →</a>
+    </div>
+
+    <div class="announcements">
+      {{ range first 3 (where .Site.RegularPages "Section" "announcements").ByDate.Reverse }}
+        <article class="announcement">
+          <div class="announcement__date">
+            {{ with .Params.tag }}{{ . }} · {{ end }}{{ .Date.Format "2 Jan 2006" }}
+          </div>
+          <h3 class="announcement__title"><a href="{{ .RelPermalink }}" style="color: inherit;">{{ .Title }}</a></h3>
+          <p class="announcement__excerpt">{{ .Params.summary | default .Summary }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section style="background: var(--color-bg-alt);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">What is BSides</span>
+      <h2 class="section-title section-title--center">A conference built by the community</h2>
+      <p class="lead" style="margin: 0 auto;">
+        BSides is a community-driven framework for organizing information security conferences.
+        Originally conceived in the US in 2009 to remove the barrier to entry and provide a more
+        intimate atmosphere for networking and collaboration.
+      </p>
+    </div>
+    {{ partial "about-grid.html" . }}
+  </div>
+</section>
+
+{{ end }}

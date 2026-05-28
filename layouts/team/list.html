@@ -1,0 +1,47 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "The humans"
+  "title" (printf "The <span style=\"color: var(--color-primary);\">BSidesFrankfurt</span> team")
+  "lead" "BSidesFrankfurt is run entirely by volunteers. These are the people making the 2026 edition happen.")
+}}
+
+{{ $team := .Site.Data.team }}
+
+{{ with $team.organisers }}
+<section>
+  <div class="container">
+    <span class="eyebrow">Lead organisers</span>
+    <h2 class="section-title" style="margin-bottom: var(--space-5);">Main organisation</h2>
+    <div class="team-grid team-grid--leads">
+      {{ range . }}
+        {{ partial "team-card.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with $team.team }}
+<section style="background: var(--color-bg-alt); padding-top: var(--space-6);">
+  <div class="container">
+    <span class="eyebrow">Volunteers</span>
+    <h2 class="section-title" style="margin-bottom: var(--space-5);">Organising team</h2>
+    <div class="team-grid">
+      {{ range . }}
+        {{ partial "team-card.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section>
+  <div class="container text-center">
+    <h2 class="section-title section-title--center">Want to help?</h2>
+    <p class="lead" style="margin: 0 auto var(--space-4);">
+      We're always looking for volunteers - from on-site logistics to review committee work.
+    </p>
+    <a href="mailto:volunteer@bsidesfrankfurt.org" class="btn">Get in touch</a>
+  </div>
+</section>
+{{ end }}

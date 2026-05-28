@@ -1,0 +1,38 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "Photos"
+  "title" "<span style=\"color: var(--color-primary);\">BSidesFrankfurt</span> gallery"
+  "lead" "Moments from past editions. Taken by our photography volunteers.")
+}}
+
+<section>
+  <div class="container">
+    {{ $images := slice
+      "/images/2025/1.webp"
+      "/images/2025/2.webp"
+      "/images/2025/3.webp"
+      "/images/2025/4.webp"
+      "/images/bsidesfra-2.png.webp"
+      "/images/hacker1.png.webp"
+      "/images/casino/casino1.jpg.webp"
+    }}
+    <div class="gallery-grid">
+      {{ range $i, $img := $images }}
+        <a href="{{ $img | relURL }}" class="gallery-item" target="_blank" rel="noopener noreferrer">
+          <img src="{{ $img | relURL }}" alt="BSidesFrankfurt gallery image {{ add $i 1 }}" loading="lazy">
+        </a>
+      {{ end }}
+    </div>
+
+    <div class="text-center" style="margin-top: var(--space-7);">
+      <span class="eyebrow">Past years</span>
+      <h2 class="section-title section-title--center">Browse by edition</h2>
+      <div class="btn-row" style="justify-content: center;">
+        <a href="https://2025.bsidesfrankfurt.org" class="btn btn--outline">2025</a>
+        <a href="https://2024.bsidesfrankfurt.org" class="btn btn--outline">2024</a>
+        <a href="https://2023.bsidesfrankfurt.org" class="btn btn--outline">2023</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

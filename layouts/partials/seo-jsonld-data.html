@@ -1,0 +1,106 @@
+{{/* ============================================================
+     Builds JSON-LD structured-data blocks AND their SHA-256 hashes.
+     RETURNS a slice of dicts: [{ json: "...", hash: "sha256-..." }, ...]
+
+     Called from head.html so the CSP meta tag can include the hashes
+     BEFORE the JSON-LD scripts are emitted.
+     ============================================================ */}}
+{{- $isHome := .IsHome -}}
+{{- $event := .Site.Data.event -}}
+{{- $siteName := .Site.Title -}}
+{{- $siteDesc := .Site.Params.description -}}
+{{- $description := .Description | default .Params.summary | default $siteDesc -}}
+{{- $url := .Permalink -}}
+{{- $ogImage := absURL "apple-touch-icon-180.png" -}}
+
+{{- $jsons := slice -}}
+
+{{- /* Organization (every page) */ -}}
+{{- $org := dict
+    "@context" "https://schema.org"
+    "@type" "Organization"
+    "name" $siteName
+    "url" .Site.BaseURL
+    "logo" (absURL "apple-touch-icon-180.png")
+    "description" $siteDesc
+    "sameAs" (slice $event.social.twitter $event.social.linkedin $event.social.mastodon $event.social.instagram)
+-}}
+{{- $jsons = $jsons | append ($org | jsonify (dict "indent" "  ")) -}}
+
+{{- /* Event (homepage only) */ -}}
+{{- if $isHome -}}
+{{- $ev := dict
+    "@context" "https://schema.org"
+    "@type" "Event"
+    "name" (printf "%s %d" $siteName $event.year)
+    "startDate" ($event.dates.conference | dateFormat "2006-01-02")
+    "endDate" ($event.dates.workshops | dateFormat "2006-01-02")
+    "eventStatus" "https://schema.org/EventScheduled"
+    "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+    "description" $siteDesc
+    "image" (slice $ogImage)
+    "location" (dict
+      "@type" "Place"
+      "name" $event.location.name
+      "address" (dict
+        "@type" "PostalAddress"
+        "streetAddress" "Theodor-W.-Adorno-Platz 1"
+        "addressLocality" "Frankfurt am Main"
+        "postalCode" "60323"
+        "addressCountry" "DE"
+      )
+    )
+    "organizer" (dict
+      "@type" "Organization"
+      "name" $siteName
+      "url" .Site.BaseURL
+    )
+    "offers" (dict
+      "@type" "Offer"
+      "url" "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/"
+      "availability" "https://schema.org/InStock"
+      "priceCurrency" "EUR"
+      "validFrom" (now | dateFormat "2006-01-02")
+    )
+-}}
+{{- $jsons = $jsons | append ($ev | jsonify (dict "indent" "  ")) -}}
+{{- end -}}
+
+{{- /* BlogPosting (blog single pages) */ -}}
+{{- if and (eq .Section "blog") (not (or .IsSection .IsHome)) -}}
+{{- $post := dict
+    "@context" "https://schema.org"
+    "@type" "BlogPosting"
+    "headline" .Title
+    "description" $description
+    "datePublished" (.Date.Format "2006-01-02")
+    "dateModified" (.Lastmod.Format "2006-01-02")
+    "image" $ogImage
+    "url" $url
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" $url)
+    "publisher" (dict
+      "@type" "Organization"
+      "name" $siteName
+      "logo" (dict
+        "@type" "ImageObject"
+        "url" (absURL "apple-touch-icon-180.png")
+      )
+    )
+-}}
+{{- with .Params.author -}}
+  {{- $post = merge $post (dict "author" (dict "@type" "Person" "name" .)) -}}
+{{- end -}}
+{{- $jsons = $jsons | append ($post | jsonify (dict "indent" "  ")) -}}
+{{- end -}}
+
+{{- /* Compute SHA-256 hash for each JSON-LD block (for CSP script-src).
+       Path must be UNIQUE per page-block, otherwise resources.FromString
+       returns a cached resource (first page wins). */ -}}
+{{- $pageKey := md5 .RelPermalink -}}
+{{- $blocks := slice -}}
+{{- range $i, $json := $jsons -}}
+  {{- $res := resources.FromString (printf "tmp/ld-%s-%d.json" $pageKey $i) $json | resources.Fingerprint "sha256" -}}
+  {{- $blocks = $blocks | append (dict "json" $json "hash" $res.Data.Integrity) -}}
+{{- end -}}
+
+{{- return $blocks -}}

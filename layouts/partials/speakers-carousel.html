@@ -1,0 +1,40 @@
+{{ $speakers := .Site.Data.speakers }}
+{{ if $speakers }}
+<div class="speakers" aria-label="Conference speakers">
+  <button class="speakers__nav speakers__nav--prev" aria-label="Previous speakers" type="button">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <div class="speakers__track" tabindex="0">
+    {{ range $s := $speakers }}
+      <article class="speaker-card">
+        <div class="speaker-card__photo">
+          {{ if $s.photo }}
+            <img src="{{ $s.photo | relURL }}" alt="{{ $s.name }}" loading="lazy">
+          {{ else }}
+            <span class="speaker-card__initials" aria-hidden="true">
+              {{ $parts := split $s.name " " }}
+              {{ range $i, $p := $parts }}{{ if lt $i 2 }}{{ substr $p 0 1 }}{{ end }}{{ end }}
+            </span>
+          {{ end }}
+        </div>
+        <div class="speaker-card__body">
+          <h3 class="speaker-card__name">{{ $s.name }}</h3>
+          {{ with $s.role }}<p class="speaker-card__role">{{ . }}</p>{{ end }}
+          {{ with $s.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
+          {{ with $s.bio }}<p class="speaker-card__bio">{{ . }}</p>{{ end }}
+          {{ with $s.linkedin }}
+            <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} on LinkedIn">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+          {{ end }}
+        </div>
+      </article>
+    {{ end }}
+  </div>
+
+  <button class="speakers__nav speakers__nav--next" aria-label="Next speakers" type="button">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+{{ end }}

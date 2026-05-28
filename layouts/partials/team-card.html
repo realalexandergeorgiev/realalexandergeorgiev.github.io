@@ -1,0 +1,20 @@
+<article class="team-card">
+  <div class="team-card__photo">
+    {{ if .image }}
+      <img src="{{ .image | relURL }}" alt="{{ .name }}" loading="lazy">
+    {{ else }}
+      <span class="team-card__initials" aria-hidden="true">
+        {{ $parts := split .name " " }}
+        {{ range $i, $p := $parts }}{{ if lt $i 2 }}{{ substr $p 0 1 }}{{ end }}{{ end }}
+      </span>
+    {{ end }}
+  </div>
+  <h3 class="team-card__name">{{ .name }}</h3>
+  {{ with .role }}<p class="team-card__role">{{ . }}</p>{{ end }}
+  <div class="team-card__links">
+    {{ with .linkedin }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>{{ end }}
+    {{ with .twitter }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>{{ end }}
+    {{ with .github }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{{ end }}
+    {{ with .email }}<a href="mailto:{{ . }}" aria-label="Email"><i class="fas fa-envelope"></i></a>{{ end }}
+  </div>
+</article>

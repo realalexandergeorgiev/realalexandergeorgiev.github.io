@@ -1,0 +1,32 @@
+{{ define "main" }}
+<section style="padding-top: var(--space-7); padding-bottom: var(--space-5);">
+  <div class="container">
+    <span class="eyebrow">Announcements</span>
+    <h1 style="text-transform: none; letter-spacing: -0.02em; margin-bottom: var(--space-3);">
+      Official updates from the <span style="color: var(--color-primary);">organizing team</span>
+    </h1>
+    <p class="lead" style="max-width: 60ch;">
+      {{ .Description | default "Dates, deadlines, and programme changes." }}
+    </p>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="announcements">
+      {{ range .Pages.ByDate.Reverse }}
+        <article class="announcement">
+          <div class="announcement__date">
+            {{ with .Params.tag }}{{ . }} · {{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+          </div>
+          <h2 class="announcement__title"><a href="{{ .RelPermalink }}" style="color: inherit;">{{ .Title }}</a></h2>
+          <p class="announcement__excerpt">{{ .Params.summary | default .Summary }}</p>
+          <a href="{{ .RelPermalink }}" style="font-family: var(--font-heading); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary); display: inline-block; margin-top: var(--space-2);">
+            Read more →
+          </a>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

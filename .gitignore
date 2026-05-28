@@ -1,2 +1,24 @@
-#OS junk files
-*.DS_Store
+# Hugo build artifacts
+public/
+resources/
+.hugo_build.lock
+
+# Local secrets / config (should never be committed)
+.env
+.env.*
+wrangler.toml
+.wrangler/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build / dependency artifacts (in case anyone adds npm later)
+node_modules/
+
+# Local distribution zips
+*.zip

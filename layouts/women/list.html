@@ -1,0 +1,164 @@
+{{ define "main" }}
+{{ $women := .Site.Data.women }}
+
+<section style="padding-top: var(--space-7); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-border);">
+  <div class="container" style="max-width: 820px;">
+    <span class="eyebrow">Community initiative</span>
+    <h1 style="text-transform: none; letter-spacing: -0.02em; margin-bottom: var(--space-3); font-size: clamp(2rem, 6vw, var(--fs-4xl));">
+      BSides <span style="color: var(--color-primary);">Women</span>
+    </h1>
+    <p class="lead" style="max-width: 65ch; margin: 0;">
+      A BSides Frankfurt–driven initiative focused on bringing more women into cybersecurity
+      and strengthening connections across security communities.
+    </p>
+  </div>
+</section>
+
+<!-- Mission -->
+<section>
+  <div class="container" style="max-width: 820px;">
+    <div class="women-prose">
+      <p>
+        Our goal is to encourage and support more women in technical security conferences -
+        not only as attendees, but also as speakers and active contributors to the community.
+      </p>
+      <p>
+        Together with multiple <a href="#communities">women's communities</a>, we create a
+        welcoming space for networking, collaboration, and technical exchange.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Vanessa contact (moved up, directly below mission) -->
+<section style="padding-top: 0; padding-bottom: var(--space-4);">
+  <div class="container" style="max-width: 820px;">
+    <div class="women-contact">
+      <div class="women-contact__photo">
+        {{ if $women.contact.photo }}
+          <img src="{{ $women.contact.photo | relURL }}" alt="{{ $women.contact.name }}" loading="lazy">
+        {{ else }}
+          <span class="women-contact__initials" aria-hidden="true">
+            {{ $parts := split $women.contact.name " " }}
+            {{ range $i, $p := $parts }}{{ if lt $i 2 }}{{ substr $p 0 1 }}{{ end }}{{ end }}
+          </span>
+        {{ end }}
+      </div>
+      <div class="women-contact__body">
+        <span class="eyebrow">Get in touch</span>
+        <h3 style="text-transform: none; letter-spacing: -0.01em; margin-bottom: var(--space-2);">Questions about BSides Women?</h3>
+        <p style="margin: 0 0 var(--space-1); color: var(--color-text); font-weight: 600;">{{ $women.contact.name }}</p>
+        <p style="margin: 0 0 var(--space-3); color: var(--color-text-muted); font-size: var(--fs-sm);">{{ $women.contact.role }}</p>
+        <div class="btn-row">
+          <a href="mailto:{{ $women.contact.email }}" class="btn btn--sm btn--outline">
+            <i class="fas fa-envelope"></i> {{ $women.contact.email }}
+          </a>
+          <a href="{{ $women.contact.linkedin }}" class="btn btn--sm btn--outline" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Participating + Speaking CTAs -->
+<section style="padding-top: var(--space-4);">
+  <div class="container" style="max-width: 820px;">
+    <div class="women-cta-grid">
+      <!-- Participate -->
+      <article class="women-cta">
+        <span class="eyebrow">Attendees</span>
+        <h2 class="women-cta__title">Interested in participating?</h2>
+        <p class="women-cta__body">
+          Thanks to the support of <strong>{{ $women.discountSponsor.name }}</strong>,
+          discounted BSides Frankfurt tickets are available for women attendees. To request
+          your discount code, email our BSides Women lead with the participant's
+          <strong>full name</strong> and <strong>LinkedIn profile</strong> - this helps us
+          track allocations and make sure the discount reaches the community it's intended for.
+        </p>
+        {{ with $women.discountSponsor }}
+        <div class="women-cta__sponsor-wrap">
+          <span class="women-cta__sponsor-label">Made possible by</span>
+          <a href="{{ .website }}" class="women-cta__sponsor" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}">
+            <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+          </a>
+        </div>
+        {{ end }}
+        <a
+          href="mailto:{{ $women.contact.email }}?subject=BSides%20Women%20discount%20code%20request&body=Hi%20Vanessa%2C%0A%0AI%27d%20like%20to%20request%20a%20BSides%20Women%20discount%20code.%0A%0AFull%20name%3A%20%0ALinkedIn%20profile%3A%20%0ACommunity%20%2F%20how%20I%20heard%20about%20BSides%20Women%20%28optional%29%3A%20%0A%0AThanks%21"
+          class="btn"
+          data-copy-template="Hi Vanessa,&#10;&#10;I'd like to request a BSides Women discount code.&#10;&#10;Full name: &#10;LinkedIn profile: &#10;Community / how I heard about BSides Women (optional): &#10;&#10;Thanks!"
+          data-copy-label="Template copied to clipboard - paste it into your email if it didn't auto-fill.">
+          <i class="fas fa-envelope"></i> Request Discount Code
+        </a>
+        <p class="women-cta__copy-feedback" hidden role="status" aria-live="polite"></p>
+
+        <details class="women-cta__fallback">
+          <summary>Mail app didn't open or template missing? Copy it manually</summary>
+          <pre class="women-cta__template" id="women-template">Hi Vanessa,
+
+I'd like to request a BSides Women discount code.
+
+Full name:
+LinkedIn profile:
+Community / how I heard about BSides Women (optional):
+
+Thanks!</pre>
+          <button type="button" class="btn btn--sm btn--outline" data-copy-from="#women-template">
+            <i class="fas fa-copy"></i> Copy template
+          </button>
+        </details>
+      </article>
+
+      <!-- Speak -->
+      <article class="women-cta">
+        <span class="eyebrow">Speakers</span>
+        <h2 class="women-cta__title">Interested in speaking?</h2>
+        <p class="women-cta__body">
+          We welcome first-time and experienced speakers, students, researchers, and community
+          members sharing technical security topics and hands-on experience.
+        </p>
+        <a href="https://cfp.bsidesfrankfurt.org" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+          Submit your talk
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Partner communities -->
+{{ with $women.partners }}
+<section id="communities" style="background: var(--color-bg-alt); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); scroll-margin-top: calc(var(--nav-height) + var(--space-3));">
+  <div class="container" style="max-width: 820px;">
+    <div class="mb-5">
+      <span class="eyebrow">In collaboration with</span>
+      <h2 style="text-transform: none; letter-spacing: -0.01em; margin: var(--space-2) 0 var(--space-2);">Women's communities</h2>
+      <p style="color: var(--color-text-muted); max-width: 60ch; margin: 0;">
+        BSides Women collaborates with the following women's security communities to bring
+        people, communities, and opportunities together in one place.
+      </p>
+    </div>
+    <div class="women-partners">
+      {{ range . }}
+        <a href="{{ or .website .linkedin "#" }}" class="women-partner" target="_blank" rel="noopener noreferrer">
+          <div class="women-partner__logo">
+            {{ if .logo }}
+              <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
+            {{ else }}
+              <span class="women-partner__placeholder">{{ .name }}</span>
+            {{ end }}
+          </div>
+          <div class="women-partner__name">{{ .name }}</div>
+          {{ with .linkedin }}
+            <div class="women-partner__linkedin">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </div>
+          {{ end }}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

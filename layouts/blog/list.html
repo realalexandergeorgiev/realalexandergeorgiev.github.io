@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section style="padding-top: var(--space-7); padding-bottom: var(--space-5);">
+  <div class="container">
+    <span class="eyebrow">Blog</span>
+    <h1 style="text-transform: none; letter-spacing: -0.02em; margin-bottom: var(--space-3);">
+      Notes from the <span style="color: var(--color-primary);">BSidesFrankfurt</span> community
+    </h1>
+    <p class="lead" style="max-width: 60ch;">
+      {{ .Description | default "Retrospectives, speaker stories, and deep dives from our crew." }}
+    </p>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="blog-grid">
+      {{ range .Pages.ByDate.Reverse }}
+        <article class="blog-card">
+          <a href="{{ .RelPermalink }}" style="color: inherit; display: block;">
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+                {{ with .Params.author }} · {{ . }}{{ end }}
+              </div>
+              <h2 class="blog-card__title">{{ .Title }}</h2>
+              <p class="blog-card__excerpt">{{ .Params.summary | default .Summary }}</p>
+              <div style="margin-top: var(--space-3); font-family: var(--font-heading); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary);">
+                Read article →
+              </div>
+            </div>
+          </a>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

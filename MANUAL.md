@@ -22,14 +22,18 @@ A practical guide for organizers, volunteers, and contributors to maintain the B
    - [5.8 Update the schedule](#58-update-the-schedule)
    - [5.9 Update the workshops page](#59-update-the-workshops-page)
    - [5.10 Add or change navigation menu items](#510-add-or-change-navigation-menu-items)
-   - [5.11 Add speakers (when ready)](#511-add-speakers-when-ready)
+   - [5.11 Edit the BSides Women page](#511-edit-the-bsides-women-page)
+   - [5.12 Add speakers (when ready)](#512-add-speakers-when-ready)
+   - [5.13 Edit the homepage stats strip](#513-edit-the-homepage-stats-strip)
 6. [Images and other assets](#6-images-and-other-assets)
 7. [Changing colors and fonts](#7-changing-colors-and-fonts)
-8. [Building and deploying](#8-building-and-deploying)
+8. [Building and deploying to Cloudflare Pages](#8-building-and-deploying-to-cloudflare-pages)
 9. [Subdomain archive (2023/2024/2025)](#9-subdomain-archive-202320242025)
-10. [Common tasks — quick reference](#10-common-tasks--quick-reference)
-11. [Troubleshooting](#11-troubleshooting)
-12. [Where to get help](#12-where-to-get-help)
+10. [SEO](#10-seo)
+11. [Common tasks - quick reference](#11-common-tasks--quick-reference)
+12. [Style guidelines](#12-style-guidelines)
+13. [Troubleshooting](#13-troubleshooting)
+14. [Where to get help](#14-where-to-get-help)
 
 ---
 
@@ -65,7 +69,7 @@ The site you're editing lives at **`hugo-site/`** inside the repository.
 ### What you'll need
 
 - A computer running macOS, Linux, or Windows
-- A code editor — [VS Code](https://code.visualstudio.com/) is free and friendly
+- A code editor - [VS Code](https://code.visualstudio.com/) is free and friendly
 - [Git](https://git-scm.com/) (often pre-installed)
 - [Hugo](https://gohugo.io/) **extended edition**
 
@@ -88,7 +92,7 @@ choco install hugo-extended
 scoop install hugo-extended
 ```
 
-Verify the install — you should see `extended` in the version string:
+Verify the install - you should see `extended` in the version string:
 ```sh
 hugo version
 # → hugo v0.160.x+extended ...
@@ -109,7 +113,7 @@ You should now see folders called `content/`, `data/`, `layouts/`, `static/`, et
 hugo server
 ```
 
-Open [http://localhost:1313](http://localhost:1313) in your browser. **Keep `hugo server` running** while you edit — every save reloads the page automatically.
+Open [http://localhost:1313](http://localhost:1313) in your browser. **Keep `hugo server` running** while you edit - every save reloads the page automatically.
 
 To stop, press `Ctrl+C`.
 
@@ -151,11 +155,11 @@ year: 2026
 dates:
   conference: 2026-09-10
   workshops: 2026-09-11
-  display: "10–11 September 2026"     # ← human-readable, shown in hero
+  display: "10-11 September 2026"     # human-readable, shown in hero
 location:
   name: Goethe University Frankfurt
   address: "Theodor-W.-Adorno-Platz 1, 60323 Frankfurt am Main"
-  mapUrl: "https://www.uni-frankfurt.de/..."
+  mapUrl: "https://maps.app.goo.gl/GcqTCP2SCqvs8YZe6"   # makes the location text clickable
 social:
   twitter: "https://x.com/BSidesFRA"
   instagram: "https://instagram.com/BSidesFRA"
@@ -164,7 +168,10 @@ social:
   email: "info@bsidesfrankfurt.org"
 ```
 
-This file feeds the **hero**, **footer social icons**, and **contact email** across every page.
+This file feeds the **hero**, **footer social icons**, **contact email**, and the **homepage map link** across every page.
+
+- `dates.conference` and `dates.workshops` are also picked up by the JSON-LD `Event` structured data (helps Google's rich result for "BSidesFrankfurt").
+- `mapUrl` turns the venue name in the hero into a clickable link that opens Google Maps in a new tab. Leave it empty to render plain text.
 
 ---
 
@@ -172,7 +179,7 @@ This file feeds the **hero**, **footer social icons**, and **contact email** acr
 
 **File:** `data/sponsors.yaml`
 
-The file has three tiers: **gold**, **silver**, and **partners**. Each entry has a name, logo path, and URL.
+The file has four tiers: **gold**, **silver**, **bronze**, and **partners** (community partners). Each entry has a name, logo path, and URL.
 
 #### Add a sponsor
 
@@ -181,28 +188,43 @@ The file has three tiers: **gold**, **silver**, and **partners**. Each entry has
 
 ```yaml
 gold:
-  - name: "Acme Security"
-    logo: "/images/sponsors/acme-security.svg"
-    url: "https://acmesecurity.example/"
+  - name: "Existing Gold Sponsor"
+    logo: "/images/sponsors/existing-gold.svg"
+    url: "https://existing.example/"
+  - name: "New Gold Sponsor"
+    logo: "/images/sponsors/new-gold.svg"
+    url: "https://new.example/"
 
 silver:
-  - name: "Existing Silver Sponsor"
-    logo: "/images/sponsors/existing.svg"
-    url: "https://existing.example/"
-  - name: "New Silver Sponsor"           # ← new entry
-    logo: "/images/sponsors/new.svg"
-    url: "https://new.example/"
+  - name: "Silver Sponsor"
+    logo: "/images/sponsors/silver.svg"
+    url: "https://silver.example/"
+
+bronze:
+  - name: "Bronze Sponsor"
+    logo: "/images/sponsors/bronze.svg"
+    url: "https://bronze.example/"
+
+partners:
+  - name: "BSidesSomewhere"
+    logo: "/images/sponsors/bsides-somewhere.png"
+    url: "https://bsidessomewhere.example/"
 ```
 
 #### Remove a sponsor
 
-Delete the four lines for that sponsor (`- name`, `logo`, `url`, plus the indentation line). Save.
+Delete the block for that sponsor (`- name:` line and everything indented under it). Save.
+
+#### Hide a whole tier
+
+Hugo only renders a tier if it has at least one entry. Empty the tier (`bronze: []`) or comment out / delete its entries - the tier heading disappears with it.
 
 #### Notes
 
 - Logos automatically appear greyscale, then turn full-colour on hover.
-- Tier order on the page: **Gold → Silver → Partners**.
-- Logos must be `/images/sponsors/<filename>` — note the leading slash.
+- Tier order on the page: **Gold > Silver > Bronze > Community Partners**.
+- Logos must be `/images/sponsors/<filename>` - note the leading slash.
+- The Bronze tier title uses an orange accent (`#e09c31`); other tiers use their conventional metallic colors.
 
 ---
 
@@ -210,32 +232,36 @@ Delete the four lines for that sponsor (`- name`, `logo`, `url`, plus the indent
 
 **File:** `data/team.yaml`
 
-Two sections: `organisers` (lead organisers — usually 2-3 people, shown larger) and `team` (the rest of the volunteers).
+Two sections: `organisers` (lead organisers - usually 2-3 people, shown larger and listed first) and `team` (the rest of the volunteers).
 
 ```yaml
 organisers:
   - name: "Alexander Georgiev"
     role: "Lead Organiser"
-    image: "/images/teammember_1.png.webp"
+    image: "/images/team/alexander-georgiev.jpg"
     linkedin: "https://www.linkedin.com/in/alexander-georgiev-93610038/"
     twitter: "https://x.com/mechpen"          # optional
-  - name: "Hristiyan Lazarov"
-    role: "Lead Organiser"
-    image: "/images/teammember_2.png.webp"
-    linkedin: "https://www.linkedin.com/in/hlazarov/"
 
 team:
+  - name: "Vanessa Barnekow"
+    role: "Organising Team - BSides Women Lead"
+    image: "/images/team/vanessa-barnekow.jpg"
+    linkedin: "https://www.linkedin.com/in/vanessa-barnekow/"
+    email: "vanessa@bsidesfrankfurt.org"        # optional - shows envelope icon
   - name: "New Volunteer"
     role: "Organising Team"
-    image: "/images/teammember_X.png.webp"
-    linkedin: "https://www.linkedin.com/in/..."     # optional
+    image: "/images/team/new-volunteer.jpg"
+    linkedin: "https://www.linkedin.com/in/..."   # optional
 ```
 
 #### Adding a person
 
-1. Save their photo into `static/images/` (square, ~400×400 PNG/JPG/WebP).
-2. Add a new block under `team:` (or `organisers:` if they're a lead).
-3. `linkedin` and `twitter` are optional — omit the line if no profile.
+1. **Save their photo** into `static/images/team/` (square, ideally 800x800 PNG/JPG; LinkedIn profile photos work great).
+   - **Important:** don't link directly to a LinkedIn-hosted image URL. LinkedIn URLs are signed and expire after a few months. Always download the image, save it locally, and reference the local path.
+   - **Don't link to images from external sites** in general - the site's Content Security Policy blocks external images.
+2. **Add a new block** under `team:` (or `organisers:` if they're a lead).
+3. Supported fields: `name`, `role`, `image`, `linkedin`, `twitter`, `email`, `github`. Only `name` and `role` are required; the rest are optional and render their respective icon only when set.
+4. **Fallback if no photo yet:** leave `image: ""` (empty string) and the card displays a coloured circle with the person's initials. Once you have the photo, drop it in and update the path.
 
 #### Removing a person
 
@@ -287,7 +313,7 @@ Find Font Awesome icons at [fontawesome.com/search](https://fontawesome.com/sear
 
 ### 5.6 Add a blog post
 
-1. Create a new file: `content/blog/your-slug.md` — the slug becomes the URL.
+1. Create a new file: `content/blog/your-slug.md` - the slug becomes the URL.
 2. Paste this template at the top, then write the article body in Markdown:
 
 ```markdown
@@ -301,7 +327,7 @@ draft: false
 ---
 
 Article body in **Markdown**. Use headings, [links](https://example.com),
-lists, code blocks — anything Markdown supports.
+lists, code blocks - anything Markdown supports.
 
 ## Section heading
 
@@ -349,7 +375,7 @@ The three most recent announcements appear on the homepage automatically.
 
 **File:** `content/schedule/_index.md`
 
-Edit the body in Markdown. The schedule is currently a simple page — when the actual programme is finalized, you can replace it with a structured timetable.
+Edit the body in Markdown. The schedule is currently a simple page - when the actual programme is finalized, you can replace it with a structured timetable.
 
 For now, this is the place to mention "Schedule will be announced X weeks before the event."
 
@@ -361,7 +387,7 @@ For now, this is the place to mention "Schedule will be announced X weeks before
 
 The current page mirrors the original site: a generic info box ("Expect 6–8 workshops...") and a "lineup coming soon" placeholder.
 
-When the 2026 workshop lineup is finalized, edit this layout to add cards or a list — see the partial pattern used in `layouts/blog/list.html` for an example.
+When the 2026 workshop lineup is finalized, edit this layout to add cards or a list - see the partial pattern used in `layouts/blog/list.html` for an example.
 
 ---
 
@@ -369,7 +395,9 @@ When the 2026 workshop lineup is finalized, edit this layout to add cards or a l
 
 **File:** `hugo.toml`
 
-The `[menu]` section controls the top-bar menu.
+The top nav is intentionally minimal: **Schedule, Workshops, Blog, Women, Archive (dropdown)** plus two CTA buttons on the right (**Tickets, CFP**). Secondary pages (Team, Gallery, FAQ, Code of Conduct) live in the **footer** instead.
+
+The `[menu.main]` section controls the top-bar menu:
 
 ```toml
 [[menu.main]]
@@ -402,11 +430,64 @@ The right-hand CTA buttons (Tickets / CFP) are in a separate block:
   weight = 10
 ```
 
+The **footer** "Navigate" column is a hardcoded list in `layouts/partials/footer.html` - edit that file directly to add/remove footer links.
+
+#### Tips
+
+- The site logo (top-left, with the favicon icon) always links to the homepage - there is no separate "Home" menu item.
+- On mobile (under 960px), the nav collapses into a hamburger menu. Menu items + Tickets/CFP buttons stack inside the sliding panel.
+
 ---
 
-### 5.11 Add speakers (when ready)
+### 5.11 Edit the BSides Women page
 
-**File:** `data/speakers.yaml` already exists with placeholder data. The carousel partial and CSS are still in place — they're just not currently shown on the homepage (the section was removed pending speaker confirmation).
+**Files:** `data/women.yaml` (data) + `content/women/_index.md` (frontmatter only) + `layouts/women/list.html` (page structure).
+
+Everything except the body prose is data-driven. To update the page in 90% of cases, you only touch `data/women.yaml`.
+
+```yaml
+# Collaborating women's communities (shown at the bottom of /women/)
+partners:
+  - name: "Women in Tech by heise"
+    logo: "/images/women/women-in-tech-heise.svg"
+    website: ""                                       # optional
+    linkedin: "https://www.linkedin.com/groups/13300324/"   # used if website is empty
+  - name: "Another Community"
+    logo: "/images/women/another.svg"
+    website: ""
+    linkedin: ""
+
+# Lead contact for BSides Women - photo, email, LinkedIn, etc.
+contact:
+  name: "Vanessa Barnekow"
+  role: "BSides Women Lead"
+  photo: "/images/team/vanessa-barnekow.jpg"
+  email: "vanessa@bsidesfrankfurt.org"
+  linkedin: "https://www.linkedin.com/in/vanessa-barnekow/"
+
+# The sponsor whose support enables discounted women's tickets
+discountSponsor:
+  name: "NVISO"
+  logo: "/images/sponsors/NVISO_Logo 1.svg"
+  website: "https://www.nviso.eu/"
+```
+
+#### Notes
+
+- Drop new community logos into `static/images/women/` (SVG preferred; PNG fine).
+- Each partner card links to `website` first; if empty, falls back to `linkedin`; if both empty, the card still renders but the link goes nowhere (`#`).
+- The mission paragraph "Together with multiple women's communities..." has an in-page link `#communities` that auto-scrolls down to the partners section.
+- The "Request Discount Code" button opens an email with a pre-filled template asking for the requester's name + LinkedIn + community. If the email client ignores the body, the template is also copied to the clipboard (so the requester can paste it). There's also a manual fallback below the button showing the same template with a "Copy template" button.
+
+#### Editing the prose text
+
+To change wording (mission text, button labels), edit `layouts/women/list.html` directly - it's mostly plain HTML.
+
+---
+
+### 5.12 Add speakers (when ready)
+
+**File:** `data/speakers.yaml` already exists with placeholder data. The carousel partial and CSS are still in place - they're just not currently shown on the homepage (the section was removed pending speaker confirmation).
 
 **To show speakers again on the homepage**, edit `layouts/index.html` and add this block where you want them:
 
@@ -431,10 +512,24 @@ Then edit `data/speakers.yaml`:
 - name: "Real Speaker Name"
   photo: "/images/speakers/real-speaker.jpg"   # leave "" for an auto-initials avatar
   role: "Their job title and company"
-  bio: "Short 1–2 sentence bio. Will be truncated to 3 lines on the card."
+  bio: "Short 1-2 sentence bio. Will be truncated to 3 lines on the card."
   linkedin: "https://www.linkedin.com/in/..."   # optional
   talk: "Title of their talk"
 ```
+
+---
+
+### 5.13 Edit the homepage stats strip
+
+**File:** `layouts/index.html` (the homepage layout)
+
+The "300 Attendees / 8 Talks / 12 Workshops / 4 Editions" row near the top of the homepage is hardcoded in the layout. To change a number, edit the `data-count-to="..."` attribute - the JS animates from 0 up to that number when the section scrolls into view:
+
+```html
+<div class="stat"><span class="stat__value" data-count-to="300">0</span><span class="stat__label">Attendees</span></div>
+```
+
+To add/remove a stat tile, copy/delete the surrounding `<div class="stat">` block.
 
 ---
 
@@ -448,7 +543,7 @@ Anything under **`static/`** is copied verbatim to the website's root. So:
 | `static/images/blog/photo.jpg` | `/images/blog/photo.jpg` |
 | `static/files/programme.pdf` | `/files/programme.pdf` |
 
-**Don't** put `static/` in the URL — Hugo strips it automatically.
+**Don't** put `static/` in the URL - Hugo strips it automatically.
 
 #### File-naming tips
 
@@ -467,50 +562,68 @@ Anything under **`static/`** is copied verbatim to the website's root. So:
 :root {
   --color-bg:      #011023;     /* dark blue page background */
   --color-surface: #121314;     /* card background */
-  --color-primary: #9acd32;     /* yellowgreen — buttons, accents */
-  --color-secondary:#eb3812;    /* reddish-orange — hover states */
+  --color-primary: #9acd32;     /* yellowgreen - buttons, accents */
+  --color-secondary:#eb3812;    /* reddish-orange - hover states */
   --color-text:    #ffffff;
   --font-heading:  'Poppins', sans-serif;
   --font-body:     'Open Sans', sans-serif;
 }
 ```
 
-Change a variable, save — every component picks it up. **Don't** edit individual component colors; change the variable.
+Change a variable, save - every component picks it up. **Don't** edit individual component colors; change the variable.
 
 ---
 
-## 8. Building and deploying
+## 8. Building and deploying to Cloudflare Pages
+
+The site is hosted on **Cloudflare Pages**. Production builds are static HTML in `hugo-site/public/`.
 
 ### Build for production
 
 ```sh
 cd hugo-site
-hugo --minify
+rm -rf public
+hugo --minify --gc
 ```
 
-The output appears in `hugo-site/public/`. That folder is what gets uploaded to the host.
+The output appears in `hugo-site/public/`. That folder is what gets uploaded.
 
-### Deploy to Cloudflare Pages (current host)
+### Option 1 - Dashboard upload (simplest, no CLI)
 
-#### Option 1 — Dashboard (simplest)
+```sh
+cd hugo-site
+zip -qr ../bsidesfrankfurt.zip public -x "*.DS_Store"
+```
 
-1. Build the site (`hugo --minify`).
-2. Zip the `public/` folder.
-3. Go to Cloudflare Dashboard → Workers & Pages → your project → **Create deployment** → **Upload assets**.
-4. Drag the zip in and click **Deploy**.
+Then in the browser:
 
-#### Option 2 — Wrangler CLI (faster on repeat)
+1. Go to [dash.cloudflare.com](https://dash.cloudflare.com) → Workers & Pages → your `bsidesfrankfurt` project → **Create deployment**.
+2. Pick **Upload assets**, drag `bsidesfrankfurt.zip` in.
+3. Click **Deploy** - you'll get a unique deployment URL, and the production domain will update automatically once Cloudflare promotes it.
+
+### Option 2 - Wrangler CLI (faster on repeat)
 
 ```sh
 npm install -g wrangler          # one-time
 wrangler login                    # one-time
 cd hugo-site
+hugo --minify --gc
 wrangler pages deploy public --project-name=bsidesfrankfurt
 ```
 
+### Headers and redirects
+
+`static/_headers` and `static/_redirects` are copied verbatim into the build and read by Cloudflare Pages on every request. The `_headers` file sets:
+
+- A strict Content Security Policy
+- HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy
+- Long cache lifetimes for fingerprinted CSS / static images
+
+Edit those files if you need to add a redirect or change a header.
+
 ### Custom domain
 
-Point `bsidesfrankfurt.org` at the Cloudflare Pages project in the Cloudflare dashboard → Pages → Custom domains.
+Point `bsidesfrankfurt.org` at the Cloudflare Pages project in the Cloudflare dashboard → Pages → Custom domains. DNS is also managed inside Cloudflare in our setup, so this is largely a click-through.
 
 ---
 
@@ -522,7 +635,7 @@ Each past edition lives at its own subdomain:
 - `2024.bsidesfrankfurt.org`
 - `2025.bsidesfrankfurt.org`
 
-These are **separate sites** — typically uploaded as static archives of the year's website at the time. The main site links to them in the **Archive** dropdown ([hugo.toml](hugo.toml) `[menu.main]` block).
+These are **separate sites** - typically uploaded as static archives of the year's website at the time. The main site links to them in the **Archive** dropdown ([hugo.toml](hugo.toml) `[menu.main]` block).
 
 To set one up:
 
@@ -531,29 +644,73 @@ To set one up:
 3. In Cloudflare Pages → Custom domains, add `2025.bsidesfrankfurt.org`.
 4. Update DNS so the subdomain points at the project.
 
-You don't need Hugo for these — they're frozen in time.
+You don't need Hugo for these - they're frozen in time.
 
 ---
 
-## 10. Common tasks — quick reference
+## 10. SEO
+
+Search engine optimisation is handled by [`layouts/partials/seo.html`](layouts/partials/seo.html) and is mostly automatic. **You don't usually need to touch it.** What it adds to every page:
+
+- **Open Graph tags** for rich previews on LinkedIn, Facebook, Slack, Discord
+- **Twitter Card** for rich previews on X
+- **Canonical URL** to prevent duplicate-content issues
+- **JSON-LD `Organization`** structured data on every page
+- **JSON-LD `Event`** structured data on the homepage (builds Google's rich event card with dates, venue, ticket link)
+- **JSON-LD `BlogPosting`** structured data on each blog post (better Google News / Discover surface)
+- **theme-color**, **meta description**, **keywords** for general indexing
+
+**What you should do when adding content:**
+
+- Always fill in the `description:` and `summary:` fields in frontmatter for new pages and blog posts. They appear in Google search snippets and social previews.
+- Use clear, specific titles. Hugo combines them as `Title | BSidesFrankfurt` in the `<title>` tag.
+
+**Sitemap and robots.txt** are auto-generated by Hugo at `/sitemap.xml` and `/robots.txt`. Both are submitted automatically when search engines crawl the site - no manual action needed.
+
+**Social preview image:** the current default is the apple-touch-icon (square). For best results on LinkedIn/X, design a **1200x630 banner image** (logo + "BSidesFrankfurt 2026" + venue/date) and save it as `static/images/og-image.jpg`, then update `seo.html` to use it.
+
+**Validate** what Google sees with the [Rich Results Test](https://search.google.com/test/rich-results) - paste your production URL and confirm the Event/Organization/BlogPosting cards parse correctly.
+
+---
+
+## 11. Common tasks - quick reference
 
 | Task | File | Quick example |
 |------|------|---------------|
-| Change event dates | `data/event.yaml` | `display: "10–11 September 2026"` |
-| Add sponsor | `data/sponsors.yaml` | new entry under `gold:` / `silver:` / `partners:` |
+| Change event dates | `data/event.yaml` | `display: "10-11 September 2026"` |
+| Change venue / map link | `data/event.yaml` | `mapUrl: "https://maps.app.goo.gl/..."` |
+| Add sponsor | `data/sponsors.yaml` | new entry under `gold:` / `silver:` / `bronze:` / `partners:` |
 | Add team member | `data/team.yaml` | new entry under `team:` |
 | Add FAQ item | `data/faq.yaml` | new `- question: ... answer: ...` block |
 | Edit homepage cards | `data/about.yaml` | edit the two entries |
+| Edit BSides Women partners | `data/women.yaml` | new entry under `partners:` |
+| Change BSides Women contact | `data/women.yaml` | edit the `contact:` block |
 | New blog post | `content/blog/<slug>.md` | use the frontmatter template above |
 | New announcement | `content/announcements/<slug>.md` | use the frontmatter template above |
+| Edit a section page (e.g. Schedule body) | `content/<section>/_index.md` | Markdown body |
 | Change menu | `hugo.toml` | edit `[[menu.main]]` blocks |
-| Change palette | `assets/css/main.css` (top) | edit the `:root` variables |
+| Change palette / fonts | `assets/css/main.css` (top) | edit the `:root` variables |
 | Replace favicon | `static/favicon.ico` and the `favicon-*.png` files | drop in new files with the same names |
 | Update Tickets / CFP URL | `hugo.toml` `[[menu.cta]]` | change the `url` |
+| Change homepage stats | `layouts/index.html` | edit `data-count-to="..."` |
+| Edit security headers / CSP | `static/_headers` | applies on Cloudflare Pages |
 
 ---
 
-## 11. Troubleshooting
+## 12. Style guidelines
+
+A few small conventions to keep the site consistent:
+
+- **No em-dashes (`-`).** Use a normal hyphen (`-`) instead. (We did a one-time cleanup sweep already.) En-dashes (`-`) for date ranges like "10-11 September" are fine.
+- **No external image hot-linking.** Always download images (sponsor logos, team photos, etc.) and save them in `static/images/...`. External URLs are blocked by the site's Content Security Policy and may also expire (LinkedIn URLs especially).
+- **Square photos for team and speaker cards.** They're rendered in circles at ~120px - ideally feed 800x800 source images.
+- **SVG > PNG > JPG** for logos. SVG scales perfectly and is tiny.
+- **One sentence per `summary:`.** Blog post summaries surface on the index page, homepage announcement strip, and as social-preview descriptions - keep them tight.
+- **Plain English in titles.** They show up in browser tabs, search results, and `<h1>`s. Avoid clever wordplay that won't translate well in Google snippets.
+
+---
+
+## 13. Troubleshooting
 
 **"My changes don't show up."**
 Make sure `hugo server` is running and the browser is pointing at `http://localhost:1313`. If still stuck, stop with `Ctrl+C` and run `hugo server` again.
@@ -565,7 +722,7 @@ Indentation problem. YAML uses spaces (no tabs). Check that all sub-items under 
 Check the path. URLs that begin with `/images/...` correspond to `static/images/...` on disk. Don't include `static/` in the URL itself.
 
 **"Build fails with `taxonomy` warning."**
-Harmless — we don't use tag-list pages. Site builds fine despite the warning.
+Harmless - we don't use tag-list pages. Site builds fine despite the warning.
 
 **"Site looks broken on mobile."**
 Force-refresh with `Ctrl+Shift+R` (or `Cmd+Shift+R`). Phone-style preview is built into Chrome DevTools (`F12` → click device-toolbar icon).
@@ -578,14 +735,14 @@ git checkout -- .               # revert everything (careful)
 ```
 
 **"Favicon won't update in Chrome."**
-Chrome caches favicons aggressively. Try an Incognito window — that's the fastest way to verify.
+Chrome caches favicons aggressively. Try an Incognito window - that's the fastest way to verify.
 
 **"`hugo` says non-extended."**
 Reinstall with the extended variant. On macOS, `brew install hugo` already gives you extended. On other platforms, look for `hugo_extended` in the package name.
 
 ---
 
-## 12. Where to get help
+## 14. Where to get help
 
 - **Hugo documentation:** [https://gohugo.io/documentation/](https://gohugo.io/documentation/)
 - **Markdown cheat sheet:** [https://commonmark.org/help/](https://commonmark.org/help/)
@@ -596,4 +753,4 @@ Reinstall with the extended variant. On macOS, `brew install hugo` already gives
 
 ---
 
-*This manual lives at [`hugo-site/MANUAL.md`](MANUAL.md). Edit it whenever the site grows new sections — future you will thank you.*
+*This manual lives at [`hugo-site/MANUAL.md`](MANUAL.md). Edit it whenever the site grows new sections - future you will thank you.*

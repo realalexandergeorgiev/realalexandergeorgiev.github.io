@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+/faq.html                   /faq/           301
+/team.html                  /team/          301
+/gallery.html               /gallery/       301
+/code-of-conduct.html       /code-of-conduct/ 301
+/schedule/schedule.html     /schedule/      301
+/workshop/workshop.html     /workshops/     301

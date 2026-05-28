@@ -1,0 +1,62 @@
+# Build with Hugo v0.160+ extended.
+# To pin in Cloudflare Pages build env: set HUGO_VERSION=0.160.1
+baseURL = "https://bsidesfrankfurt.org/"
+languageCode = "en-us"
+title = "BSidesFrankfurt"
+enableRobotsTXT = true
+
+# Skip empty taxonomy / term list pages (we don't expose tag indexes).
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "BSidesFrankfurt - community-driven information security conference"
+  logo = "/images/bsides-frankfurt-logo-main.svg"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "Schedule"
+    url = "/schedule/"
+    weight = 20
+  [[menu.main]]
+    name = "Workshops"
+    url = "/workshops/"
+    weight = 50
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 60
+  [[menu.main]]
+    name = "Women"
+    url = "/women/"
+    weight = 65
+  [[menu.main]]
+    name = "Archive"
+    identifier = "archive"
+    weight = 80
+  [[menu.main]]
+    parent = "archive"
+    name = "2025"
+    url = "/2025/"
+    weight = 10
+  [[menu.main]]
+    parent = "archive"
+    name = "2024"
+    url = "/2024/"
+    weight = 20
+  [[menu.main]]
+    parent = "archive"
+    name = "2023"
+    url = "/2023/"
+    weight = 30
+
+[[menu.cta]]
+  name = "Tickets"
+  url = "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/"
+  weight = 10
+[[menu.cta]]
+  name = "CFP"
+  url = "https://cfp.bsidesfrankfurt.org"
+  weight = 20

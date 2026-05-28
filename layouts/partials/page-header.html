@@ -1,0 +1,23 @@
+{{/*
+  Page header partial
+  Params:
+    eyebrow: small label above title
+    title: main page title (HTML allowed)
+    lead: lede paragraph (optional, HTML allowed)
+
+  SECURITY: `title` and `lead` are rendered with `safeHTML` so callers can
+  pass markup like a colored <span>. NEVER pass user-controlled or external
+  data to this partial - it would create an XSS vector. All current callers
+  pass static strings hardcoded in templates, which is safe.
+*/}}
+<section style="padding-top: var(--space-7); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-border);">
+  <div class="container">
+    {{ with .eyebrow }}<span class="eyebrow">{{ . }}</span>{{ end }}
+    <h1 style="text-transform: none; letter-spacing: -0.02em; margin-bottom: var(--space-3); font-size: clamp(2rem, 6vw, var(--fs-4xl));">
+      {{ .title | safeHTML }}
+    </h1>
+    {{ with .lead }}
+      <p class="lead" style="max-width: 65ch;">{{ . | safeHTML }}</p>
+    {{ end }}
+  </div>
+</section>

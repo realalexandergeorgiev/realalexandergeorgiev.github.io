@@ -1,0 +1,50 @@
+{{ define "main" }}
+<article class="article">
+  <header class="article__header">
+    <div class="container" style="max-width: 760px;">
+      <a href="{{ "/blog/" | relURL }}" class="article__back">
+        <i class="fas fa-arrow-left"></i> All posts
+      </a>
+      {{ with .Params.tags }}
+        <div class="article__tags">
+          {{ range . }}<span class="article__tag">{{ . }}</span>{{ end }}
+        </div>
+      {{ end }}
+      <h1 class="article__title">{{ .Title }}</h1>
+      <div class="article__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+        {{ with .Params.author }} · {{ . }}{{ end }}
+        {{ with .ReadingTime }} · {{ . }} min read{{ end }}
+      </div>
+      {{ with .Params.summary }}
+        <p class="article__lede">{{ . }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="container" style="max-width: 760px;">
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+  </div>
+
+  <footer class="article__footer">
+    <div class="container" style="max-width: 760px;">
+      <div class="article__nav">
+        {{ with .PrevInSection }}
+          <a href="{{ .RelPermalink }}" class="article__nav-link article__nav-link--prev">
+            <span class="article__nav-label">Previous</span>
+            <span class="article__nav-title">{{ .Title }}</span>
+          </a>
+        {{ end }}
+        {{ with .NextInSection }}
+          <a href="{{ .RelPermalink }}" class="article__nav-link article__nav-link--next">
+            <span class="article__nav-label">Next</span>
+            <span class="article__nav-title">{{ .Title }}</span>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </footer>
+</article>
+{{ end }}

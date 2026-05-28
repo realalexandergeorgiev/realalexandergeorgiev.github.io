@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "Community"
+  "title" "Code of Conduct"
+  "lead" "Applies to all attendees, speakers, sponsors, and volunteers.")
+}}
+
+<section>
+  <div class="container" style="max-width: 760px;">
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+{{ end }}

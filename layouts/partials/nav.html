@@ -1,0 +1,38 @@
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="{{ "/" | relURL }}" class="nav__logo">
+      <img src="{{ "apple-touch-icon-180.png" | relURL }}" alt="" class="nav__logo-icon" width="32" height="32"> BSidesFrankfurt
+    </a>
+
+    <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="nav__panel" id="nav-panel">
+      <ul class="nav__links">
+        {{ range .Site.Menus.main }}
+          {{ if .HasChildren }}
+            <li class="nav__dropdown">
+              <a href="#" aria-haspopup="true">{{ .Name }} <i class="fas fa-caret-down"></i></a>
+              <ul class="nav__dropdown-menu">
+                {{ range .Children }}
+                  <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+          {{ else }}
+            <li>
+              <a href="{{ .URL | relURL }}"{{ if $.IsMenuCurrent "main" . }} class="is-active"{{ end }}>{{ .Name }}</a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+
+      <div class="nav__cta">
+        {{ range .Site.Menus.cta }}
+          <a href="{{ .URL }}" class="btn btn--sm{{ if eq .Name "Tickets" }}{{ else }} btn--outline{{ end }}">{{ .Name }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,52 @@
+{{ $event := .Site.Data.event }}
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a href="{{ "/" | relURL }}" class="nav__logo" style="font-size: 1.25rem;">
+          <img src="{{ "apple-touch-icon-180.png" | relURL }}" alt="" class="nav__logo-icon" width="32" height="32"> BSidesFrankfurt
+        </a>
+        <p class="footer__tagline">
+          A community-driven information security conference held annually at
+          {{ $event.location.name }}.
+        </p>
+        <div class="footer__social">
+          {{ with $event.social.twitter }}<a href="{{ . }}" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>{{ end }}
+          {{ with $event.social.instagram }}<a href="{{ . }}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{{ end }}
+          {{ with $event.social.mastodon }}<a href="{{ . }}" aria-label="Mastodon"><i class="fa-brands fa-mastodon"></i></a>{{ end }}
+          {{ with $event.social.linkedin }}<a href="{{ . }}" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>{{ end }}
+          {{ with $event.social.email }}<a href="mailto:{{ . }}" aria-label="Email"><i class="fas fa-envelope"></i></a>{{ end }}
+        </div>
+      </div>
+
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="{{ "/schedule/" | relURL }}">Schedule</a></li>
+          <li><a href="{{ "/workshops/" | relURL }}">Workshops</a></li>
+          <li><a href="{{ "/blog/" | relURL }}">Blog</a></li>
+          <li><a href="{{ "/women/" | relURL }}">BSides Women</a></li>
+          <li><a href="{{ "/team/" | relURL }}">Team</a></li>
+          <li><a href="{{ "/gallery/" | relURL }}">Gallery</a></li>
+          <li><a href="{{ "/faq/" | relURL }}">FAQ</a></li>
+          <li><a href="{{ "/code-of-conduct/" | relURL }}">Code of Conduct</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/">Tickets</a></li>
+          <li><a href="https://cfp.bsidesfrankfurt.org">Call for Papers</a></li>
+          <li><a href="mailto:sponsors@bsidesfrankfurt.org">Sponsor</a></li>
+          <li><a href="mailto:{{ $event.social.email }}">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ now.Format "2006" }} BSidesFrankfurt. All rights reserved.</span>
+      <span>Built with Hugo · <a href="{{ "/code-of-conduct/" | relURL }}">Code of Conduct</a></span>
+    </div>
+  </div>
+</footer>

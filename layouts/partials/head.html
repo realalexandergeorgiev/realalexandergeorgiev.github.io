@@ -1,0 +1,52 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{/* Build JSON-LD blocks + SHA-256 hashes for the per-page CSP. */}}
+{{- $jsonld := partial "seo-jsonld-data.html" . -}}
+{{- $scriptHashes := "" -}}
+{{- range $jsonld -}}{{- $scriptHashes = printf "%s '%s'" $scriptHashes .hash -}}{{- end -}}
+
+<!-- Security headers (meta-equivalents; the same policy is also served as a real HTTP header by Cloudflare Pages via static/_headers).
+     This meta CSP is per-page and strict: script-src only allows the specific JSON-LD hashes below.
+     style-src still allows 'unsafe-inline' due to extensive inline style="..." attributes in layouts (refactor planned). -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self'{{ $scriptHashes }};
+  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+  font-src 'self' https://cdnjs.cloudflare.com;
+  img-src 'self' data:;
+  connect-src 'self';
+  frame-ancestors 'none';
+  frame-src 'none';
+  object-src 'none';
+  worker-src 'self';
+  base-uri 'self';
+  form-action 'self';
+  upgrade-insecure-requests
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ .Description | default .Params.summary | default .Site.Params.description }}">
+
+{{ partial "seo.html" . }}
+
+<!-- JSON-LD structured data (hashes for these blocks are in the script-src above) -->
+{{ range $jsonld }}<script type="application/ld+json">{{ .json | safeJS }}</script>
+{{ end }}
+
+<!-- Favicons (multi-format for broad browser support) -->
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16.png" | relURL }}">
+<link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon-180.png" | relURL }}">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha384-QI8z31KmtR+tk1MYi0DfgxrjYgpTpLLol3bqZA/Q1Y8BvH+6k7/Huoj38gQOaCS7"
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<!-- Stylesheet -->
+{{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

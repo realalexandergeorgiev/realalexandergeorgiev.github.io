@@ -1,0 +1,28 @@
+# BSides Women collaborating women's communities
+partners:
+  - name: "Women in Tech by heise"
+    logo: "/images/women/women-in-tech-heise.svg"
+    website: ""
+    linkedin: "https://www.linkedin.com/groups/13300324/"
+  - name: "Women4Cyber Germany"
+    logo: "/images/women/women4cyber-germany.png"
+    website: ""
+    linkedin: "https://www.linkedin.com/company/women4cybergermany/"
+  - name: "SheLeadsTech - ISACA Germany Chapter"
+    logo: "/images/women/sheleadstech-isaca.jpg"
+    website: ""
+    linkedin: "https://www.linkedin.com/showcase/she-isaca-germany-chapter"
+
+# Lead contact for BSides Women - discount code requests etc.
+contact:
+  name: "Vanessa Barnekow"
+  role: "BSides Women Lead"
+  photo: "/images/team/vanessa-barnekow.jpg"
+  email: "vanessa@bsidesfrankfurt.org"
+  linkedin: "https://www.linkedin.com/in/vanessa-barnekow/"
+
+# Supporting sponsor whose backing enables discounted tickets
+discountSponsor:
+  name: "NVISO"
+  logo: "/images/sponsors/NVISO_Logo 1.svg"
+  website: "https://www.nviso.eu/"
