@@ -8,15 +8,15 @@ partners:
     logo: "/images/women/women4cyber-germany.png"
     website: "https://www.eurobits.de/projekte/women4cyber/"
     linkedin: "https://www.linkedin.com/company/women4cybergermany/"
-  - name: "SheLeadsTech - ISACA Germany Chapter"
-    logo: "/images/women/sheleadstech-isaca.jpg"
-    website: "https://www.isaca.de/sheatisaca.html"
-    linkedin: "https://www.linkedin.com/showcase/she-isaca-germany-chapter"
+#  - name: "SheLeadsTech - ISACA Germany Chapter"
+#    logo: "/images/women/sheleadstech-isaca.jpg"
+#    website: "https://www.isaca.de/sheatisaca.html"
+#    linkedin: "https://www.linkedin.com/showcase/she-isaca-germany-chapter"
 
 # Lead contact for BSides Women - discount code requests etc.
 contact:
   name: "Vanessa Barnekow"
-  role: "BSides Women Lead"
+  role: "BSidesFrankfurt Women Lead"
   photo: "/images/team/vanessa-barnekow.jpg"
   email: "vanessa@bsidesfrankfurt.org"
   linkedin: "https://www.linkedin.com/in/vanessa-barnekow/"
