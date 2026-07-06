@@ -504,19 +504,6 @@ section { padding: var(--space-8) 0; }
 .sponsors--light .lead { color: rgba(0, 0, 0, 0.7); }
 .sponsors--light .eyebrow { color: var(--color-primary); }
 
-/* Per-card background variants: dark (default), medium, light */
-.sponsor-card--dark {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-}
-.sponsor-card--medium {
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border-strong);
-}
-.sponsor-card--light {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
 .sponsors__tier { margin-bottom: var(--space-7); }
 .sponsors__tier:last-child { margin-bottom: 0; }
 .sponsors__tier-title {
@@ -575,6 +562,21 @@ section { padding: var(--space-8) 0; }
   transition: filter var(--dur-mid) var(--ease);
 }
 .sponsor-card:hover img { filter: grayscale(0%) brightness(1); }
+
+/* Per-card background variants: dark (default), medium, light.
+   Must come after .sponsor-card base rule to override background. */
+.sponsor-card--dark {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.sponsor-card--medium {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
+}
+.sponsor-card--light {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 /* Colored logos variant - always show in color, no grayscale.
    Can be applied globally (options.colored_logos) or per-entry (colored: true). */

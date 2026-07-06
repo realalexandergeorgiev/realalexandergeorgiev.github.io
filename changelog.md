@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-06 22:38 — `85ad16e` → *pending*
+
+### Fixed
+- **CSS-Reihenfolge-Fix: `sponsor-card--light` wurde von `.sponsor-card` Basisregel überschrieben** — die pro-Card-Hintergrund-Varianten (`sponsor-card--dark/medium/light`) standen vor der `.sponsor-card` Basisregel und wurden dadurch überschrieben. Die Varianten wurden nach der Basisregel verschoben, sodass sie nun korrekt greifen.
+
 ## 2026-07-06 22:33 — `caea30e` → `66718eb`
 
 ### Changed
