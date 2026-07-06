@@ -1,7 +1,9 @@
 # Display options for the sponsors section
 options:
-  light_background: false  # true = heller Hintergrund, false = dunkler Hintergrund
-  colored_logos: false     # true = Logos immer farbig, false = farbig nur bei Mouseover
+  light_background: false  # true = heller Hintergrund, false = dunkler Hintergrund (global)
+  colored_logos: false     # true = Logos immer farbig, false = farbig nur bei Mouseover (global)
+# Per-entry override: set "colored: true" or "colored: false" on any sponsor/partner
+# to override the global colored_logos default for that single entry.
 
 gold:
   - name: Blaze Information Security
@@ -26,7 +28,7 @@ bronze:
     url: "https://www.usd.de/"
 partners:
   - name: BSidesMunich
-    logo: /images/sponsors/bsidesmunic_logo_2026_inverted.png
+    logo: /images/sponsors/bsidesmunic_logo_2026.png
     url: "https://2026.bsidesmunich.org/"
   - name: BSidesBerlin
     logo: /images/sponsors/bsidesberlin.png

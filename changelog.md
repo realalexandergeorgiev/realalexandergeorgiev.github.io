@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-06 22:24 — `e9ba422` → *pending*
+
+### Changed
+- **`colored_logos` jetzt pro Eintrag möglich** — zusätzlich zum globalen `options.colored_logos` kann nun jeder Sponsor/Partner-Eintrag in `data/sponsors.yaml` ein optionales `colored: true` / `colored: false` Feld erhalten, das den globalen Default für diesen einen Eintrag überschreibt.
+- `layouts/partials/sponsors-grid.html`: Logik von Grid-Level-Klasse (`sponsors__grid--colored`) auf pro-Card-Klasse (`sponsor-card--colored`) umgestellt; pro Eintrag wird `.colored | default $globalColored` ausgewertet.
+- `assets/css/main.css`: CSS-Selektor von `.sponsors__grid--colored .sponsor-card img` zu `.sponsor-card--colored img` geändert (wirkt nun auf einzelne Cards).
+- `data/sponsors.yaml`: Kommentar-Dokumentation für pro-Eintrag-Override hinzugefügt.
+
 ## 2026-07-06 22:16 — `dfc8957` → `81a66b2`
 
 ### Added

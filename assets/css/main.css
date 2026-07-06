@@ -565,11 +565,10 @@ section { padding: var(--space-8) 0; }
 }
 .sponsor-card:hover img { filter: grayscale(0%) brightness(1); }
 
-/* Colored logos variant - always show in color, no grayscale */
-.sponsors__grid--colored .sponsor-card img {
-  filter: none;
-}
-.sponsors__grid--colored .sponsor-card:hover img {
+/* Colored logos variant - always show in color, no grayscale.
+   Can be applied globally (options.colored_logos) or per-entry (colored: true). */
+.sponsor-card--colored img,
+.sponsor-card--colored:hover img {
   filter: none;
 }
 
