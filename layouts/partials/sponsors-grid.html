@@ -1,17 +1,18 @@
 {{ $sponsors := .Site.Data.sponsors }}
 {{ $opts := $sponsors.options | default dict }}
 {{ $globalColored := $opts.colored_logos | default false }}
+{{ $globalBg := $opts.background | default "dark" }}
 
-{{/* Per-entry "colored" overrides the global default (options.colored_logos). */}}
+{{/* Per-entry "colored" and "background" override the global defaults. */}}
 
 {{ with $sponsors.gold }}
 <div class="sponsors__tier sponsors__tier--gold">
   <h3 class="sponsors__tier-title">Gold Sponsors</h3>
   <div class="sponsors__grid">
     {{ range . }}
-      {{ $entryColored := .colored }}
-      {{ $isColored := $entryColored | default $globalColored }}
-      <a href="{{ .url }}" class="sponsor-card sponsor-card--gold{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
+      {{ $isColored := .colored | default $globalColored }}
+      {{ $bg := .background | default $globalBg }}
+      <a href="{{ .url }}" class="sponsor-card sponsor-card--gold sponsor-card--{{ $bg }}{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
         <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
       </a>
     {{ end }}
@@ -24,9 +25,9 @@
   <h3 class="sponsors__tier-title">Silver Sponsors</h3>
   <div class="sponsors__grid">
     {{ range . }}
-      {{ $entryColored := .colored }}
-      {{ $isColored := $entryColored | default $globalColored }}
-      <a href="{{ .url }}" class="sponsor-card{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
+      {{ $isColored := .colored | default $globalColored }}
+      {{ $bg := .background | default $globalBg }}
+      <a href="{{ .url }}" class="sponsor-card sponsor-card--{{ $bg }}{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
         <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
       </a>
     {{ end }}
@@ -39,9 +40,9 @@
   <h3 class="sponsors__tier-title">Bronze Sponsors</h3>
   <div class="sponsors__grid">
     {{ range . }}
-      {{ $entryColored := .colored }}
-      {{ $isColored := $entryColored | default $globalColored }}
-      <a href="{{ .url }}" class="sponsor-card{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
+      {{ $isColored := .colored | default $globalColored }}
+      {{ $bg := .background | default $globalBg }}
+      <a href="{{ .url }}" class="sponsor-card sponsor-card--{{ $bg }}{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
         <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
       </a>
     {{ end }}
@@ -54,9 +55,9 @@
   <h3 class="sponsors__tier-title">Community Partners</h3>
   <div class="sponsors__grid">
     {{ range . }}
-      {{ $entryColored := .colored }}
-      {{ $isColored := $entryColored | default $globalColored }}
-      <a href="{{ .url }}" class="sponsor-card{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
+      {{ $isColored := .colored | default $globalColored }}
+      {{ $bg := .background | default $globalBg }}
+      <a href="{{ .url }}" class="sponsor-card sponsor-card--{{ $bg }}{{ if $isColored }} sponsor-card--colored{{ end }}" target="_blank" rel="noopener noreferrer">
         <img src="{{ .logo | relURL }}" alt="{{ .name }}" loading="lazy">
       </a>
     {{ end }}

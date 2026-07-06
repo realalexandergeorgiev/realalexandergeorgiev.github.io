@@ -1,9 +1,11 @@
 # Display options for the sponsors section
 options:
-  light_background: false  # true = heller Hintergrund, false = dunkler Hintergrund (global)
+  background: dark         # dark | medium | light (globaler Default für Section & Karten)
   colored_logos: false     # true = Logos immer farbig, false = farbig nur bei Mouseover (global)
-# Per-entry override: set "colored: true" or "colored: false" on any sponsor/partner
-# to override the global colored_logos default for that single entry.
+# Per-entry overrides: set "background" and/or "colored" on any sponsor/partner
+# to override the global defaults for that single entry.
+#   background: dark | medium | light
+#   colored: true | false
 
 gold:
   - name: Blaze Information Security

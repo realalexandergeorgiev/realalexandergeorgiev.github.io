@@ -40,8 +40,8 @@
 
 <!-- Sponsors - grid only (spotlight removed; speaker section hidden until lineup confirmed) -->
 {{ $sponsorOpts := .Site.Data.sponsors.options | default dict }}
-{{ $sponsorClass := "sponsors" }}
-{{ if $sponsorOpts.light_background }}{{ $sponsorClass = printf "%s sponsors--light" $sponsorClass }}{{ end }}
+{{ $sponsorBg := $sponsorOpts.background | default "dark" }}
+{{ $sponsorClass := printf "sponsors sponsors--%s" $sponsorBg }}
 <section class="{{ $sponsorClass }}">
   <div class="container">
     <div class="text-center mb-5">

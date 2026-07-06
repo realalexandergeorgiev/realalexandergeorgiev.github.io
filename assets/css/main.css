@@ -476,35 +476,46 @@ section { padding: var(--space-8) 0; }
   border-bottom: 1px solid var(--color-border);
 }
 
-/* Light background variant */
+/* Section background variants: dark (default), medium, light */
+.sponsors--dark {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.sponsors--medium {
+  background: linear-gradient(180deg, #1a1c1f 0%, #2a2d31 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
 .sponsors--light {
   background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.sponsors--light .sponsors__tier-title {
-  color: rgba(0, 0, 0, 0.6);
-}
+
+/* Tier title colors per section variant */
+.sponsors--light .sponsors__tier-title { color: rgba(0, 0, 0, 0.6); }
 .sponsors--light .sponsors__tier-title::before,
-.sponsors--light .sponsors__tier-title::after {
-  background: rgba(0, 0, 0, 0.2);
-}
+.sponsors--light .sponsors__tier-title::after { background: rgba(0, 0, 0, 0.2); }
 .sponsors--light .sponsors__tier--gold .sponsors__tier-title { color: #b8941f; }
 .sponsors--light .sponsors__tier--silver .sponsors__tier-title { color: #7a7a7a; }
 .sponsors--light .sponsors__tier--bronze .sponsors__tier-title { color: #b8732a; }
 .sponsors--light .sponsors__tier--partners .sponsors__tier-title { color: #a06523; }
-.sponsors--light .sponsor-card {
+.sponsors--light .lead { color: rgba(0, 0, 0, 0.7); }
+.sponsors--light .eyebrow { color: var(--color-primary); }
+
+/* Per-card background variants: dark (default), medium, light */
+.sponsor-card--dark {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.sponsor-card--medium {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
+}
+.sponsor-card--light {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.sponsors--light .sponsor-card:hover {
-  border-color: var(--color-primary);
-}
-.sponsors--light .lead {
-  color: rgba(0, 0, 0, 0.7);
-}
-.sponsors--light .eyebrow {
-  color: var(--color-primary);
 }
 .sponsors__tier { margin-bottom: var(--space-7); }
 .sponsors__tier:last-child { margin-bottom: 0; }

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-07-06 22:32 — `caea30e` → *pending*
+
+### Changed
+- **`light_background` (bool) → `background` (3 Stufen: dark/medium/light)** — die bisherige Bool-Option wurde durch eine String-Option mit drei Stufen ersetzt. Wirkt global (`options.background`) und pro Eintrag (`background`).
+  - `dark`: dunkler Section-Gradient + dunkle Karten (Standard, wie bisher)
+  - `medium`: mittelgrauer Section-Gradient + mittelgraue Karten
+  - `light`: heller Section-Gradient + weiße Karten
+- `data/sponsors.yaml`: `options.light_background` → `options.background` (String); Kommentar-Dokumentation für pro-Eintrag-Override erweitert.
+- `layouts/index.html`: Section-Klasse `sponsors--dark/medium/light` basierend auf `options.background`.
+- `layouts/partials/sponsors-grid.html`: pro Card wird `sponsor-card--dark/medium/light` basierend auf `.background | default $globalBg` gesetzt.
+- `assets/css/main.css`: Section-Level Regeln für `sponsors--dark/medium/light` und pro-Card Regeln für `sponsor-card--dark/medium/light`; alte `.sponsors--light .sponsor-card` Regeln durch pro-Card-Klassen ersetzt.
+
 ## 2026-07-06 22:24 — `e9ba422` → `d9983a7`
 
 ### Changed
