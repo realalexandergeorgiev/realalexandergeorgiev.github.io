@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-07-06 22:32 — `caea30e` → *pending*
+## 2026-07-06 22:33 — `caea30e` → `66718eb`
 
 ### Changed
 - **`light_background` (bool) → `background` (3 Stufen: dark/medium/light)** — die bisherige Bool-Option wurde durch eine String-Option mit drei Stufen ersetzt. Wirkt global (`options.background`) und pro Eintrag (`background`).
