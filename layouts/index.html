@@ -39,7 +39,10 @@
 </section>
 
 <!-- Sponsors - grid only (spotlight removed; speaker section hidden until lineup confirmed) -->
-<section class="sponsors">
+{{ $sponsorOpts := .Site.Data.sponsors.options | default dict }}
+{{ $sponsorClass := "sponsors" }}
+{{ if $sponsorOpts.light_background }}{{ $sponsorClass = printf "%s sponsors--light" $sponsorClass }}{{ end }}
+<section class="{{ $sponsorClass }}">
   <div class="container">
     <div class="text-center mb-5">
       <span class="eyebrow">Our Sponsors</span>

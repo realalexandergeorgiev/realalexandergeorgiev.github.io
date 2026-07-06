@@ -1,3 +1,8 @@
+# Display options for the sponsors section
+options:
+  light_background: false  # true = heller Hintergrund, false = dunkler Hintergrund
+  colored_logos: false     # true = Logos immer farbig, false = farbig nur bei Mouseover
+
 gold:
   - name: Blaze Information Security
     logo: /images/sponsors/Blaze_Information_Security_Logo_Horizontal_Alternative_White_Vector.svg
