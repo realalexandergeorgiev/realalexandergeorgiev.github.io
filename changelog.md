@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-07-06 22:24 — `e9ba422` → *pending*
+## 2026-07-06 22:24 — `e9ba422` → `d9983a7`
 
 ### Changed
 - **`colored_logos` jetzt pro Eintrag möglich** — zusätzlich zum globalen `options.colored_logos` kann nun jeder Sponsor/Partner-Eintrag in `data/sponsors.yaml` ein optionales `colored: true` / `colored: false` Feld erhalten, das den globalen Default für diesen einen Eintrag überschreibt.
