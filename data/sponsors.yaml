@@ -1,7 +1,7 @@
 # Display options for the sponsors section
 options:
   background: dark         # dark | medium | light (globaler Default für Section & Karten)
-  colored_logos: false     # true = Logos immer farbig, false = farbig nur bei Mouseover (global)
+  colored_logos: true     # true = Logos immer farbig, false = farbig nur bei Mouseover (global)
 # Per-entry overrides: set "background" and/or "colored" on any sponsor/partner
 # to override the global defaults for that single entry.
 #   background: dark | medium | light
@@ -18,12 +18,14 @@ silver:
   - name: SECUINFRA GmbH
     logo: /images/sponsors/secuinfra_01_SI_Primaerlogo_Standard_RGB.png
     url: "https://www.secuinfra.com/"
+    background: light
   - name: OffSec
     logo: /images/sponsors/OffSec_Full_Color_White_Text_Horizontal.png
     url: "https://www.offsec.com/"
   - name: Red Cyber Security GmbH
     logo: /images/sponsors/Red-CS_Logo.png
     url: "https://red-cyber-security.com"
+    background: light
 bronze:
   - name: USD AG
     logo: /images/sponsors/USD_more_security.usd_RGB_Weiss.svg
@@ -32,6 +34,7 @@ partners:
   - name: BSidesMunich
     logo: /images/sponsors/bsidesmunic_logo_2026.png
     url: "https://2026.bsidesmunich.org/"
+    background: light
   - name: BSidesBerlin
     logo: /images/sponsors/bsidesberlin.png
     url: "https://bsidesberlin.org/"
@@ -47,3 +50,4 @@ partners:
   - name: BSidesTransylvania
     logo: /images/sponsors/bsidestransylvania.png
     url: "https://bsidestransylvania.com/"
+    background: light
