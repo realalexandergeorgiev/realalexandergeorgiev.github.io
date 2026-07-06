@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-07-06 22:15 — `dfc8957` → *pending*
+## 2026-07-06 22:16 — `dfc8957` → `81a66b2`
 
 ### Added
 - **Sponsoren-Section: Option für hellen Hintergrund** — neue Bool-Option `options.light_background` in `data/sponsors.yaml`; wenn `true`, wird die CSS-Klasse `sponsors--light` auf die Section angewendet (heller Gradient, dunkle Textfarben, weiße Karten).
