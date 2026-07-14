@@ -23,7 +23,7 @@ A practical guide for organizers, volunteers, and contributors to maintain the B
    - [5.9 Update the workshops page](#59-update-the-workshops-page)
    - [5.10 Add or change navigation menu items](#510-add-or-change-navigation-menu-items)
    - [5.11 Edit the BSides Women page](#511-edit-the-bsides-women-page)
-   - [5.12 Add speakers (when ready)](#512-add-speakers-when-ready)
+   - [5.12 Add speakers](#512-add-speakers)
    - [5.13 Edit the homepage stats strip](#513-edit-the-homepage-stats-strip)
 6. [Images and other assets](#6-images-and-other-assets)
 7. [Changing colors and fonts](#7-changing-colors-and-fonts)
@@ -373,11 +373,27 @@ The three most recent announcements appear on the homepage automatically.
 
 ### 5.8 Update the schedule
 
-**File:** `content/schedule/_index.md`
+**Files:** `layouts/schedule/list.html` (page structure) + `data/speakers.yaml` (keynote data).
 
-Edit the body in Markdown. The schedule is currently a simple page - when the actual programme is finalized, you can replace it with a structured timetable.
+> **The `content/schedule/_index.md` body is not rendered.** The layout does not call `.Content` - only the file's frontmatter (`title`, `description`) feeds the page header. Editing the markdown body has no visible effect.
 
-For now, this is the place to mention "Schedule will be announced X weeks before the event."
+The page has two parts:
+
+1. **Keynote card (data-driven).** The layout ranges over `data/speakers.yaml` and renders every entry flagged `keynote: true` as a highlighted card (photo or auto-initials avatar, role, talk title, full bio, LinkedIn link). To announce a keynote, just set `keynote: true` on that speaker - see §5.12. The keynote bio is shown in full (not truncated).
+
+2. **"Full timetable coming soon" box.** A static placeholder shown while the CFP is open.
+
+#### Publishing the full timetable
+
+A complete **example timetable is already in `layouts/schedule/list.html`, wrapped in a Hugo template comment** (`{{/* ... */}}`) so it doesn't render. It contains a full day of placeholder slots (registration, opening, keynote, talk slots with coffee/lunch breaks, closing, social) plus a small `<style>` block, so it looks right the moment you enable it.
+
+To turn it on:
+
+1. Remove the `{{/*` marker at the top of the block and the `*/}}` marker at the bottom.
+2. Replace the placeholders (`<Title TBA>`, `Speaker TBA`, times) with real data; duplicate the `.tt-row` blocks as needed.
+3. Delete (or comment out) the "Full timetable coming soon" box.
+
+Row classes: `.tt-row` for a talk, `.tt-row--break` for breaks/social (rendered dashed and muted).
 
 ---
 
@@ -485,37 +501,36 @@ To change wording (mission text, button labels), edit `layouts/women/list.html` 
 
 ---
 
-### 5.12 Add speakers (when ready)
+### 5.12 Add speakers
 
-**File:** `data/speakers.yaml` already exists with placeholder data. The carousel partial and CSS are still in place - they're just not currently shown on the homepage (the section was removed pending speaker confirmation).
+**File:** `data/speakers.yaml`
 
-**To show speakers again on the homepage**, edit `layouts/index.html` and add this block where you want them:
-
-```html
-<section>
-  <div class="container">
-    <div class="mb-5" style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: var(--space-3);">
-      <div>
-        <span class="eyebrow">Lineup</span>
-        <h2 class="section-title" style="margin: 0;">Featured Speakers</h2>
-      </div>
-      <a href="{{ "/schedule/" | relURL }}" class="btn btn--sm btn--outline">Full schedule →</a>
-    </div>
-    {{ partial "speakers-carousel.html" . }}
-  </div>
-</section>
-```
-
-Then edit `data/speakers.yaml`:
+The **Featured Speakers** carousel is live on the homepage - it renders just after the stats strip via the `layouts/partials/speakers-carousel.html` partial. Every entry in `data/speakers.yaml` becomes a card in the carousel.
 
 ```yaml
 - name: "Real Speaker Name"
-  photo: "/images/speakers/real-speaker.jpg"   # leave "" for an auto-initials avatar
+  keynote: true                                   # optional - marks the keynote (see below)
+  photo: "/images/speakers/real-speaker.jpg"      # leave "" for an auto-initials avatar
   role: "Their job title and company"
-  bio: "Short 1-2 sentence bio. Will be truncated to 3 lines on the card."
-  linkedin: "https://www.linkedin.com/in/..."   # optional
+  bio: "Short bio. Truncated to 3 lines on the carousel card; full text shows in a mouseover tooltip."
+  linkedin: "https://www.linkedin.com/in/..."     # optional
   talk: "Title of their talk"
 ```
+
+#### The `keynote` flag
+
+Setting `keynote: true` on a speaker does two things:
+
+- They still appear in the homepage carousel like any other speaker.
+- They are **also rendered as a highlighted Keynote card on the `/schedule/` page** (see §5.8), with the bio shown in full.
+
+Keep at most one speaker flagged as the keynote.
+
+#### Notes
+
+- **Bios** are truncated to 3 lines on carousel cards via CSS (`-webkit-line-clamp: 3`). The full text is exposed automatically as a native mouseover tooltip (the `title` attribute). To show a bio in full on a given card, add the CSS class `speaker-card__bio--full` to the `<p>` - this is what the schedule keynote card uses.
+- **Photos** render best as square source images (~800x800). Drop them in `static/images/speakers/`. The `photo` value is passed through Hugo's `relURL`, so absolute `https://` URLs technically work too, but external/hotlinked images are not recommended (breakage, privacy, no optimisation).
+- To **add more speakers**, just append entries to `data/speakers.yaml` - the carousel picks them up automatically.
 
 ---
 

@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-07-14 — working tree (uncommitted)
+
+### Added
+- **Keynote auf der `/schedule/`-Seite (datengetrieben)** — der Schedule-Layout (`layouts/schedule/list.html`) liest `data/speakers.yaml` und rendert jeden Eintrag mit `keynote: true` als hervorgehobene Keynote-Karte (Foto/Initialen-Avatar, Role, Talk-Titel, volle Bio, LinkedIn).
+- **`keynote`-Flag in `data/speakers.yaml`** — markiert einen Speaker als Keynote; erscheint dann sowohl im Homepage-Karussell als auch als Keynote-Karte auf `/schedule/`.
+- **Homepage: "Featured Speakers"-Karussell reaktiviert** — neue Section in `layouts/index.html` (nach der Stats-Strip) über das `speakers-carousel.html`-Partial; war zuvor entfernt.
+- **Beispiel-Timetable im Schedule-Layout** — vollständiger Platzhalter-Stundenplan (Registrierung, Keynote, Talk-Slots, Kaffee-/Mittagspausen, Closing, Social) als Hugo-Template-Kommentar (`{{/* ... */}}`) inkl. `<style>`-Block; zum Freischalten nur die Kommentar-Marker entfernen und Platzhalter füllen.
+- **CSS-Modifier `.speaker-card__bio--full`** — zeigt eine Speaker-Bio ungekürzt statt auf 3 Zeilen; genutzt von der Keynote-Karte.
+
+### Changed
+- **`data/speakers.yaml`**: Name normalisiert `"Joern"` → `"Jörn"` (konsistent zur Bio); `keynote: true` am Eintrag gesetzt.
+- **Bio-Mouseover-Tooltip (Carousel)** — `layouts/partials/speakers-carousel.html` setzt ein `title`-Attribut mit dem vollen Bio-Text; optische Truncierung bleibt auf 3 Zeilen, voller Text per Hover.
+- **`MANUAL.md` §5.8 (Schedule)** umgeschrieben: klargestellt, dass der `_index.md`-Body nicht gerendert wird (nur Frontmatter); Keynote ist datengetrieben; Anleitung zur Beispiel-Timetable ergänzt.
+- **`MANUAL.md` §5.12 (Speakers)** aktualisiert: Karussell ist live; `keynote`-Flag, Bio-Truncierung/-Tooltip und `--full`-Modifier dokumentiert; Heading "(when ready)" inkl. TOC-Anker bereinigt.
+- **`layouts/index.html`**: veralteten Sponsoren-Kommentar ("speaker section hidden until lineup confirmed") korrigiert.
+
+### Fixed
+- **`.Site.Data` → `hugo.Data` (13 Layout-Dateien, 17 Vorkommen)** — Hugo ≥0.156 deprecates `.Site.Data`; alle Vorkommen migriert, die entsprechende Deprecation-Warning ist damit beseitigt (betrifft u.a. `index`, `schedule`, `women`, `team`, `faq`, `workshops`, `partials/{footer,about-grid,sponsor-carousel,seo,seo-jsonld-data,speakers-carousel,sponsors-grid}`).
+- **Redundantes Title-Tooltip an der Keynote-Bio entfernt** — die `--full`-Variante zeigt die Bio bereits vollständig, das doppelte `title`-Attribut wurde gestrichen (nur die truncierte Carousel-Variante behält es).
+
 ## 2026-07-06 22:38 — `85ad16e` → `88502e3`
 
 ### Fixed

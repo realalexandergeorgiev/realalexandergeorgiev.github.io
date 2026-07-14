@@ -4,7 +4,7 @@
      CSP meta tag (which includes their SHA-256 hashes) can come first.
      ============================================================ */}}
 {{- $isHome := .IsHome -}}
-{{- $event := .Site.Data.event -}}
+{{- $event := hugo.Data.event -}}
 {{- $siteName := .Site.Title -}}
 {{- $siteDesc := .Site.Params.description -}}
 {{- $title := cond $isHome $siteName (printf "%s | %s" .Title $siteName) -}}

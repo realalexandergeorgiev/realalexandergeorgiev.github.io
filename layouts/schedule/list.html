@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := .Site.Data.event }}
+{{ $event := hugo.Data.event }}
 
 {{ partial "page-header.html" (dict
   "eyebrow" "2026 Conference"
@@ -7,12 +7,172 @@
   "lead" (printf "%s · %s" $event.dates.display $event.location.name))
 }}
 
-<section>
-  <div class="container text-center">
-    <div style="max-width: 720px; margin: 0 auto; padding: var(--space-7) var(--space-5); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
-      <i class="fas fa-calendar-plus fa-3x text-primary" style="margin-bottom: var(--space-4);"></i>
-      <h2 class="section-title section-title--center">Full schedule coming soon</h2>
-      <p class="lead" style="margin: 0 auto var(--space-5);">
+<section style="padding-top: var(--space-7);">
+  <div class="container">
+    {{ $keynotes := where hugo.Data.speakers "keynote" true }}
+    {{ range $k := $keynotes }}
+    <div class="text-center mb-5">
+      <span class="eyebrow">Keynote</span>
+      <h2 class="section-title section-title--center">Opening the conference</h2>
+    </div>
+    <div style="max-width: 420px; margin: 0 auto;">
+      <article class="speaker-card">
+        <div class="speaker-card__photo">
+          {{ with $k.photo }}
+            <img src="{{ $k.photo | relURL }}" alt="{{ $k.name }}" loading="lazy">
+          {{ else }}
+            <span class="speaker-card__initials" aria-hidden="true">
+              {{ $parts := split $k.name " " }}
+              {{ range $i, $p := $parts }}{{ if lt $i 2 }}{{ substr $p 0 1 }}{{ end }}{{ end }}
+            </span>
+          {{ end }}
+        </div>
+        <div class="speaker-card__body">
+          <h3 class="speaker-card__name">{{ $k.name }}</h3>
+          {{ with $k.role }}<p class="speaker-card__role">{{ . }}</p>{{ end }}
+          {{ with $k.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
+          {{ with $k.bio }}<p class="speaker-card__bio speaker-card__bio--full">{{ . }}</p>{{ end }}
+          {{ with $k.linkedin }}
+            <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $k.name }} on LinkedIn">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+          {{ end }}
+        </div>
+      </article>
+    </div>
+    {{ end }}
+
+    {{/*
+    ================================================================
+         EXAMPLE TIMETABLE  (placeholder - not rendered)
+         Sobald das 2026er Programm steht:
+           1. Die Hugo-Kommentar-Marker am Anfang und Ende dieses Blocks
+              entfernen -> Block wird sichtbar.
+           2. Platzhalter (<Title TBA>, Speaker TBA, Zeiten) durch
+              echte Daten ersetzen. Weitere Rows einfach nach dem
+              gleichen Muster duplizieren.
+           3. Die "Full timetable coming soon"-Box weiter unten dann
+              loeschen oder auskommentieren.
+         Klassen: .tt-row = Vortrag  |  .tt-row--break = Pause/Social
+    ================================================================
+
+    <style>
+      .tt-row{display:grid;grid-template-columns:110px 1fr;gap:var(--space-4);align-items:baseline;padding:var(--space-3) var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+      .tt-row--break{background:transparent;border-style:dashed;color:var(--color-text-muted)}
+      .tt-time{font-family:var(--font-heading);font-weight:700;letter-spacing:.05em;color:var(--color-primary)}
+      .tt-row--break .tt-time{color:var(--color-text-muted)}
+      .tt-sess{line-height:1.4}
+      .tt-sess strong{display:block}
+      .tt-sess small{color:var(--color-text-muted);font-style:italic}
+    </style>
+
+    <section style="padding-top: var(--space-7);">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="eyebrow">Programme</span>
+          <h2 class="section-title section-title--center">Timetable</h2>
+          <p class="lead" style="margin: 0 auto;">All times local (CET). Subject to change.</p>
+        </div>
+
+        <div style="max-width: 820px; margin: 0 auto; display: grid; gap: var(--space-2);">
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">09:00</span>
+            <span class="tt-sess">Registration &amp; coffee</span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">10:00</span>
+            <span class="tt-sess">Opening remarks</span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">10:15</span>
+            <span class="tt-sess">
+              <strong>Keynote</strong>
+              <small>Joern Schneeweisz &middot; Principal Security Engineer, GitLab</small>
+            </span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">11:00</span>
+            <span class="tt-sess">
+              <strong>&lt;Title TBA&gt;</strong>
+              <small>Speaker TBA &middot; Main track</small>
+            </span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">11:50</span>
+            <span class="tt-sess">Coffee break</span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">12:10</span>
+            <span class="tt-sess">
+              <strong>&lt;Title TBA&gt;</strong>
+              <small>Speaker TBA &middot; Main track</small>
+            </span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">13:00</span>
+            <span class="tt-sess">Lunch break</span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">14:00</span>
+            <span class="tt-sess">
+              <strong>&lt;Title TBA&gt;</strong>
+              <small>Speaker TBA &middot; Main track</small>
+            </span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">14:50</span>
+            <span class="tt-sess">Coffee break</span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">15:10</span>
+            <span class="tt-sess">
+              <strong>&lt;Title TBA&gt;</strong>
+              <small>Speaker TBA &middot; Main track</small>
+            </span>
+          </div>
+
+          <div class="tt-row">
+            <span class="tt-time">16:00</span>
+            <span class="tt-sess">
+              <strong>&lt;Title TBA&gt;</strong>
+              <small>Speaker TBA &middot; Main track</small>
+            </span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">16:45</span>
+            <span class="tt-sess">Closing remarks &amp; sponsor draw</span>
+          </div>
+
+          <div class="tt-row tt-row--break">
+            <span class="tt-time">17:00</span>
+            <span class="tt-sess">Social / after-party</span>
+          </div>
+
+        </div>
+
+        <p class="text-center" style="margin-top: var(--space-5);">
+          <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="btn"><i class="fas fa-ticket"></i> Get Tickets</a>
+        </p>
+      </div>
+    </section>
+
+    ================================================================= */}}
+
+    <div class="text-center" style="max-width: 720px; margin: var(--space-7) auto 0; padding: var(--space-6) var(--space-5); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
+      <i class="fas fa-calendar-plus fa-2x text-primary" style="margin-bottom: var(--space-3);"></i>
+      <h3 class="section-title section-title--center" style="font-size: var(--fs-xl);">Full timetable coming soon</h3>
+      <p class="lead" style="margin: 0 auto;">
         The Call for Papers is still open. Once the review committee has finalised the
         program, the full schedule - talks, workshops, and breaks - will be published here.
       </p>

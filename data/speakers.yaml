@@ -1,6 +1,7 @@
-- name: "Joern Schneeweisz"
+- name: "Jörn Schneeweisz"
+  keynote: true
   photo: ""
   role: "Principal Security Engineer, Gitlab"
-  bio: "J�rn Schneeweisz is a Principal Security Engineer at GitLab who managed to turn a decade of breaking other people's broken Ruby on Rails code into a legitimate corporate career, because apparently, getting paid to tell companies how bad their security is qualifies as a real job."
+  bio: "Jörn Schneeweisz is a Principal Security Engineer at GitLab who managed to turn a decade of breaking other people's broken Ruby on Rails code into a legitimate corporate career, because apparently, getting paid to tell companies how bad their security is qualifies as a real job."
   linkedin: "https://www.linkedin.com/in/joern-schneeweisz-b5a4511b1/"
   talk: "keynote tba"

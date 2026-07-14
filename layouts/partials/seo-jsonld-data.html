@@ -6,7 +6,7 @@
      BEFORE the JSON-LD scripts are emitted.
      ============================================================ */}}
 {{- $isHome := .IsHome -}}
-{{- $event := .Site.Data.event -}}
+{{- $event := hugo.Data.event -}}
 {{- $siteName := .Site.Title -}}
 {{- $siteDesc := .Site.Params.description -}}
 {{- $description := .Description | default .Params.summary | default $siteDesc -}}

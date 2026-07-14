@@ -1,4 +1,4 @@
-{{ $about := .Site.Data.about }}
+{{ $about := hugo.Data.about }}
 {{ if $about }}
 <div class="about-grid">
   {{ range $about }}

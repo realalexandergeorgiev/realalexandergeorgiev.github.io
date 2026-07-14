@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := .Site.Data.event }}
+{{ $event := hugo.Data.event }}
 
 <section class="hero">
   <div class="container hero__inner">
@@ -38,8 +38,22 @@
   </div>
 </section>
 
-<!-- Sponsors - grid only (spotlight removed; speaker section hidden until lineup confirmed) -->
-{{ $sponsorOpts := .Site.Data.sponsors.options | default dict }}
+<!-- Featured speakers -->
+<section>
+  <div class="container">
+    <div class="mb-5" style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: var(--space-3);">
+      <div>
+        <span class="eyebrow">Lineup</span>
+        <h2 class="section-title" style="margin: 0;">Featured Speakers</h2>
+      </div>
+      <a href="{{ "/schedule/" | relURL }}" class="btn btn--sm btn--outline">Full schedule &rarr;</a>
+    </div>
+    {{ partial "speakers-carousel.html" . }}
+  </div>
+</section>
+
+<!-- Sponsors - grid only (spotlight removed) -->
+{{ $sponsorOpts := hugo.Data.sponsors.options | default dict }}
 {{ $sponsorBg := $sponsorOpts.background | default "dark" }}
 {{ $sponsorClass := printf "sponsors sponsors--%s" $sponsorBg }}
 <section class="{{ $sponsorClass }}">

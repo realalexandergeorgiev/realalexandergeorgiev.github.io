@@ -809,6 +809,11 @@ section { padding: var(--space-8) 0; }
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.speaker-card__bio--full {
+  display: block;
+  -webkit-line-clamp: initial;
+  overflow: visible;
+}
 .speaker-card__link {
   margin-top: auto;
   display: inline-flex;

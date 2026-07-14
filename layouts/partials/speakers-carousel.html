@@ -1,4 +1,4 @@
-{{ $speakers := .Site.Data.speakers }}
+{{ $speakers := hugo.Data.speakers }}
 {{ if $speakers }}
 <div class="speakers" aria-label="Conference speakers">
   <button class="speakers__nav speakers__nav--prev" aria-label="Previous speakers" type="button">
@@ -22,7 +22,7 @@
           <h3 class="speaker-card__name">{{ $s.name }}</h3>
           {{ with $s.role }}<p class="speaker-card__role">{{ . }}</p>{{ end }}
           {{ with $s.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
-          {{ with $s.bio }}<p class="speaker-card__bio">{{ . }}</p>{{ end }}
+          {{ with $s.bio }}<p class="speaker-card__bio" title="{{ . }}">{{ . }}</p>{{ end }}
           {{ with $s.linkedin }}
             <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} on LinkedIn">
               <i class="fa-brands fa-linkedin"></i> LinkedIn
