@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="856" height="540" viewBox="0 0 856 540" role="img" aria-label="ID-1 card template placeholder">
+  <rect width="856" height="540" rx="31.8" fill="#011023"/>
+  <rect x="40" y="40" width="776" height="460" rx="18" fill="none" stroke="#1f3a5f" stroke-width="2" stroke-dasharray="8 8"/>
+  <g transform="translate(70,70)" font-family="Helvetica, Arial, sans-serif">
+    <rect width="40" height="40" rx="8" fill="#1f3a5f"/>
+    <text x="55" y="27" font-size="22" font-weight="700" fill="#e8edf3">BSidesFrankfurt</text>
+    <text x="55" y="50" font-size="14" fill="#8aa0b8">2026 · conference card</text>
+  </g>
+  <text x="428" y="285" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#3f6080" text-anchor="middle" letter-spacing="2">YOUR DESIGN HERE</text>
+  <g transform="translate(70,400)" font-family="Helvetica, Arial, sans-serif">
+    <rect width="300" height="14" rx="4" fill="#1f3a5f"/>
+    <text y="44" font-size="16" fill="#8aa0b8">name · handle · QR · whatever you want</text>
+  </g>
+  <text x="816" y="500" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5a7392" text-anchor="end">ID-1 / CR80 · 85.60 × 54.00 mm · Platzhalter — ersetzen (static/files/bsidesfra-2026-card-template.svg)</text>
+</svg>

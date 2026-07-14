@@ -46,7 +46,7 @@ Frankfurt is unusually well-served by S-Bahn and regional trains, so you don't n
 
 - **Offenbach** (S1, S2, S8, S9). Cheaper, plenty of mid-range hotels, 15-20 minutes to the city center.
 - **Eschborn / Bad Soden** (S3, S4). Quiet, business-hotel territory, often available when central hotels aren't.
-- **Oberursel** (U3). Direct train from Oberursel to Holzhausenstraße available. About
+- **Oberursel** (U3). Direct train from Oberursel to Holzhausenstraße available. About 20-30 minutes.
 - **Mainz** (RB / S8). ~60 minutes door-to-venue, but Mainz is genuinely a nice city to stay in, and you'll find rooms when Frankfurt has none.
 - **Wiesbaden** (S1, S8, S9). Same story as Mainz. Spa-town vibe.
 - **Hanau** (S8, S9, RB). Further out but consistently has availability.
