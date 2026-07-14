@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Platzhalter Bild: Rheingauer Weinmarkt">
+  <rect width="1200" height="675" fill="#011023"/>
+  <rect x="40" y="40" width="1120" height="595" fill="none" stroke="#1f3a5f" stroke-width="2" stroke-dasharray="10 10" rx="12"/>
+  <g transform="translate(540,210)" fill="none" stroke="#3f6080" stroke-width="4" stroke-linejoin="round">
+    <rect x="0" y="0" width="120" height="90" rx="8"/>
+    <circle cx="35" cy="32" r="12"/>
+    <path d="M0 82 L42 52 L72 72 L92 58 L120 82"/>
+  </g>
+  <text x="600" y="400" font-family="Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#e8edf3" text-anchor="middle">Foto: Rheingauer Weinmarkt an der Fressgass</text>
+  <text x="600" y="450" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#8aa0b8" text-anchor="middle">Platzhalter — ersetzen (static/images/blog/rheingauer-weinmarkt.svg)</text>
+</svg>

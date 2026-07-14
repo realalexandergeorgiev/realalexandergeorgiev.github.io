@@ -2,12 +2,19 @@
 title: "Book your hotel early: Frankfurt is full during BSides week"
 date: 2026-05-15
 author: "BSidesFrankfurt Team"
-summary: "Frankfurt's biggest wine festival, the Rheingauer Weinmarkt, runs at the same time as BSidesFrankfurt 2026. Hotels fill up months in advance. Here's how to plan accordingly."
+summary: "Frankfurt's biggest automotive fair and wine festival, the Rheingauer Weinmarkt, runs at the same time as BSidesFrankfurt 2026. Hotels fill up months in advance. Here's how to plan accordingly."
 tags: ["travel", "logistics", "attendees"]
 draft: false
 ---
 
-If you're planning to attend BSidesFrankfurt 2026 (10-11 September) and you haven't booked a hotel yet, do it this week. Frankfurt hotels are notoriously tight during conference week, and the reason has very little to do with us: the [**Rheingauer Weinmarkt**](https://www.visitfrankfurt.travel/erleben/feste-und-veranstaltungen/rheingauer-weinmarkt) takes over the city center at the same time.
+If you're planning to attend BSidesFrankfurt 2026 (10-11 September) and you haven't booked a hotel yet, do it asap. Frankfurt hotels are notoriously tight during conference week, and the reason has very little to do with us: 
+- the [**Automechanika**](https://automechanika.messefrankfurt.com/frankfurt/de.html) fair is taking place at the same week.
+- the [**Rheingauer Weinmarkt**](https://www.visitfrankfurt.travel/erleben/feste-und-veranstaltungen/rheingauer-weinmarkt) takes over the city center at the same time.
+
+## What Automechanika is
+
+Automechanika Frankfurt is the world's leading trade fair for the automotive aftermarket and service industry. Held every two years at Messe Frankfurt, it brings together thousands of exhibitors (typically 3,000–5,000 from 70+ countries) who showcase innovations, parts, equipment, tools, accessories, and technologies for vehicle repair, maintenance, and the broader automotive supply chain.
+It serves as the premier international meeting point for manufacturers, workshops, traders, and professionals in the sector.
 
 ## What the Rheingauer Weinmarkt is
 
@@ -23,7 +30,9 @@ We have no influence over either event, so the only practical move is to book ea
 
 ## Book now (yes, now)
 
-Don't wait. For BSidesFrankfurt 2025 we heard from a handful of attendees who left it to the last minute and ended up commuting in from Hanau or skipping the second day to drive home. Save yourself the headache.
+Don't wait. For BSidesFrankfurt 2025 we heard from a handful of attendees who left it to the last minute and ended up commuting in from Hanau.
+
+Save yourself the headache.
 
 A few practical pointers:
 
@@ -37,11 +46,14 @@ Frankfurt is unusually well-served by S-Bahn and regional trains, so you don't n
 
 - **Offenbach** (S1, S2, S8, S9). Cheaper, plenty of mid-range hotels, 15-20 minutes to the city center.
 - **Eschborn / Bad Soden** (S3, S4). Quiet, business-hotel territory, often available when central hotels aren't.
-- **Mainz** (RB / S8). 35 minutes door-to-venue, but Mainz is genuinely a nice city to stay in, and you'll find rooms when Frankfurt has none.
+- **Oberursel** (U3). Direct train from Oberursel to Holzhausenstraße available. About
+- **Mainz** (RB / S8). ~60 minutes door-to-venue, but Mainz is genuinely a nice city to stay in, and you'll find rooms when Frankfurt has none.
 - **Wiesbaden** (S1, S8, S9). Same story as Mainz. Spa-town vibe.
 - **Hanau** (S8, S9, RB). Further out but consistently has availability.
 
-A 9-Euro-style RMV day pass (currently around 12 Euro) covers the whole Rhine-Main region and pays for itself if you commute twice.
+Try to **avoid** Frankfurt Hauptbahnhof area.
+
+A RMV day pass (~10-15 Euro) usually pays for itself if you travel more than twice.
 
 ## AirBnB and short-term rentals
 
