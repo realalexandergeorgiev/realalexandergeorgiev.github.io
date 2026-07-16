@@ -14,6 +14,10 @@ gold:
   - name: Siemens Energy
     logo: /images/sponsors/SE_Logo_Color_CMYK.png
     url: "https://www.siemens-energy.com/de/de/home.html"
+  - name: IGEL Technology GmbH
+    logo: /images/sponsors/igel-logo-new-dark.svg
+    url: "https://www.igel.com/"
+    background: light
 silver:
   - name: SECUINFRA GmbH
     logo: /images/sponsors/secuinfra_01_SI_Primaerlogo_Standard_RGB.png
