@@ -43,6 +43,8 @@ We'll announce the **submission email address in the coming weeks**. Keep an eye
 
 Once the address is live, email us your final SVG or PNG at card size (300+ DPI recommended). We handle the rest, and your card will be waiting at the badge desk in September.
 
+EDIT: You can send your desired badge to badges@bsidesfrankfurt.org - please use the email you used for ordering a ticket in order to prevent fraud.
+
 ![Finished card examples](/images/blog/2026-card-sample.jpg)
 
 ## Share your design (optional)
