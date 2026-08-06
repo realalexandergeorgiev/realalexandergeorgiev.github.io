@@ -34,10 +34,15 @@ bronze:
   - name: USD AG
     logo: /images/sponsors/USD_more_security.usd_RGB_Weiss.svg
     url: "https://www.usd.de/"
+    background: dark
   - name: SCHUTZWERK GmbH
     logo: /images/sponsors/schutzwerk_logo.svg
     url: "https://www.schutzwerk.com/"
     background: dark
+  - name: Secure Code Warrior
+    logo: /images/sponsors/securecodewarrior.svg
+    url: "https://www.securecodewarrior.com/"
+    background: light
 partners:
   - name: BSidesMunich
     logo: /images/sponsors/bsidesmunic_logo_2026.png
