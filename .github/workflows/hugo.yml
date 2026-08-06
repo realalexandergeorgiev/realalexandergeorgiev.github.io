@@ -32,10 +32,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Hugo
-        uses: gohugoio/hugo-setup@v1
-        with:
-          version: '0.162.0'
+      - name: Install Hugo
+        run: |
+          wget -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.162.0/hugo_extended_0.162.0_linux-amd64.deb
+          sudo dpkg -i hugo.deb
+          rm hugo.deb
 
       - name: Build with Hugo
         env:
