@@ -1,4 +1,4 @@
-{{ $sponsors := hugo.Data.sponsors }}
+{{ $sponsors := site.Data.sponsors }}
 {{ $opts := $sponsors.options | default dict }}
 {{ $globalColored := $opts.colored_logos | default false }}
 {{ $globalBg := $opts.background | default "dark" }}

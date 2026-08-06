@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := hugo.Data.event }}
+{{ $event := site.Data.event }}
 
 {{ partial "page-header.html" (dict
   "eyebrow" "2026 Conference"
@@ -9,7 +9,7 @@
 
 <section style="padding-top: var(--space-7);">
   <div class="container">
-    {{ $keynotes := where hugo.Data.speakers "keynote" true }}
+    {{ $keynotes := where site.Data.speakers "keynote" true }}
     {{ range $k := $keynotes }}
     <div class="text-center mb-5">
       <span class="eyebrow">Keynote</span>

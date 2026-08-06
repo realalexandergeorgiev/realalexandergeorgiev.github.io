@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := hugo.Data.event }}
+{{ $event := site.Data.event }}
 
 <section class="hero">
   <div class="container hero__inner">
@@ -53,7 +53,7 @@
 </section>
 
 <!-- Sponsors - grid only (spotlight removed) -->
-{{ $sponsorOpts := hugo.Data.sponsors.options | default dict }}
+{{ $sponsorOpts := site.Data.sponsors.options | default dict }}
 {{ $sponsorBg := $sponsorOpts.background | default "dark" }}
 {{ $sponsorClass := printf "sponsors sponsors--%s" $sponsorBg }}
 <section class="{{ $sponsorClass }}">

@@ -1,7 +1,7 @@
 {{ $all := slice }}
-{{ with hugo.Data.sponsors.gold }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
-{{ with hugo.Data.sponsors.silver }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
-{{ with hugo.Data.sponsors.partners }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+{{ with site.Data.sponsors.gold }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+{{ with site.Data.sponsors.silver }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
+{{ with site.Data.sponsors.partners }}{{ range . }}{{ $all = $all | append . }}{{ end }}{{ end }}
 
 {{ if $all }}
 <div class="sponsor-carousel" aria-label="Sponsors carousel">
