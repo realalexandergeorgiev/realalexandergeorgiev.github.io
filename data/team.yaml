@@ -8,6 +8,10 @@ organisers:
     role: "Lead Organiser"
     image: "/images/team/hristiyan-lazarov.jpg"
     linkedin: "https://www.linkedin.com/in/hlazarov/"
+  - name: "Peter Massini"
+    role: "MVP"
+    image: "/images/team/peter-massini.jpg"
+    linkedin: "https://www.linkedin.com/in/peter-massini-227021a6/"
 
 team:
   - name: "Rita Nemetz"
@@ -26,16 +30,12 @@ team:
     role: "Organising Team"
     image: "/images/team/joerg-pawlitzky.jpg"
     linkedin: "https://www.linkedin.com/in/joerg-pawlitzky/"
-  - name: "Peter Massini"
-    role: "Organising Team"
-    image: "/images/team/peter-massini.jpg"
-    linkedin: "https://www.linkedin.com/in/peter-massini-227021a6/"
   - name: "Marco Hertlein"
     role: "Organising Team"
     image: "/images/team/marco-hertlein.jpg"
     linkedin: "https://www.linkedin.com/in/marcohertlein/"
   - name: 'Patrick Eisenschmidt ("secdude")'
-    role: "Organising Team"
+    role: "Organising Team & Master of Pretix and Pretalx"
     image: "/images/team/patrick-eisenschmidt.jpg"
     linkedin: "https://www.linkedin.com/in/patrick-eisenschmidt/"
   - name: "Alexander Steinbrecher"

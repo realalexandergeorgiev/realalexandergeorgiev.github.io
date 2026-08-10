@@ -9,8 +9,18 @@
 
 <section style="padding-top: var(--space-7);">
   <div class="container">
-    {{ $keynotes := where site.Data.speakers "keynote" true }}
-    {{ range $k := $keynotes }}
+    <p class="schedule-note">
+      <i class="fas fa-arrows-rotate"></i>
+      Schedule is work-in-progress and subject to change &mdash; please check back closer to the event.
+    </p>
+  </div>
+</section>
+
+<!-- Keynote spotlight (data-driven from data/speakers.yaml, keynote: true) -->
+{{ $keynotes := where site.Data.speakers "keynote" true }}
+{{ range $k := $keynotes }}
+<section style="padding-top: var(--space-5);">
+  <div class="container">
     <div class="text-center mb-5">
       <span class="eyebrow">Keynote</span>
       <h2 class="section-title section-title--center">Opening the conference</h2>
@@ -40,145 +50,136 @@
         </div>
       </article>
     </div>
-    {{ end }}
+  </div>
+</section>
+{{ end }}
 
-    {{/*
-    ================================================================
-         EXAMPLE TIMETABLE  (placeholder - not rendered)
-         Sobald das 2026er Programm steht:
-           1. Die Hugo-Kommentar-Marker am Anfang und Ende dieses Blocks
-              entfernen -> Block wird sichtbar.
-           2. Platzhalter (<Title TBA>, Speaker TBA, Zeiten) durch
-              echte Daten ersetzen. Weitere Rows einfach nach dem
-              gleichen Muster duplizieren.
-           3. Die "Full timetable coming soon"-Box weiter unten dann
-              loeschen oder auskommentieren.
-         Klassen: .tt-row = Vortrag  |  .tt-row--break = Pause/Social
-    ================================================================
+<!-- Day navigation -->
+<section style="padding-top: var(--space-7);">
+  <div class="container">
+    <nav class="day-nav" aria-label="Schedule days">
+      <a href="#day-1" class="day-nav__link"><i class="fas fa-microphone"></i> Day 1 &middot; Talks</a>
+      <a href="#day-2" class="day-nav__link"><i class="fas fa-wrench"></i> Day 2 &middot; Workshops</a>
+    </nav>
+  </div>
+</section>
 
-    <style>
-      .tt-row{display:grid;grid-template-columns:110px 1fr;gap:var(--space-4);align-items:baseline;padding:var(--space-3) var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
-      .tt-row--break{background:transparent;border-style:dashed;color:var(--color-text-muted)}
-      .tt-time{font-family:var(--font-heading);font-weight:700;letter-spacing:.05em;color:var(--color-primary)}
-      .tt-row--break .tt-time{color:var(--color-text-muted)}
-      .tt-sess{line-height:1.4}
-      .tt-sess strong{display:block}
-      .tt-sess small{color:var(--color-text-muted);font-style:italic}
-    </style>
+<!-- ============ DAY 1 — TALKS ============ -->
+<section id="day-1" class="day-block" style="padding-top: 0;">
+  <div class="container">
+    <div class="day-block__head">
+      <span class="day-block__date">10 September 2026</span>
+      <h2 class="section-title section-title--center">Day 1 &middot; Conference Talks</h2>
+      <p class="lead" style="margin: 0 auto;">Conference day 09:00&ndash;~18:00. All times local (CEST). Subject to change.</p>
+    </div>
 
-    <section style="padding-top: var(--space-7);">
-      <div class="container">
-        <div class="text-center mb-5">
-          <span class="eyebrow">Programme</span>
-          <h2 class="section-title section-title--center">Timetable</h2>
-          <p class="lead" style="margin: 0 auto;">All times local (CET). Subject to change.</p>
+    <p class="text-center" style="margin-bottom: var(--space-3); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/schedule/" target="_blank" rel="noopener noreferrer">View full schedule on pretalx &rarr;</a>
+    </p>
+
+    <div class="schedule-widget">
+      <pretalx-schedule event-url="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/" locale="en" format="grid" style="--pretalx-clr-primary: #9acd32"></pretalx-schedule>
+      <noscript>
+        <div class="pretalx-widget">
+          <div class="pretalx-widget-info-message">
+            JavaScript is disabled in your browser. To access the talks schedule without JavaScript,
+            please <a target="_blank" href="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/schedule/">click here</a>.
+          </div>
         </div>
+      </noscript>
+    </div>
 
-        <div style="max-width: 820px; margin: 0 auto; display: grid; gap: var(--space-2);">
+    <p class="text-center" style="margin-top: var(--space-3); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/schedule/" target="_blank" rel="noopener noreferrer">View full schedule on pretalx &rarr;</a><br>
+      For speaker bios and full talk descriptions, visit the
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/" target="_blank" rel="noopener noreferrer">presentations CFP page</a>.
+    </p>
+  </div>
+</section>
 
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">09:00</span>
-            <span class="tt-sess">Registration &amp; coffee</span>
-          </div>
+<!-- ============ DAY 2 — WORKSHOPS ============ -->
+<section id="day-2" class="day-block">
+  <span id="workshops" aria-hidden="true"></span>
+  <div class="container">
+    <div class="day-block__head">
+      <span class="day-block__date">11 September 2026</span>
+      <h2 class="section-title section-title--center">Day 2 &middot; Workshops</h2>
+      <p class="lead" style="margin: 0 auto;">Workshops 09:00&ndash;18:00. All times local (CEST). Subject to change.</p>
+    </div>
 
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">10:00</span>
-            <span class="tt-sess">Opening remarks</span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">10:15</span>
-            <span class="tt-sess">
-              <strong>Keynote</strong>
-              <small>Joern Schneeweisz &middot; Principal Security Engineer, GitLab</small>
-            </span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">11:00</span>
-            <span class="tt-sess">
-              <strong>&lt;Title TBA&gt;</strong>
-              <small>Speaker TBA &middot; Main track</small>
-            </span>
-          </div>
-
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">11:50</span>
-            <span class="tt-sess">Coffee break</span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">12:10</span>
-            <span class="tt-sess">
-              <strong>&lt;Title TBA&gt;</strong>
-              <small>Speaker TBA &middot; Main track</small>
-            </span>
-          </div>
-
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">13:00</span>
-            <span class="tt-sess">Lunch break</span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">14:00</span>
-            <span class="tt-sess">
-              <strong>&lt;Title TBA&gt;</strong>
-              <small>Speaker TBA &middot; Main track</small>
-            </span>
-          </div>
-
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">14:50</span>
-            <span class="tt-sess">Coffee break</span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">15:10</span>
-            <span class="tt-sess">
-              <strong>&lt;Title TBA&gt;</strong>
-              <small>Speaker TBA &middot; Main track</small>
-            </span>
-          </div>
-
-          <div class="tt-row">
-            <span class="tt-time">16:00</span>
-            <span class="tt-sess">
-              <strong>&lt;Title TBA&gt;</strong>
-              <small>Speaker TBA &middot; Main track</small>
-            </span>
-          </div>
-
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">16:45</span>
-            <span class="tt-sess">Closing remarks &amp; sponsor draw</span>
-          </div>
-
-          <div class="tt-row tt-row--break">
-            <span class="tt-time">17:00</span>
-            <span class="tt-sess">Social / after-party</span>
-          </div>
-
-        </div>
-
-        <p class="text-center" style="margin-top: var(--space-5);">
-          <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="btn"><i class="fas fa-ticket"></i> Get Tickets</a>
-        </p>
-      </div>
-    </section>
-
-    ================================================================= */}}
-
-    <div class="text-center" style="max-width: 720px; margin: var(--space-7) auto 0; padding: var(--space-6) var(--space-5); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
-      <i class="fas fa-calendar-plus fa-2x text-primary" style="margin-bottom: var(--space-3);"></i>
-      <h3 class="section-title section-title--center" style="font-size: var(--fs-xl);">Full timetable coming soon</h3>
-      <p class="lead" style="margin: 0 auto;">
-        The Call for Papers is still open. Once the review committee has finalised the
-        program, the full schedule - talks, workshops, and breaks - will be published here.
+    <div class="workshop-info" style="max-width: 860px; margin: 0 auto var(--space-5);">
+      <p style="margin-bottom: var(--space-3); font-size: var(--fs-md); color: var(--color-text);">
+        Expect <strong>8 workshops</strong> this year, targeting a mix of beginners and advanced topics.
       </p>
-      <div class="btn-row" style="justify-content: center;">
-        <a href="https://cfp.bsidesfrankfurt.org" class="btn">Submit a Talk</a>
-        <a href="{{ "/" | relURL }}" class="btn btn--outline">Back to home</a>
+      <ul class="workshop-info__list">
+        <li><strong>Registration:</strong> Separate tickets required (&euro;48) &mdash; a workshop ticket grants access to that single workshop only, not to other workshops or the conference.</li>
+        <li><strong>Location:</strong> Close to the conference - Campus Westend, Goethe University Frankfurt.</li>
+        <li><strong>Catering:</strong> Drinks and snacks provided in every workshop session.</li>
+        <li><strong>Sessions:</strong> Morning session 09:00&ndash;13:00, lunch break 13:00&ndash;14:00, afternoon session 14:00&ndash;18:00.</li>
+        <li><strong>Capacity:</strong> Limited - first come, first served.</li>
+      </ul>
+    </div>
+
+    <p class="text-center" style="margin-bottom: var(--space-3); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/schedule/" target="_blank" rel="noopener noreferrer">View full schedule on pretalx &rarr;</a>
+    </p>
+
+    <div class="schedule-widget">
+      <pretalx-schedule event-url="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/" locale="en" format="list" style="--pretalx-clr-primary: #9acd32"></pretalx-schedule>
+      <noscript>
+        <div class="pretalx-widget">
+          <div class="pretalx-widget-info-message">
+            JavaScript is disabled in your browser. To access the workshops schedule without JavaScript,
+            please <a target="_blank" href="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/schedule/">click here</a>.
+          </div>
+        </div>
+      </noscript>
+    </div>
+
+    <p class="text-center" style="margin-top: var(--space-3); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/schedule/" target="_blank" rel="noopener noreferrer">View full schedule on pretalx &rarr;</a><br>
+      For trainer bios and full workshop descriptions, visit the
+      <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/" target="_blank" rel="noopener noreferrer">workshops CFP page</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ TICKETS & CATERING ============ -->
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="disclaimer-callout">
+      <h3 class="disclaimer-callout__title"><i class="fas fa-circle-info"></i> Tickets &amp; catering</h3>
+      <div class="disclaimer-callout__grid">
+        <div class="disclaimer-item">
+          <strong>Ticket scope</strong>
+          A conference ticket grants access to the conference day only &mdash; not to workshops. A workshop ticket grants access to that single workshop only &mdash; not to other workshops or the conference.
+        </div>
+        <div class="disclaimer-item">
+          <strong>Conference catering</strong>
+          Snacks, drinks, and lunch served throughout the conference day.
+        </div>
+        <div class="disclaimer-item">
+          <strong>Workshop catering</strong>
+          Drinks and snacks provided in every workshop session.
+        </div>
+        <div class="disclaimer-item">
+          <strong>Programme details</strong>
+          For speaker/trainer bios and full talk and workshop descriptions, see the respective CFP pages.
+        </div>
+      </div>
+      <div class="disclaimer-callout__links">
+        <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/" class="btn btn--sm btn--outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-microphone"></i> Talks CFP
+        </a>
+        <a href="https://cfp.bsidesfrankfurt.org/call-for-paper-workshops-2026/" class="btn btn--sm btn--outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-wrench"></i> Workshops CFP
+        </a>
+        <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="btn btn--sm">
+          <i class="fas fa-ticket"></i> Get conference ticket
+        </a>
+        <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026-workshops/" class="btn btn--sm btn--outline">
+          <i class="fas fa-wrench"></i> Get workshop ticket
+        </a>
       </div>
     </div>
   </div>

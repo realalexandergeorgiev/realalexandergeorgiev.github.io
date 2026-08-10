@@ -18,10 +18,9 @@
     </p>
     <div class="btn-row" style="justify-content: center;">
       <a href="https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/" class="btn btn--lg">
-        <i class="fas fa-ticket"></i> Get Tickets
+        <i class="fas fa-ticket"></i> Get conference ticket
       </a>
-      <a href="https://cfp.bsidesfrankfurt.org" class="btn btn--lg btn--outline">Submit a Talk</a>
-      <a href="{{ "/workshops/" | relURL }}" class="btn btn--lg btn--ghost">Workshops</a>
+      <a href="{{ "/schedule/#workshops" | relURL }}" class="btn btn--lg btn--outline">Workshops</a>
     </div>
   </div>
 </section>
@@ -32,7 +31,7 @@
     <div class="stats">
       <div class="stat"><span class="stat__value" data-count-to="300">0</span><span class="stat__label">Attendees</span></div>
       <div class="stat"><span class="stat__value" data-count-to="8">0</span><span class="stat__label">Talks</span></div>
-      <div class="stat"><span class="stat__value" data-count-to="12">0</span><span class="stat__label">Workshops</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="8">0</span><span class="stat__label">Workshops</span></div>
       <div class="stat"><span class="stat__value" data-count-to="4">0</span><span class="stat__label">Editions</span></div>
     </div>
   </div>
@@ -98,19 +97,19 @@
   </div>
 </section>
 
-<!-- Announcements (reads from content/announcements/) -->
+<!-- Latest updates (reads from content/updates/) -->
 <section>
   <div class="container">
     <div class="mb-5" style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: var(--space-3);">
       <div>
         <span class="eyebrow">Latest</span>
-        <h2 class="section-title" style="margin: 0;">Announcements</h2>
+        <h2 class="section-title" style="margin: 0;">Updates</h2>
       </div>
-      <a href="{{ "/blog/" | relURL }}" class="btn btn--sm btn--outline">All posts →</a>
+      <a href="{{ "/updates/" | relURL }}" class="btn btn--sm btn--outline">All updates →</a>
     </div>
 
     <div class="announcements">
-      {{ range first 3 (where .Site.RegularPages "Section" "announcements").ByDate.Reverse }}
+      {{ range first 3 (where .Site.RegularPages "Section" "updates").ByDate.Reverse }}
         <article class="announcement">
           <div class="announcement__date">
             {{ with .Params.tag }}{{ . }} · {{ end }}{{ .Date.Format "2 Jan 2006" }}

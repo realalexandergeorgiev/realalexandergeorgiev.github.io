@@ -66,8 +66,8 @@
 {{- $jsons = $jsons | append ($ev | jsonify (dict "indent" "  ")) -}}
 {{- end -}}
 
-{{- /* BlogPosting (blog single pages) */ -}}
-{{- if and (eq .Section "blog") (not (or .IsSection .IsHome)) -}}
+{{- /* BlogPosting (updates single pages) */ -}}
+{{- if and (eq .Section "updates") (not (or .IsSection .IsHome)) -}}
 {{- $post := dict
     "@context" "https://schema.org"
     "@type" "BlogPosting"

@@ -5,6 +5,7 @@ author: "BSidesFrankfurt Team"
 summary: "Frankfurt's biggest automotive fair and wine festival, the Rheingauer Weinmarkt, runs at the same time as BSidesFrankfurt 2026. Hotels fill up months in advance. Here's how to plan accordingly."
 tags: ["travel", "logistics", "attendees"]
 draft: false
+aliases: ["/blog/hotels-rheingauer-weinmarkt-2026/"]
 ---
 
 If you're planning to attend BSidesFrankfurt 2026 (10-11 September) and you haven't booked a hotel yet, do it asap. Frankfurt hotels are notoriously tight during conference week, and the reason has very little to do with us: 

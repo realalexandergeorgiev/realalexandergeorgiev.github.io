@@ -23,3 +23,7 @@
 # Cache images for a month
 /images/*
   Cache-Control: public, max-age=2592000
+
+# /schedule/ embeds the pretalx schedule widget - allow its origin in the CSP
+/schedule/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cfp.bsidesfrankfurt.org; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cfp.bsidesfrankfurt.org; font-src 'self' https://cdnjs.cloudflare.com https://cfp.bsidesfrankfurt.org; img-src 'self' data: https://cfp.bsidesfrankfurt.org; connect-src 'self' https://cfp.bsidesfrankfurt.org; frame-ancestors 'none'; frame-src 'none'; object-src 'none'; worker-src 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests

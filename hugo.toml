@@ -22,11 +22,11 @@ disableKinds = ["taxonomy", "term"]
     weight = 20
   [[menu.main]]
     name = "Workshops"
-    url = "/workshops/"
+    url = "/schedule/#workshops"
     weight = 50
   [[menu.main]]
-    name = "Blog"
-    url = "/blog/"
+    name = "Updates"
+    url = "/updates/"
     weight = 60
   [[menu.main]]
     name = "Women"
@@ -54,9 +54,5 @@ disableKinds = ["taxonomy", "term"]
 
 [[menu.cta]]
   name = "Tickets"
-  url = "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/"
+  url = "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/"
   weight = 10
-[[menu.cta]]
-  name = "CFP"
-  url = "https://cfp.bsidesfrankfurt.org"
-  weight = 20

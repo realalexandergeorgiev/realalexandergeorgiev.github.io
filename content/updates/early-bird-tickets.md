@@ -4,6 +4,7 @@ date: 2026-03-20
 tag: "Tickets"
 summary: "Limited early-bird tickets at reduced price are on sale. Student rate also available with valid university enrollment."
 draft: false
+aliases: ["/announcements/early-bird-tickets/"]
 ---
 
 Early-bird tickets for **BSidesFrankfurt 2026** are now on sale at a reduced price. Quantities are limited - once the early-bird allocation is gone, standard pricing applies.

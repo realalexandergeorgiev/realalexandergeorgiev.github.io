@@ -11,7 +11,7 @@
 {{- $description := .Description | default .Params.summary | default $siteDesc -}}
 {{- $url := .Permalink -}}
 {{- $ogImage := absURL "apple-touch-icon-180.png" -}}
-{{- $ogType := cond (eq .Section "blog") "article" "website" -}}
+{{- $ogType := cond (eq .Section "updates") "article" "website" -}}
 
 <!-- Canonical -->
 <link rel="canonical" href="{{ $url }}">
@@ -29,7 +29,7 @@
 <meta property="og:url" content="{{ $url }}">
 <meta property="og:image" content="{{ $ogImage }}">
 <meta property="og:locale" content="en_US">
-{{- if eq .Section "blog" }}
+{{- if eq .Section "updates" }}
 {{- with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
 {{- with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
 {{- with .Params.author }}<meta property="article:author" content="{{ . }}">{{ end }}

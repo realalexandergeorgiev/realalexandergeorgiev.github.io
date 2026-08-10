@@ -8,15 +8,16 @@
 {{- range $jsonld -}}{{- $scriptHashes = printf "%s '%s'" $scriptHashes .hash -}}{{- end -}}
 
 <!-- Security headers (meta-equivalents; the same policy is also served as a real HTTP header by Cloudflare Pages via static/_headers).
-     This meta CSP is per-page and strict: script-src only allows the specific JSON-LD hashes below.
+     This meta CSP is per-page and strict: script-src only allows the specific JSON-LD hashes below,
+     plus https://cfp.bsidesfrankfurt.org on the /schedule/ page (pretalx schedule widget).
      style-src still allows 'unsafe-inline' due to extensive inline style="..." attributes in layouts (refactor planned). -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  script-src 'self'{{ $scriptHashes }};
-  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-  font-src 'self' https://cdnjs.cloudflare.com;
-  img-src 'self' data:;
-  connect-src 'self';
+  script-src 'self'{{ $scriptHashes }}{{ if eq .Section "schedule" }} https://cfp.bsidesfrankfurt.org{{ end }};
+  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com{{ if eq .Section "schedule" }} https://cfp.bsidesfrankfurt.org{{ end }};
+  font-src 'self' https://cdnjs.cloudflare.com{{ if eq .Section "schedule" }} https://cfp.bsidesfrankfurt.org{{ end }};
+  img-src 'self' data:{{ if eq .Section "schedule" }} https://cfp.bsidesfrankfurt.org{{ end }};
+  connect-src 'self'{{ if eq .Section "schedule" }} https://cfp.bsidesfrankfurt.org{{ end }};
   frame-ancestors 'none';
   frame-src 'none';
   object-src 'none';
@@ -34,6 +35,11 @@
 
 <!-- JSON-LD structured data (hashes for these blocks are in the script-src above) -->
 {{ range $jsonld }}<script type="application/ld+json">{{ .json | safeJS }}</script>
+{{ end }}
+
+{{/* Pretalx schedule widget - only on /schedule/ (single script serves both events) */}}
+{{ if eq .Section "schedule" }}
+<script src="https://cfp.bsidesfrankfurt.org/call-for-paper-presentations-2026/widgets/schedule.js" defer></script>
 {{ end }}
 
 <!-- Favicons (multi-format for broad browser support) -->

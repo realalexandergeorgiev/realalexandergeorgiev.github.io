@@ -2,13 +2,19 @@
 <article class="article">
   <header class="article__header">
     <div class="container" style="max-width: 760px;">
-      <a href="{{ "/blog/" | relURL }}" class="article__back">
-        <i class="fas fa-arrow-left"></i> All posts
+      <a href="{{ "/updates/" | relURL }}" class="article__back">
+        <i class="fas fa-arrow-left"></i> All updates
       </a>
       {{ with .Params.tags }}
         <div class="article__tags">
           {{ range . }}<span class="article__tag">{{ . }}</span>{{ end }}
         </div>
+      {{ else }}
+        {{ with .Params.tag }}
+          <div class="article__tags">
+            <span class="article__tag">{{ . }}</span>
+          </div>
+        {{ end }}
       {{ end }}
       <h1 class="article__title">{{ .Title }}</h1>
       <div class="article__meta">

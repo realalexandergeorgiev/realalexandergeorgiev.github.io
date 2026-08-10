@@ -5,6 +5,7 @@ author: "BSidesFrankfurt Team"
 summary: "Every attendee gets a blank ID-1 (CR80) card to design however they like and keep. Here's the spec, a template, and how to get yours printed and waiting for you on conference day."
 tags: ["community", "attendees", "design"]
 draft: false
+aliases: ["/blog/design-your-own-card-2026/"]
 ---
 
 ## TL;DR
@@ -31,6 +32,10 @@ To get you started, here's a ready-to-edit **SVG template**. Open it in whatever
 ![Card template preview — ID-1 / CR80, 85.6 × 54.0 mm](/files/2026-card-template.svg)
 
 ![Example designs from the community](/images/blog/25-press-media-card.svg)
+
+![Example designs from the community](/images/blog/2026-card-template-02.svg)
+
+![Example designs from the community](/images/blog/2026-card-template-03.svg)
 
 ## Get yours printed — on us
 

@@ -70,8 +70,7 @@ hugo-site/
 ├── hugo.toml                  # Site config (title, menus, baseURL)
 ├── content/                   # All editable content (Markdown)
 │   ├── _index.md              # Landing page
-│   ├── blog/                  # Blog posts (one .md file per post)
-│   └── announcements/         # Announcements (shown on landing page)
+│   └── updates/               # Updates: posts + announcements (one .md file per item)
 ├── data/                      # Structured data (YAML)
 │   ├── event.yaml             # Dates, location, social links
 │   ├── sponsors.yaml          # Sponsor tiers + logos + URLs
@@ -80,8 +79,7 @@ hugo-site/
 ├── layouts/                   # HTML templates
 │   ├── _default/baseof.html   # Root template - everything inherits this
 │   ├── index.html             # Homepage layout
-│   ├── blog/                  # Blog list + single post templates
-│   ├── announcements/         # Announcement list + single
+│   ├── updates/               # Updates list + single templates
 │   └── partials/              # Reusable components (nav, footer, sponsors…)
 ├── assets/css/main.css        # Centralized design system
 ├── static/                    # Copied as-is to site root
@@ -94,26 +92,28 @@ hugo-site/
 
 ---
 
-## 4. Writing blog posts
+## 4. Writing updates (posts & announcements)
 
-### Create a new post
+Updates are the single news stream of the site - both longer community posts and short official announcements. They appear on the landing page (latest 3) and on `/updates/`.
+
+### Create a new update
 
 ```sh
-hugo new content blog/my-post-title.md
+hugo new content updates/my-post-title.md
 ```
 
-Or create the file manually at `content/blog/my-post-title.md`. The slug (URL) is the filename without `.md`.
+Or create the file manually at `content/updates/my-post-title.md`. The slug (URL) is the filename without `.md`.
 
 ### Frontmatter template
 
-Every post starts with a YAML block between `---` fences:
+Every update starts with a YAML block between `---` fences:
 
 ```yaml
 ---
 title: "Your post title"
 date: 2026-05-01
-author: "Your name"
-summary: "One-sentence description. Appears on the blog index and in the homepage feed."
+author: "Your name"            # optional, shown next to the date
+summary: "One-sentence description. Appears on the updates index and in the homepage feed."
 tags: ["cfp", "community", "workshops"]
 draft: false
 ---
@@ -134,27 +134,7 @@ echo "hello"
 ```
 ```
 
-### Rules
-
-- `draft: true` hides the post unless you run `hugo server -D`.
-- `date` controls ordering - newest first on the blog index.
-- `summary` is used in previews; if omitted, Hugo auto-extracts the first paragraph.
-- `tags` render as pill badges on the single-post page.
-- Images: drop them in `static/images/blog/` and reference as `/images/blog/my-image.png`.
-
----
-
-## 5. Writing announcements
-
-Announcements are content pages that appear on the landing page and have their own dedicated page.
-
-### Create a new announcement
-
-```
-content/announcements/ticket-sales-extended.md
-```
-
-### Frontmatter
+For short announcement-style items you can use a single tag instead:
 
 ```yaml
 ---
@@ -164,17 +144,22 @@ tag: "Tickets"
 summary: "We've extended early-bird pricing by two weeks due to popular demand."
 draft: false
 ---
-
-Body text here in Markdown.
 ```
 
 The `tag` is the short label shown before the date on the homepage (e.g. "Tickets · 15 Jun 2026").
 
-The **three most recent** announcements (by date) appear on the landing page automatically. Older ones stay accessible on `/announcements/`.
+### Rules
+
+- `draft: true` hides the post unless you run `hugo server -D`.
+- `date` controls ordering - newest first on the updates index and homepage strip.
+- `summary` is used in previews; if omitted, Hugo auto-extracts the first paragraph.
+- `tags` (list) or a single `tag` render as pill badges on the single-post page.
+- Images: drop them in `static/images/blog/` and reference as `/images/blog/my-image.png`.
+- Old `/blog/...` and `/announcements/...` URLs redirect to `/updates/...` via `aliases:` in the frontmatter of the moved posts.
 
 ---
 
-## 6. Editing speakers
+## 5. Editing speakers
 
 Speakers live in **one YAML file**: `data/speakers.yaml`.
 
@@ -198,7 +183,7 @@ Speakers live in **one YAML file**: `data/speakers.yaml`.
 
 ---
 
-## 7. Editing sponsors
+## 6. Editing sponsors
 
 Sponsors live in `data/sponsors.yaml` with three tiers: **gold**, **silver**, **partners**.
 
@@ -230,7 +215,7 @@ partners:
 
 ---
 
-## 8. Editing event info (dates, location, social)
+## 7. Editing event info (dates, location, social)
 
 `data/event.yaml` controls the event-wide details:
 
@@ -257,7 +242,7 @@ Editing this file updates every page.
 
 ---
 
-## 9. Editing the navigation menu
+## 8. Editing the navigation menu
 
 `hugo.toml` under the `[menu]` block:
 
@@ -286,7 +271,7 @@ The `menu.cta` block is a separate list used for the orange "Tickets" / "CFP" bu
 
 ---
 
-## 10. Editing styles
+## 9. Editing styles
 
 All design tokens (colors, fonts, spacing, shadows) are in `assets/css/main.css` at the top:
 
@@ -304,7 +289,7 @@ Change a token, every component updates. Don't edit individual component colors 
 
 ---
 
-## 11. Building for production
+## 10. Building for production
 
 ```sh
 hugo
@@ -321,7 +306,7 @@ hugo && cd public && python3 -m http.server 8000
 
 ---
 
-## 12. Deployment (GitHub Pages)
+## 11. Deployment (GitHub Pages)
 
 The site auto-deploys on push to `main` via GitHub Actions. The workflow is at `.github/workflows/hugo.yml` (add if missing - see the Hugo docs for [GitHub Pages setup](https://gohugo.io/hosting-and-deployment/hosting-on-github/)).
 
@@ -339,12 +324,11 @@ The site auto-deploys on push to `main` via GitHub Actions. The workflow is at `
 
 ---
 
-## 13. Common tasks - quick reference
+## 12. Common tasks - quick reference
 
 | Task | File(s) to edit |
 |------|-----------------|
-| Add a blog post | `content/blog/new-post.md` |
-| Add an announcement | `content/announcements/new-announcement.md` |
+| Add an update (post or announcement) | `content/updates/new-post.md` |
 | Add/edit a speaker | `data/speakers.yaml` |
 | Add/edit a sponsor | `data/sponsors.yaml` + logo in `static/images/sponsors/` |
 | Update event dates/venue | `data/event.yaml` |
@@ -355,7 +339,7 @@ The site auto-deploys on push to `main` via GitHub Actions. The workflow is at `
 
 ---
 
-## 14. Troubleshooting
+## 13. Troubleshooting
 
 **Hugo says `No matching layout found`.**
 Check that the frontmatter `layout:` field (if set) matches a file in `layouts/`. Hugo's lookup rules: [https://gohugo.io/templates/lookup-order/](https://gohugo.io/templates/lookup-order/).
@@ -374,7 +358,7 @@ Reinstall with the extended variant (`brew install hugo` installs extended by de
 
 ---
 
-## 15. Where to get help
+## 14. Where to get help
 
 - Hugo docs: [https://gohugo.io/documentation/](https://gohugo.io/documentation/)
 - Markdown reference: [https://commonmark.org/help/](https://commonmark.org/help/)

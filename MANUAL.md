@@ -17,8 +17,7 @@ A practical guide for organizers, volunteers, and contributors to maintain the B
    - [5.3 Add or remove team members](#53-add-or-remove-team-members)
    - [5.4 Edit the FAQ](#54-edit-the-faq)
    - [5.5 Edit the "What is BSides?" cards](#55-edit-the-what-is-bsides-cards)
-   - [5.6 Add a blog post](#56-add-a-blog-post)
-   - [5.7 Add an announcement](#57-add-an-announcement)
+   - [5.6 Add an update (post or announcement)](#56-add-an-update-post-or-announcement)
    - [5.8 Update the schedule](#58-update-the-schedule)
    - [5.9 Update the workshops page](#59-update-the-workshops-page)
    - [5.10 Add or change navigation menu items](#510-add-or-change-navigation-menu-items)
@@ -311,18 +310,20 @@ Find Font Awesome icons at [fontawesome.com/search](https://fontawesome.com/sear
 
 ---
 
-### 5.6 Add a blog post
+### 5.6 Add an update (post or announcement)
 
-1. Create a new file: `content/blog/your-slug.md` - the slug becomes the URL.
+Updates are news items - both longer community posts and short official announcements - that surface on the homepage (latest 3) and on the dedicated `/updates/` page.
+
+1. Create a new file: `content/updates/your-slug.md` - the slug becomes the URL.
 2. Paste this template at the top, then write the article body in Markdown:
 
 ```markdown
 ---
 title: "Your post title"
 date: 2026-05-01
-author: "Your name"
-summary: "One-sentence description shown on the blog index and in homepage previews."
-tags: ["community", "cfp"]
+author: "Your name"            # optional, shown next to the date
+summary: "One-sentence description shown on the updates index and in homepage previews."
+tags: ["community", "cfp"]     # or a single short tag: "Tickets"
 draft: false
 ---
 
@@ -339,35 +340,14 @@ More text.
 #### Notes
 
 - **`draft: true`** hides the post unless you run `hugo server -D`.
-- Posts are sorted newest-first on `/blog/`.
+- Posts are sorted newest-first on `/updates/`.
+- Use `tags: [...]` (list) for longer posts, or a single `tag: "Tickets"` for short announcement-style items - both render as chips.
 - Images for a post: drop them in `static/images/blog/` and use `/images/blog/your-image.png` in the post.
+- Old `/blog/...` and `/announcements/...` URLs redirect to `/updates/...` automatically via `aliases:` in the moved posts' frontmatter.
 
-#### Remove a blog post
+#### Remove an update
 
 Delete the `.md` file. Done.
-
----
-
-### 5.7 Add an announcement
-
-Announcements are small updates that surface on the homepage (latest 3) and on the dedicated `/announcements/` page.
-
-1. Create `content/announcements/short-slug.md`.
-2. Use this template:
-
-```markdown
----
-title: "Ticket sales now open"
-date: 2026-04-22
-tag: "Tickets"                 # short label shown before the date on the homepage
-summary: "One-sentence preview shown in the announcement card."
-draft: false
----
-
-Optional longer body in Markdown for the dedicated page.
-```
-
-The three most recent announcements appear on the homepage automatically.
 
 ---
 
@@ -397,13 +377,13 @@ Row classes: `.tt-row` for a talk, `.tt-row--break` for breaks/social (rendered 
 
 ---
 
-### 5.9 Update the workshops page
+### 5.9 Update the workshops info
 
-**File:** `layouts/workshops/list.html`
+**File:** `layouts/schedule/list.html` (Day 2 block)
 
-The current page mirrors the original site: a generic info box ("Expect 6–8 workshops...") and a "lineup coming soon" placeholder.
+There is no separate workshops page anymore - `/workshops/` redirects to `/schedule/#workshops`, the Day 2 block of the schedule page. The workshop info (expected count, ticket price, location, session times, capacity) lives in the `.workshop-info` block directly above the workshops pretalx widget in `layouts/schedule/list.html` - edit it there.
 
-When the 2026 workshop lineup is finalized, edit this layout to add cards or a list - see the partial pattern used in `layouts/blog/list.html` for an example.
+When the 2026 workshop lineup is finalized, the pretalx widget renders it automatically; no layout change needed.
 
 ---
 
@@ -411,7 +391,7 @@ When the 2026 workshop lineup is finalized, edit this layout to add cards or a l
 
 **File:** `hugo.toml`
 
-The top nav is intentionally minimal: **Schedule, Workshops, Blog, Women, Archive (dropdown)** plus two CTA buttons on the right (**Tickets, CFP**). Secondary pages (Team, Gallery, FAQ, Code of Conduct) live in the **footer** instead.
+The top nav is intentionally minimal: **Schedule, Workshops, Updates, Women, Archive (dropdown)** plus two CTA buttons on the right (**Tickets, CFP**). "Workshops" is a deep link to `/schedule/#workshops` (the Day 2 block on the schedule page). Secondary pages (Team, Gallery, FAQ, Code of Conduct) live in the **footer** instead.
 
 The `[menu.main]` section controls the top-bar menu:
 
@@ -442,9 +422,11 @@ The right-hand CTA buttons (Tickets / CFP) are in a separate block:
 ```toml
 [[menu.cta]]
   name = "Tickets"
-  url = "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/"
+  url = "https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/"   # pretix overview listing both shops (conference + workshops)
   weight = 10
 ```
+
+The entry named "Tickets" renders as a solid button, any other entries as outline buttons. Direct shop links: conference `https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026/`, workshops `https://tickets.bsidesfrankfurt.org/bsidesfrankfurt/2026-workshops/`.
 
 The **footer** "Navigate" column is a hardcoded list in `layouts/partials/footer.html` - edit that file directly to add/remove footer links.
 
@@ -672,7 +654,7 @@ Search engine optimisation is handled by [`layouts/partials/seo.html`](layouts/p
 - **Canonical URL** to prevent duplicate-content issues
 - **JSON-LD `Organization`** structured data on every page
 - **JSON-LD `Event`** structured data on the homepage (builds Google's rich event card with dates, venue, ticket link)
-- **JSON-LD `BlogPosting`** structured data on each blog post (better Google News / Discover surface)
+- **JSON-LD `BlogPosting`** structured data on each update page (better Google News / Discover surface)
 - **theme-color**, **meta description**, **keywords** for general indexing
 
 **What you should do when adding content:**
@@ -700,8 +682,7 @@ Search engine optimisation is handled by [`layouts/partials/seo.html`](layouts/p
 | Edit homepage cards | `data/about.yaml` | edit the two entries |
 | Edit BSides Women partners | `data/women.yaml` | new entry under `partners:` |
 | Change BSides Women contact | `data/women.yaml` | edit the `contact:` block |
-| New blog post | `content/blog/<slug>.md` | use the frontmatter template above |
-| New announcement | `content/announcements/<slug>.md` | use the frontmatter template above |
+| New update (post or announcement) | `content/updates/<slug>.md` | use the frontmatter template above |
 | Edit a section page (e.g. Schedule body) | `content/<section>/_index.md` | Markdown body |
 | Change menu | `hugo.toml` | edit `[[menu.main]]` blocks |
 | Change palette / fonts | `assets/css/main.css` (top) | edit the `:root` variables |
@@ -720,7 +701,7 @@ A few small conventions to keep the site consistent:
 - **No external image hot-linking.** Always download images (sponsor logos, team photos, etc.) and save them in `static/images/...`. External URLs are blocked by the site's Content Security Policy and may also expire (LinkedIn URLs especially).
 - **Square photos for team and speaker cards.** They're rendered in circles at ~120px - ideally feed 800x800 source images.
 - **SVG > PNG > JPG** for logos. SVG scales perfectly and is tiny.
-- **One sentence per `summary:`.** Blog post summaries surface on the index page, homepage announcement strip, and as social-preview descriptions - keep them tight.
+- **One sentence per `summary:`.** Update summaries surface on the `/updates/` index page, homepage updates strip, and as social-preview descriptions - keep them tight.
 - **Plain English in titles.** They show up in browser tabs, search results, and `<h1>`s. Avoid clever wordplay that won't translate well in Google snippets.
 
 ---
