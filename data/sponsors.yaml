@@ -11,56 +11,60 @@ gold:
   - name: Blaze Information Security
     logo: /images/sponsors/Blaze_Information_Security_Logo_Horizontal_Alternative_White_Vector.svg
     url: "https://www.blazeinfosec.com/"
-  - name: Siemens Energy
-    logo: /images/sponsors/SE_Logo_Color_CMYK.png
-    url: "https://www.siemens-energy.com/de/de/home.html"
   - name: IGEL Technology GmbH
     logo: /images/sponsors/igel-logo-new-dark.svg
     url: "https://www.igel.com/"
     background: light
+  - name: Siemens Energy
+    logo: /images/sponsors/SE_Logo_Color_CMYK.png
+    url: "https://www.siemens-energy.com/de/de/home.html"
 silver:
+  - name: OffSec
+    logo: /images/sponsors/OffSec_Full_Color_White_Text_Horizontal.png
+    url: "https://www.offsec.com/"
   - name: SECUINFRA GmbH
     logo: /images/sponsors/secuinfra_01_SI_Primaerlogo_Standard_RGB.png
     url: "https://www.secuinfra.com/"
     background: light
-  - name: OffSec
-    logo: /images/sponsors/OffSec_Full_Color_White_Text_Horizontal.png
-    url: "https://www.offsec.com/"
   - name: Red Cyber Security GmbH
     logo: /images/sponsors/Red-CS_Logov2.jpg
     url: "https://red-cyber-security.com"
     background: light
+  - name: QuoIntelligence SRL
+    logo: /images/sponsors/QUO_Logo_Negative@2x.png
+    url: "https://www.quointelligence.eu/"
+    background: dark
 bronze:
   - name: USD AG
     logo: /images/sponsors/USD_more_security.usd_RGB_Weiss.svg
     url: "https://www.usd.de/"
     background: dark
-  - name: SCHUTZWERK GmbH
-    logo: /images/sponsors/schutzwerk_logo.svg
-    url: "https://www.schutzwerk.com/"
-    background: dark
   - name: Secure Code Warrior
     logo: /images/sponsors/securecodewarrior.svg
     url: "https://www.securecodewarrior.com/"
     background: light
+  - name: SCHUTZWERK GmbH
+    logo: /images/sponsors/schutzwerk_logo.svg
+    url: "https://www.schutzwerk.com/"
+    background: dark
 partners:
   - name: BSidesMunich
     logo: /images/sponsors/bsidesmunic_logo_2026.png
     url: "https://2026.bsidesmunich.org/"
     background: light
-  - name: BSidesBerlin
-    logo: /images/sponsors/bsidesberlin.png
-    url: "https://bsidesberlin.org/"
-  - name: Elbsides
-    logo: /images/sponsors/Elbsides_Logo_2026.svg
-    url: "https://elbsides.de/"
   - name: BSidesDresden
     logo: /images/sponsors/bsidesdresden.png
     url: "https://bsidesdresden.com/"
-  - name: BSidesPorto
-    logo: /images/sponsors/bsides_porto.svg
-    url: "https://bsidesporto.org/"
+  - name: Elbsides
+    logo: /images/sponsors/Elbsides_Logo_2026.svg
+    url: "https://elbsides.de/"
   - name: BSidesTransylvania
     logo: /images/sponsors/bsidestransylvania.png
     url: "https://bsidestransylvania.com/"
     background: light
+  - name: BSidesBerlin
+    logo: /images/sponsors/bsidesberlin.png
+    url: "https://bsidesberlin.org/"
+  - name: BSidesPorto
+    logo: /images/sponsors/bsides_porto.svg
+    url: "https://bsidesporto.org/"
