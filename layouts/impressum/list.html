@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{ $imprint := site.Data.impressum }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "Legal"
+  "title" "Impressum"
+  "lead" "Legal notice (pursuant to § 5 DDG - German Digital Services Act).")
+}}
+
+<section>
+  <div class="container" style="max-width: 760px;">
+    <div class="article__body">
+      <h2>Information pursuant to § 5 DDG</h2>
+      <p>
+        {{ $imprint.name }}<br>
+        {{ $imprint.address }}<br>
+        {{ $imprint.city }}<br>
+        {{ $imprint.country }}
+      </p>
+
+      <h2>Contact</h2>
+      <p>E-Mail: <a href="mailto:{{ $imprint.email }}">{{ $imprint.email }}</a></p>
+
+      <h2>VAT ID</h2>
+      <p>VAT identification number pursuant to § 27a UStG: {{ $imprint.ust_id }}</p>
+
+      <h2>Responsible for content pursuant to § 18 para. 2 MStV</h2>
+      <p>
+        {{ $imprint.name }}<br>
+        {{ $imprint.address }}<br>
+        {{ $imprint.city }}<br>
+        {{ $imprint.country }}
+      </p>
+    </div>
+  </div>
+</section>
+{{ end }}

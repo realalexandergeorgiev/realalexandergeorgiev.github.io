@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ $imprint := site.Data.impressum }}
+{{ partial "page-header.html" (dict
+  "eyebrow" "Legal"
+  "title" "Privacy Policy"
+  "lead" "How BSidesFrankfurt handles your personal data (GDPR).")
+}}
+
+<section>
+  <div class="container" style="max-width: 760px;">
+    <div class="article__body">
+      <p><em>Last updated: {{ site.Data.privacy.updated }}</em></p>
+      {{ range site.Data.privacy.sections }}
+        <h2>{{ .heading }}</h2>
+        {{ if eq .use "controller" }}
+          <p>
+            {{ $imprint.name }}<br>
+            {{ $imprint.address }}<br>
+            {{ $imprint.city }}<br>
+            {{ $imprint.country }}
+          </p>
+        {{ else if eq .use "contact" }}
+          <p>For any questions regarding data protection or to exercise your
+          rights, please contact us at
+          <a href="mailto:{{ $imprint.email }}">{{ $imprint.email }}</a>.</p>
+        {{ else }}
+          {{ .body | markdownify }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

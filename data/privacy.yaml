@@ -1,0 +1,103 @@
+updated: "2026-08-12"
+sections:
+  - heading: "1. Data Controller"
+    use: controller
+
+  - heading: "2. Hosting"
+    body: |
+      This website is hosted on **GitHub Pages**, a hosting service provided
+      by GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107,
+      USA, and is delivered through the CDN and proxy infrastructure of
+      **Cloudflare, Inc.**, 101 Townsend St, San Francisco, CA 94107, USA.
+      When you visit the website, GitHub and Cloudflare process technical
+      data (in particular your IP address, date and time of the request,
+      requested resource, browser type, operating system, and referring URL)
+      to deliver the site and to protect it from attacks. Both providers are
+      GDPR-compliant and covered by the EU-US Data Privacy Framework; data is
+      processed under their respective privacy policies
+      ([GitHub](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement),
+      [Cloudflare](https://www.cloudflare.com/privacypolicy/)).
+
+  - heading: "3. Server Log Files"
+    body: |
+      Our hosting providers automatically collect and store information in
+      server log files that your browser transmits. These include:
+
+      - IP address
+      - Date and time of the request
+      - Requested resource (URL)
+      - HTTP status code
+      - Browser type and version
+      - Operating system
+      - Referring URL
+
+      This data is processed to ensure the stable and secure operation of the
+      website (Art. 6 para. 1 lit. f GDPR) and is deleted after a maximum of
+      a few days, unless it is required for the investigation of attacks or
+      other security incidents.
+
+  - heading: "4. External Services"
+    body: |
+      We use a small number of external services. Personal data is only
+      transferred to them as described below.
+
+      **Font Awesome (icons).** The icons on this website are loaded from
+      [cdnjs](https://cdnjs.com/) (Cloudflare, Inc.). Your browser requests
+      the icon stylesheet and font files, which causes the usual technical
+      data (IP address, browser type) to be transmitted to Cloudflare. No
+      further personal data is processed.
+
+      **pretalx (CFP & schedule).** The Call for Papers and the event
+      schedule are operated by us on our own servers at
+      `cfp.bsidesfrankfurt.org`. The schedule widget embedded on the
+      [Schedule page](/schedule/) loads content from this server, which
+      receives your IP address when you visit it. Submissions to our Call
+      for Papers are handled on this platform and therefore fall under this
+      privacy policy.
+
+      **pretix (tickets).** Ticket sales are operated by us on our own
+      servers at `tickets.bsidesfrankfurt.org`. Ticket and purchase data is
+      processed by us on this platform under this privacy policy. Please
+      note that payment processing may be subject to the privacy policy of
+      the respective payment provider.
+
+      **Social media links.** Our website contains links to our profiles on
+      X/Twitter, Instagram, Mastodon, and LinkedIn. The respective provider
+      only receives data (e.g. your IP address) when you click on a link and
+      are redirected to their platform. We have no control over the data
+      collected by these providers.
+
+  - heading: "5. Cookies"
+    body: |
+      This website does not use cookies for tracking or analytics purposes,
+      and no advertising cookies are set.
+
+      The CDN provider Cloudflare may set security cookies (e.g.
+      `cf_clearance`, `__cf_bm`) when its bot protection or challenge
+      mechanisms are triggered. These are technically necessary to protect
+      the website.
+
+      The self-hosted platforms pretalx and pretix set functional cookies
+      (session and CSRF cookies) when they are actively used, e.g. when you
+      log in, submit to the Call for Papers, or buy tickets. These are
+      technically required for the respective service and are not used for
+      tracking.
+
+  - heading: "6. Your Rights"
+    body: |
+      You have the following rights with regard to the processing of your
+      personal data (Art. 15-21 GDPR):
+
+      - Right of access
+      - Right to rectification
+      - Right to erasure ("right to be forgotten")
+      - Right to restriction of processing
+      - Right to data portability
+      - Right to object
+
+      You also have the right to lodge a complaint with a supervisory
+      authority (Art. 77 GDPR), in particular in the German state where you
+      reside or where an alleged infringement occurred.
+
+  - heading: "7. Contact"
+    use: contact
