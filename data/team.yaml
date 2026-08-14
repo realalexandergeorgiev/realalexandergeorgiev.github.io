@@ -18,6 +18,10 @@ team:
     role: "Organising Team"
     image: "/images/team/rita-nemetz.jpg"
     linkedin: "https://www.linkedin.com/in/rita-n-8b1b52183/"
+  - name: 'Patrick Eisenschmidt ("secdude")'
+    role: "Organising Team & Master of Pretix and Pretalx"
+    image: "/images/team/patrick-eisenschmidt.jpg"
+    linkedin: "https://www.linkedin.com/in/patrick-eisenschmidt/"
   - name: "Andreas Fleck"
     role: "Organising Team"
     image: "/images/team/andreas-fleck.jpg"
@@ -34,10 +38,6 @@ team:
     role: "Organising Team"
     image: "/images/team/marco-hertlein.jpg"
     linkedin: "https://www.linkedin.com/in/marcohertlein/"
-  - name: 'Patrick Eisenschmidt ("secdude")'
-    role: "Organising Team & Master of Pretix and Pretalx"
-    image: "/images/team/patrick-eisenschmidt.jpg"
-    linkedin: "https://www.linkedin.com/in/patrick-eisenschmidt/"
   - name: "Alexander Steinbrecher"
     role: "Organising Team"
     image: "/images/team/alexander-steinbrecher.jpg"
