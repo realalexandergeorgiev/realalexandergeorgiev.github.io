@@ -8,8 +8,10 @@ Output: static/mediakit/speaker-cards/<slug>.png (960px wide, 3x scale)
 """
 
 import argparse
+import functools
 import html
 import http.server
+import os
 import pathlib
 import re
 import shutil
@@ -26,11 +28,23 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 TMP_DIR = SCRIPT_DIR / ".tmp"
 OUT_DIR = REPO_ROOT / "static" / "mediakit" / "speaker-cards"
-TESTS_DIR = OUT_DIR / "tests"
 PORT = 8765
 ORIGIN = f"http://127.0.0.1:{PORT}"
 CARD_WIDTH = 320
 SCALE = 3
+
+VERSION = "1.0.0"
+BUILD_DATE = "2026-08-14"
+AUTHOR = "Alexander Georgiev + DeepSeek V4"
+TOOL_INFO = f"BSides Frankfurt Speaker-Card Renderer v{VERSION} (build {BUILD_DATE}) by {AUTHOR}"
+
+
+class InfoArgumentParser(argparse.ArgumentParser):
+    """ArgumentParser that shows the tool info banner above the help text."""
+
+    def format_help(self):
+        return f"{TOOL_INFO}\n\n{super().format_help()}"
+
 
 SAMPLES = {
     "gold-auf-dunkelblau": {"card_bg": "#011023", "accent": "#d4af37", "accent_secondary": "#b8941f"},
@@ -77,7 +91,7 @@ def slugify(name: str) -> str:
     return name.strip("-")
 
 
-def card_html(s: dict, logo: str) -> str:
+def card_html(s: dict, logo: str, bio_text: str | None = None) -> str:
     if s.get("photo"):
         photo = (
             '<div class="speaker-card__photo">'
@@ -98,9 +112,12 @@ def card_html(s: dict, logo: str) -> str:
     if s.get("talk"):
         parts.append(f'<p class="speaker-card__talk">"{html.escape(s["talk"])}"</p>')
     if s.get("bio"):
-        parts.append(
-            f'<p class="speaker-card__bio" title="{html.escape(s["bio"])}">{html.escape(s["bio"])}</p>'
-        )
+        if bio_text is not None:
+            parts.append(f'<p class="speaker-card__bio">{html.escape(bio_text)}</p>')
+        else:
+            parts.append(
+                f'<p class="speaker-card__bio" title="{html.escape(s["bio"])}">{html.escape(s["bio"])}</p>'
+            )
 
     logo_file = "bsides_logo_white.png" if logo == "light" else "bsides_logo_black.png"
     logo = (
@@ -115,7 +132,7 @@ def card_html(s: dict, logo: str) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
+    parser = InfoArgumentParser(
         description="Render BSides Frankfurt speaker cards from data/speakers.yaml as PNGs."
     )
     parser.add_argument(
@@ -159,6 +176,28 @@ def parse_args() -> argparse.Namespace:
         help="Render all predefined color samples (see SAMPLES) to "
         "static/mediakit/speaker-cards/tests/.",
     )
+    parser.add_argument(
+        "--all-samples",
+        action="store_true",
+        help="Render every speaker in all sample templates (named <slug>-<sample>.png).",
+    )
+    parser.add_argument(
+        "--output",
+        metavar="DIR",
+        help="Output directory (default: static/mediakit/speaker-cards/). "
+        "--samples writes to <DIR>/tests/.",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=TOOL_INFO,
+    )
+    parser.add_argument(
+        "--bio-text",
+        metavar="TEXT",
+        help='Hide the speaker bio and show this static text instead, e.g. '
+        '"September 10, 2026".',
+    )
     return parser.parse_args()
 
 
@@ -191,7 +230,8 @@ def background_css(value: str) -> str:
     return parse_color(value, "background")
 
 
-def page_html(s: dict, background: str, card_overrides: str, logo: str) -> str:
+def page_html(s: dict, background: str, card_overrides: str, logo: str,
+              bio_text: str | None = None) -> str:
     card_css = f".speaker-card {{\n{card_overrides}\n}}\n" if card_overrides else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -210,7 +250,7 @@ def page_html(s: dict, background: str, card_overrides: str, logo: str) -> str:
 </style>
 </head>
 <body>
-{card_html(s, logo)}
+{card_html(s, logo, bio_text)}
 </body>
 </html>"""
 
@@ -220,12 +260,11 @@ def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, pre
     card_overrides = card_style_overrides(opts)
     logo = opts["logo"]
     out_dir.mkdir(parents=True, exist_ok=True)
-    single = len(speakers) == 1
 
     for s in speakers:
         slug = slugify(s["name"])
         tmp_file = TMP_DIR / f"{slug}.html"
-        tmp_file.write_text(page_html(s, background, card_overrides, logo), encoding="utf-8")
+        tmp_file.write_text(page_html(s, background, card_overrides, logo, opts.get("bio_text")), encoding="utf-8")
 
         context = browser.new_context(
             device_scale_factor=SCALE,
@@ -238,21 +277,27 @@ def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, pre
         )
         page.evaluate("document.fonts.ready.then(() => true)")
         box = page.locator(".speaker-card").bounding_box()
-        name = f"{prefix}.png" if (prefix and single) else f"{prefix}-{slug}.png" if prefix else f"{slug}.png"
+        name = f"{slug}-{prefix}.png" if prefix else f"{slug}.png"
         out_file = out_dir / name
         page.locator(".speaker-card").screenshot(path=str(out_file), omit_background=True)
         context.close()
 
-        print(f"{s['name']:<28} {out_file.relative_to(REPO_ROOT)}  {int(box['width'])}x{int(box['height'])}px")
+        try:
+            shown = out_file.relative_to(REPO_ROOT)
+        except ValueError:
+            shown = out_file
+        print(f"{s['name']:<28} {shown}  {int(box['width'])}x{int(box['height'])}px")
 
 
 def main() -> None:
     args = parse_args()
+    print(TOOL_INFO)
+    out_dir = pathlib.Path(args.output) if args.output else OUT_DIR
     speakers = yaml.safe_load((REPO_ROOT / "data" / "speakers.yaml").read_text(encoding="utf-8"))
 
     socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("127.0.0.1", PORT), QuietHandler) as httpd:
-        httpd.directory = str(REPO_ROOT)
+    handler = functools.partial(QuietHandler, directory=str(REPO_ROOT))
+    with socketserver.TCPServer(("127.0.0.1", PORT), handler) as httpd:
         thread = threading.Thread(target=httpd.serve_forever, daemon=True)
         thread.start()
         time.sleep(0.3)
@@ -269,9 +314,13 @@ def main() -> None:
                     if args.samples:
                         print(f"Rendering {len(SAMPLES)} color samples ...")
                         for name, sample in SAMPLES.items():
-                            render_cards(browser, speakers, {**vars(args), **sample}, TESTS_DIR, prefix=name)
-                    else:
-                        render_cards(browser, speakers, vars(args), OUT_DIR)
+                            render_cards(browser, speakers, {**vars(args), **sample}, out_dir / "tests", prefix=name)
+                    if args.all_samples:
+                        print(f"Rendering all speakers in {len(SAMPLES)} sample templates ...")
+                        for name, sample in SAMPLES.items():
+                            render_cards(browser, speakers, {**vars(args), **sample}, out_dir, prefix=name)
+                    if not args.samples and not args.all_samples:
+                        render_cards(browser, speakers, vars(args), out_dir)
                 finally:
                     browser.close()
         finally:

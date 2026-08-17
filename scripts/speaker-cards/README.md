@@ -34,6 +34,10 @@ in `render.py` anpassen).
 | `--text #RRGGBB` | Textfarbe (default: Weiß) — bei hellen Cards setzen, z.B. `--text "#011023"` |
 | `--logo light\|dark` | Logo-Variante: `light` (weiß, default) oder `dark` (schwarz, für helle Cards) |
 | `--samples` | Generiert alle Farbmuster (13 Stück) nach `static/mediakit/speaker-cards/tests/` |
+| `--all-samples` | Generiert jeden Speaker in allen 13 Template-Varianten nach `static/mediakit/speaker-cards/` (Namensschema `<slug>-<sample>.png`) |
+| `--bio-text TEXT` | Blendet die Bio aus und zeigt stattdessen den Text, z.B. `--bio-text "September 10, 2026"` |
+| `--output DIR` | Ausgabeordner (default: `static/mediakit/speaker-cards/`); `--samples` schreibt nach `<DIR>/tests/` |
+| `--version` | Zeigt Version, Build-Datum und Autor |
 
 Beispiel für eine helle Card:
 
@@ -46,6 +50,28 @@ Alle Samples auf einmal (die in `SAMPLES` in `render.py` definierten Varianten):
 ```bash
 .venv/bin/python render.py --samples
 ```
+
+Jeden Speaker in allen Template-Varianten (z.B. für Auswahl/Archiv):
+
+```bash
+.venv/bin/python render.py --all-samples
+```
+
+Bio durch statischen Text ersetzen (z.B. Datum des Talks):
+
+```bash
+.venv/bin/python render.py --bio-text "September 10, 2026"
+```
+
+Ausgabe in einen anderen Ordner (z.B. für ein anderes Projekt):
+
+```bash
+.venv/bin/python render.py --output /pfad/zum/projekt/images
+```
+
+---
+
+**BSides Frankfurt Speaker-Card Renderer v1.0.0 (build 2026-08-14) by Alexander Georgiev + DeepSeek V4**
 
 Nach Änderungen an `data/speakers.yaml` einfach erneut ausführen — jeder Speaker
 bekommt dann wieder ein frisches Bild.
