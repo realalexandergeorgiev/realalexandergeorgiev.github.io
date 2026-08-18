@@ -16,43 +16,16 @@
   </div>
 </section>
 
-<!-- Keynote spotlight (data-driven from data/speakers.yaml, keynote: true) -->
-{{ $keynotes := where site.Data.speakers "keynote" true }}
-{{ range $k := $keynotes }}
-<section style="padding-top: var(--space-5);">
+<!-- All speakers (carousel) -->
+<section style="padding-top: var(--space-7);">
   <div class="container">
     <div class="text-center mb-5">
-      <span class="eyebrow">Keynote</span>
-      <h2 class="section-title section-title--center">Opening the conference</h2>
+      <span class="eyebrow">Lineup</span>
+      <h2 class="section-title section-title--center">Conference Speakers</h2>
     </div>
-    <div style="max-width: 420px; margin: 0 auto;">
-      <article class="speaker-card">
-        <div class="speaker-card__photo">
-          {{ with $k.photo }}
-            <img src="{{ $k.photo | relURL }}" alt="{{ $k.name }}" loading="lazy">
-          {{ else }}
-            <span class="speaker-card__initials" aria-hidden="true">
-              {{ $parts := split $k.name " " }}
-              {{ range $i, $p := $parts }}{{ if lt $i 2 }}{{ substr $p 0 1 }}{{ end }}{{ end }}
-            </span>
-          {{ end }}
-        </div>
-        <div class="speaker-card__body">
-          <h3 class="speaker-card__name">{{ $k.name }}</h3>
-          {{ with $k.role }}<p class="speaker-card__role">{{ . }}</p>{{ end }}
-          {{ with $k.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
-          {{ with $k.bio }}<p class="speaker-card__bio speaker-card__bio--full">{{ . }}</p>{{ end }}
-          {{ with $k.linkedin }}
-            <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $k.name }} on LinkedIn">
-              <i class="fa-brands fa-linkedin"></i> LinkedIn
-            </a>
-          {{ end }}
-        </div>
-      </article>
-    </div>
+    {{ partial "speakers-carousel.html" . }}
   </div>
 </section>
-{{ end }}
 
 <!-- Day navigation -->
 <section style="padding-top: var(--space-7);">

@@ -7,7 +7,7 @@
 
   <div class="speakers__track" tabindex="0">
     {{ range $s := $speakers }}
-      <article class="speaker-card">
+      <article class="speaker-card{{ if $s.keynote }} speaker-card--keynote{{ end }}">
         <div class="speaker-card__photo">
           {{ if $s.photo }}
             <img src="{{ $s.photo | relURL }}" alt="{{ $s.name }}" loading="lazy">
