@@ -47,7 +47,21 @@
       </div>
       <a href="{{ "/schedule/" | relURL }}" class="btn btn--sm btn--outline">Full schedule &rarr;</a>
     </div>
-    {{ partial "speakers-carousel.html" . }}
+    {{ partial "speakers-carousel.html" (dict "filter" "speakers") }}
+  </div>
+</section>
+
+<!-- Workshop trainers -->
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="mb-5" style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: var(--space-3);">
+      <div>
+        <span class="eyebrow">Lineup</span>
+        <h2 class="section-title" style="margin: 0;">Workshop Trainers</h2>
+      </div>
+      <a href="{{ "/schedule/#workshops" | relURL }}" class="btn btn--sm btn--outline">Workshop schedule &rarr;</a>
+    </div>
+    {{ partial "speakers-carousel.html" (dict "filter" "workshop") }}
   </div>
 </section>
 

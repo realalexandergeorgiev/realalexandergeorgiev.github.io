@@ -1,12 +1,22 @@
-{{ $speakers := site.Data.speakers }}
-{{ if $speakers }}
-<div class="speakers" aria-label="Conference speakers">
+{{ $filter := "" }}
+{{ if (reflect.IsMap .) }}{{ with .filter }}{{ $filter = . }}{{ end }}{{ end }}
+{{ $all := site.Data.speakers }}
+{{ $list := slice }}
+{{ range $all }}
+  {{ if eq $filter "workshop" }}
+    {{ if .workshop }}{{ $list = $list | append . }}{{ end }}
+  {{ else }}
+    {{ if or .talk .keynote }}{{ $list = $list | append . }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if $list }}
+<div class="speakers" aria-label="{{ if eq $filter "workshop" }}Workshop trainers{{ else }}Conference speakers{{ end }}">
   <button class="speakers__nav speakers__nav--prev" aria-label="Previous speakers" type="button">
     <i class="fas fa-chevron-left"></i>
   </button>
 
   <div class="speakers__track" tabindex="0">
-    {{ range $s := $speakers }}
+    {{ range $s := $list }}
       <article class="speaker-card{{ if $s.keynote }} speaker-card--keynote{{ end }}">
         <div class="speaker-card__photo">
           {{ if $s.photo }}
@@ -21,7 +31,11 @@
         <div class="speaker-card__body">
           <h3 class="speaker-card__name">{{ $s.name }}</h3>
           {{ with $s.role }}<p class="speaker-card__role">{{ . }}</p>{{ end }}
-          {{ with $s.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
+          {{ if eq $filter "workshop" }}
+            {{ with $s.workshop }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
+          {{ else }}
+            {{ with $s.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
+          {{ end }}
           {{ with $s.bio }}<p class="speaker-card__bio" title="{{ . }}">{{ . }}</p>{{ end }}
           {{ with $s.linkedin }}
             <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} on LinkedIn">

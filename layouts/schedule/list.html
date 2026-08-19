@@ -23,7 +23,7 @@
       <span class="eyebrow">Lineup</span>
       <h2 class="section-title section-title--center">Conference Speakers</h2>
     </div>
-    {{ partial "speakers-carousel.html" . }}
+    {{ partial "speakers-carousel.html" (dict "filter" "speakers") }}
   </div>
 </section>
 
@@ -78,6 +78,11 @@
       <span class="day-block__date">11 September 2026</span>
       <h2 class="section-title section-title--center">Day 2 &middot; Workshops</h2>
       <p class="lead" style="margin: 0 auto;">Workshops 09:00&ndash;18:00. All times local (CEST). Subject to change.</p>
+    </div>
+
+    <!-- Workshop trainers -->
+    <div class="mb-5">
+      {{ partial "speakers-carousel.html" (dict "filter" "workshop") }}
     </div>
 
     <div class="workshop-info" style="max-width: 860px; margin: 0 auto var(--space-5);">

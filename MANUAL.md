@@ -353,15 +353,17 @@ Delete the `.md` file. Done.
 
 ### 5.8 Update the schedule
 
-**Files:** `layouts/schedule/list.html` (page structure) + `data/speakers.yaml` (keynote data).
+**Files:** `layouts/schedule/list.html` (page structure) + `data/speakers.yaml` (speaker/trainer data).
 
 > **The `content/schedule/_index.md` body is not rendered.** The layout does not call `.Content` - only the file's frontmatter (`title`, `description`) feeds the page header. Editing the markdown body has no visible effect.
 
-The page has two parts:
+The page has these blocks:
 
-1. **Keynote card (data-driven).** The layout ranges over `data/speakers.yaml` and renders every entry flagged `keynote: true` as a highlighted card (photo or auto-initials avatar, role, talk title, full bio, LinkedIn link). To announce a keynote, just set `keynote: true` on that speaker - see §5.12. The keynote bio is shown in full (not truncated).
-
-2. **"Full timetable coming soon" box.** A static placeholder shown while the CFP is open.
+1. **Conference Speakers carousel** (data-driven via `speakers-carousel.html` with `filter: "speakers"`) - shows all speakers from `data/speakers.yaml`; the keynote is highlighted with the `speaker-card--keynote` modifier (border + glow). See §5.12.
+2. **Day navigation** - anchor links to `#day-1` (talks) and `#day-2` (workshops).
+3. **Day 1 - Talks** - a pretalx schedule widget (`<pretalx-schedule>`) for the presentations CFP.
+4. **Day 2 - Workshops** - a **Workshop Trainers carousel** (`filter: "workshop"`) followed by the workshop info box and a pretalx schedule widget for the workshops CFP.
+5. **Tickets & catering** callout.
 
 #### Publishing the full timetable
 
@@ -483,11 +485,16 @@ To change wording (mission text, button labels), edit `layouts/women/list.html` 
 
 ---
 
-### 5.12 Add speakers
+### 5.12 Add speakers & trainers
 
 **File:** `data/speakers.yaml`
 
-The **Featured Speakers** carousel is live on the homepage - it renders just after the stats strip via the `layouts/partials/speakers-carousel.html` partial. Every entry in `data/speakers.yaml` becomes a card in the carousel.
+This file holds **both** conference speakers and workshop trainers. The `layouts/partials/speakers-carousel.html` partial is data-driven from it and takes a `filter` argument that decides which entries to show:
+
+- `filter: "speakers"` (default) → entries with a `talk:` field (or `keynote: true`). Rendered in the **Featured Speakers** carousel on the homepage and the **Conference Speakers** carousel on `/schedule/`.
+- `filter: "workshop"` → entries with a `workshop:` field. Rendered in the **Workshop Trainers** carousel on the homepage (after Featured Speakers) and inside the **Day 2** block on `/schedule/`.
+
+A single person who both gives a talk and runs a workshop just needs one entry with both `talk:` and `workshop:` set - they appear in both carousels automatically.
 
 ```yaml
 - name: "Real Speaker Name"
@@ -495,24 +502,21 @@ The **Featured Speakers** carousel is live on the homepage - it renders just aft
   photo: "/images/speakers/real-speaker.jpg"      # leave "" for an auto-initials avatar
   role: "Their job title and company"
   bio: "Short bio. Truncated to 3 lines on the carousel card; full text shows in a mouseover tooltip."
-  linkedin: "https://www.linkedin.com/in/..."     # optional
-  talk: "Title of their talk"
+  linkedin: "https://www.linkedin.com/in/..."     # optional, must include https://
+  talk: "Title of their talk"                     # conference speaker (talks carousel)
+  # workshop: "Title of their workshop"           # workshop trainer (trainers carousel)
 ```
 
 #### The `keynote` flag
 
-Setting `keynote: true` on a speaker does two things:
-
-- They still appear in the homepage carousel like any other speaker.
-- They are **also rendered as a highlighted Keynote card on the `/schedule/` page** (see §5.8), with the bio shown in full.
-
-Keep at most one speaker flagged as the keynote.
+Setting `keynote: true` on a speaker adds the `speaker-card--keynote` modifier to their card - a primary-coloured border, a subtle glow, and a slightly larger photo. They appear in the speakers carousel like any other speaker, just visually highlighted. Keep at most one speaker flagged as the keynote.
 
 #### Notes
 
-- **Bios** are truncated to 3 lines on carousel cards via CSS (`-webkit-line-clamp: 3`). The full text is exposed automatically as a native mouseover tooltip (the `title` attribute). To show a bio in full on a given card, add the CSS class `speaker-card__bio--full` to the `<p>` - this is what the schedule keynote card uses.
+- **Bios** are truncated to 3 lines on carousel cards via CSS (`-webkit-line-clamp: 3`). The full text is exposed automatically as a native mouseover tooltip (the `title` attribute).
 - **Photos** render best as square source images (~800x800). Drop them in `static/images/speakers/`. The `photo` value is passed through Hugo's `relURL`, so absolute `https://` URLs technically work too, but external/hotlinked images are not recommended (breakage, privacy, no optimisation).
-- To **add more speakers**, just append entries to `data/speakers.yaml` - the carousel picks them up automatically.
+- **LinkedIn URLs** must include the `https://` scheme - without it the browser treats them as relative paths.
+- To **add more speakers or trainers**, just append entries to `data/speakers.yaml` - the carousels pick them up automatically based on the `talk:` / `workshop:` field.
 
 ---
 
