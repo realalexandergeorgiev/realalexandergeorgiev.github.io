@@ -38,6 +38,7 @@
   talk: "Lessons learned while building an Agentic SOC: The good, the bad, and the scary."
   linkedin: "https://www.linkedin.com/in/aaron-jewitt/"
 - name: "Georg Heise"
+  photo: "/images/speakers/georgheise.png"
   role: "Senior Offensive Security Consultant and Security Researcher, Lufthansa Industry Solution"
   bio: "Georg Heise is a Senior Offensive Security Consultant at Lufthansa Industry Solutions, specializing in enterprise offensive security, identity security, and AI-driven research. With a decade of experience leading security assessments for Fortune 500 companies and critical infrastructure, he also advises an international logistics group on information security and digitalization. His work bridges offensive security and AI-powered tooling, aiming to help organizations prepare for autonomous attackers."
   talk: "Welcome to Hybrid Hell - Breaking Enterprise Identity beyond Active Directory"
