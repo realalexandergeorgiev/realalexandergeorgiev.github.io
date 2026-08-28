@@ -14,3 +14,6 @@ social:
   mastodon: "https://infosec.exchange/@bsidesfra"
   linkedin: "https://www.linkedin.com/company/bsides-frankfurt/"
   email: "info@bsidesfrankfurt.org"
+stats:
+  attendees: 250
+  editions: 4

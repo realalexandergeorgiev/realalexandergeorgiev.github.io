@@ -524,13 +524,19 @@ Setting `keynote: true` on a speaker adds the `speaker-card--keynote` modifier t
 
 **File:** `layouts/index.html` (the homepage layout)
 
-The "300 Attendees / 8 Talks / 12 Workshops / 4 Editions" row near the top of the homepage is hardcoded in the layout. To change a number, edit the `data-count-to="..."` attribute - the JS animates from 0 up to that number when the section scrolls into view:
+The stats row near the top of the homepage ("Attendees / Talks / Workshops / Editions") is data-driven, not hardcoded:
+
+- **Attendees** and **Editions** come from `data/event.yaml` (`stats.attendees`, `stats.editions`). Edit those values to change the numbers.
+- **Talks** is computed automatically from `data/speakers.yaml` (every entry with a `talk` or `keynote` field).
+- **Workshops** is computed automatically as the number of *distinct* `workshop` titles in `data/speakers.yaml` (co-trainers on one workshop don't inflate the count).
+
+The `data-count-to="..."` attribute is rendered from these values; the JS animates from 0 up to that number when the section scrolls into view:
 
 ```html
-<div class="stat"><span class="stat__value" data-count-to="300">0</span><span class="stat__label">Attendees</span></div>
+<div class="stat"><span class="stat__value" data-count-to="{{ $event.stats.attendees }}">0</span><span class="stat__label">Attendees</span></div>
 ```
 
-To add/remove a stat tile, copy/delete the surrounding `<div class="stat">` block.
+To add/remove a stat tile, copy/delete the surrounding `<div class="stat">` block. To change the workshop count, add/remove `workshop:` entries in `data/speakers.yaml`.
 
 ---
 

@@ -26,13 +26,18 @@
 </section>
 
 <!-- Stats strip -->
+{{ $talkers := slice }}
+{{ range site.Data.speakers }}{{ if or .talk .keynote }}{{ $talkers = $talkers | append . }}{{ end }}{{ end }}
+{{ $workshops := slice }}
+{{ range site.Data.speakers }}{{ with .workshop }}{{ $workshops = $workshops | append . }}{{ end }}{{ end }}
+{{ $workshopCount := len ($workshops | uniq) }}
 <section style="padding-top: 0; padding-bottom: var(--space-7);">
   <div class="container">
     <div class="stats">
-      <div class="stat"><span class="stat__value" data-count-to="300">0</span><span class="stat__label">Attendees</span></div>
-      <div class="stat"><span class="stat__value" data-count-to="8">0</span><span class="stat__label">Talks</span></div>
-      <div class="stat"><span class="stat__value" data-count-to="8">0</span><span class="stat__label">Workshops</span></div>
-      <div class="stat"><span class="stat__value" data-count-to="4">0</span><span class="stat__label">Editions</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="{{ $event.stats.attendees }}">0</span><span class="stat__label">Attendees</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="{{ len $talkers }}">0</span><span class="stat__label">Talks</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="{{ $workshopCount }}">0</span><span class="stat__label">Workshops</span></div>
+      <div class="stat"><span class="stat__value" data-count-to="{{ $event.stats.editions }}">0</span><span class="stat__label">Editions</span></div>
     </div>
   </div>
 </section>
