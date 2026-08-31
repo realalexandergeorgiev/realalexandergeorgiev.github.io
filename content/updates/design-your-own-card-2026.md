@@ -37,6 +37,10 @@ To get you started, here's a ready-to-edit **SVG template**. Open it in whatever
 
 ![Example designs from the community](/images/blog/2026-card-template-03.svg)
 
+![Example designs from the community](/images/blog/2026-card-template-umbrella.svg)
+![Example designs from the community](/images/blog/2026-card-template-homer.svg)
+
+
 ## Get yours printed — on us
 
 Here's the deal: send us your finished design before conference week and we'll **print it and hand it to you on the day of the conference**. Guaranteed. No on-site queue, no printing fee, no "maybe".
