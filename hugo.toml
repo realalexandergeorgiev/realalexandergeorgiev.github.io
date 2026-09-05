@@ -10,7 +10,7 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   description = "BSidesFrankfurt - community-driven information security conference"
-  logo = "/images/bsides-frankfurt-logo-main.svg"
+  logo = "/images/bsides-frankfurt-logo-white.svg"
 
 [markup.goldmark.renderer]
   unsafe = true

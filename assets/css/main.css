@@ -412,7 +412,7 @@ section { padding: var(--space-8) 0; }
   align-items: center;
   gap: var(--space-4);
 }
-.hero__logo { width: 100%; max-width: 420px; height: auto; margin-bottom: var(--space-3); }
+.hero__logo { width: 100%; max-width: 640px; height: auto; margin-bottom: var(--space-3); }
 .hero__title {
   font-size: clamp(2rem, 5vw, var(--fs-4xl));
   text-transform: uppercase;
@@ -1881,7 +1881,7 @@ section { padding: var(--space-8) 0; }
 
   /* Hero */
   .hero { padding-top: var(--space-7); padding-bottom: var(--space-6); }
-  .hero__logo { max-width: 280px; }
+  .hero__logo { max-width: min(440px, 88vw); }
   .hero__title { font-size: clamp(1.5rem, 7vw, 2.25rem); }
   .hero__date { font-size: var(--fs-base); padding: 6px 16px; }
 

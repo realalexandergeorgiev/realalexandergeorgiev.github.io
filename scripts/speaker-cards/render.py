@@ -1,25 +1,34 @@
 #!/usr/bin/env python3
 """Render BSides Frankfurt speaker cards as PNGs.
 
-Usage: .venv/bin/python scripts/speaker-cards/render.py [--background OPTION]
+Usage: python3 scripts/speaker-cards/render.py [--background OPTION]
 Options for --background: "transparent" (default), "page" (site bg color),
                           or a hex color like "#1a1c1f".
-Output: static/mediakit/speaker-cards/<slug>.png (960px wide, 3x scale)
+Output: static/mediakit/speaker-cards/<slug>.png (960px wide, uniform height,
+        3x scale). All cards share one fixed height (tallest card) so every
+        image has identical dimensions.
 """
 
 import argparse
 import functools
 import html
 import http.server
+import math
 import os
 import pathlib
 import re
 import shutil
 import socketserver
+import sys
 import threading
 import time
 import unicodedata
 from urllib.parse import unquote
+
+VENV_DIR = pathlib.Path(__file__).resolve().parent / ".venv"
+VENV_PYTHON = VENV_DIR / "bin" / "python"
+if VENV_PYTHON.exists() and pathlib.Path(sys.prefix).resolve() != VENV_DIR.resolve():
+    os.execv(str(VENV_PYTHON), [str(VENV_PYTHON), __file__, *sys.argv[1:]])
 
 import yaml
 from playwright.sync_api import sync_playwright
@@ -32,6 +41,101 @@ PORT = 8765
 ORIGIN = f"http://127.0.0.1:{PORT}"
 CARD_WIDTH = 320
 SCALE = 3
+
+# ISO/IEC 7810 ID-1 (CR80) credit-card format: 85.60 x 54.00 mm.
+# 428:270 == 85.6:54 exactly (both x5), so 3x scale yields a ratio-exact PNG.
+ID1_WIDTH = 428
+ID1_HEIGHT = 270
+ID1P_WIDTH = 270
+ID1P_HEIGHT = 428
+
+_CLAMP_2_LINES = """    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }"""
+
+ID1_CSS = f"""
+  .speaker-card--id1 {{
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    min-height: 0;
+    text-align: left;
+    overflow: hidden;
+  }}
+  .speaker-card--id1 .speaker-card__photo {{
+    width: 96px;
+    height: 96px;
+  }}
+  .speaker-card--id1 .speaker-card__initials {{
+    font-size: 1.6rem;
+  }}
+  .speaker-card--id1 .speaker-card__body {{
+    flex: 1;
+    min-width: 0;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 30px;
+  }}
+  .speaker-card--id1 .speaker-card__name {{ font-size: 1.15rem; }}
+  .speaker-card--id1 .speaker-card__role,
+  .speaker-card--id1 .speaker-card__talk {{
+{_CLAMP_2_LINES}
+  .speaker-card--id1 .speaker-card__role {{ font-size: 0.6rem; }}
+  .speaker-card--id1 .speaker-card__talk {{ font-size: 0.78rem; margin: 0; }}
+  .speaker-card--id1 .speaker-card__bio {{ font-size: 0.72rem; }}
+  .speaker-card--id1 .speaker-card__logo {{
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    width: 104px;
+    margin-top: 0;
+    opacity: 0.9;
+  }}
+"""
+
+ID1P_CSS = f"""
+  .speaker-card--id1p {{
+    gap: 8px;
+    padding: 18px;
+    min-height: 0;
+    overflow: hidden;
+  }}
+  .speaker-card--id1p .speaker-card__photo {{
+    width: 88px;
+    height: 88px;
+    flex: 0 0 auto;
+  }}
+  .speaker-card--id1p .speaker-card__initials {{
+    font-size: 1.5rem;
+  }}
+  .speaker-card--id1p .speaker-card__body {{
+    gap: 5px;
+  }}
+  .speaker-card--id1p .speaker-card__name {{ font-size: 1.1rem; }}
+  .speaker-card--id1p .speaker-card__role,
+  .speaker-card--id1p .speaker-card__talk {{
+{_CLAMP_2_LINES}
+  .speaker-card--id1p .speaker-card__role {{ font-size: 0.58rem; }}
+  .speaker-card--id1p .speaker-card__talk {{ font-size: 0.75rem; margin: 0; }}
+  .speaker-card--id1p .speaker-card__bio {{ font-size: 0.7rem; }}
+  .speaker-card--id1p .speaker-card__logo {{
+    width: 110px;
+    opacity: 0.9;
+  }}
+"""
+
+# fmt name -> (card width px, fixed height px or None for auto, extra CSS class, extra CSS)
+FORMATS = {
+    "portrait": (CARD_WIDTH, None, None, ""),
+    "id1": (ID1_WIDTH, ID1_HEIGHT, "speaker-card--id1", ID1_CSS),
+    "id1-portrait": (ID1P_WIDTH, ID1P_HEIGHT, "speaker-card--id1p", ID1P_CSS),
+}
+
+_HEIGHT_CACHE: dict[tuple[str, str | None], float] = {}
 
 VERSION = "1.0.0"
 BUILD_DATE = "2026-08-14"
@@ -91,7 +195,8 @@ def slugify(name: str) -> str:
     return name.strip("-")
 
 
-def card_html(s: dict, logo: str, bio_text: str | None = None) -> str:
+def card_html(s: dict, logo: str, bio_text: str | None = None,
+              card_height: int | None = None, fmt: str = "portrait") -> str:
     if s.get("photo"):
         photo = (
             '<div class="speaker-card__photo">'
@@ -106,11 +211,12 @@ def card_html(s: dict, logo: str, bio_text: str | None = None) -> str:
             "</div>"
         )
 
+    talk = s.get("talk") or s.get("workshop")
     parts = [f'<h3 class="speaker-card__name">{html.escape(s["name"])}</h3>']
     if s.get("role"):
         parts.append(f'<p class="speaker-card__role">{html.escape(s["role"])}</p>')
-    if s.get("talk"):
-        parts.append(f'<p class="speaker-card__talk">"{html.escape(s["talk"])}"</p>')
+    if talk:
+        parts.append(f'<p class="speaker-card__talk">"{html.escape(talk)}"</p>')
     if s.get("bio"):
         if bio_text is not None:
             parts.append(f'<p class="speaker-card__bio">{html.escape(bio_text)}</p>')
@@ -125,8 +231,14 @@ def card_html(s: dict, logo: str, bio_text: str | None = None) -> str:
         'alt="BSides Frankfurt" loading="eager">'
     )
 
+    fmt_width, _, fmt_class, _ = FORMATS[fmt]
+    size = f"width:{fmt_width}px"
+    if card_height is not None:
+        size += f";height:{card_height}px"
+
+    card_class = "speaker-card" + (f" {fmt_class}" if fmt_class else "")
     return (
-        f'<article class="speaker-card" style="width:{CARD_WIDTH}px">{photo}'
+        f'<article class="{card_class}" style="{size}">{photo}'
         f'<div class="speaker-card__body">{"".join(parts)}</div>{logo}</article>'
     )
 
@@ -193,6 +305,15 @@ def parse_args() -> argparse.Namespace:
         version=TOOL_INFO,
     )
     parser.add_argument(
+        "--format",
+        choices=list(FORMATS),
+        default="portrait",
+        help='Card format: "portrait" (default, 320px wide, uniform height), '
+        '"id1" (credit card ISO/IEC 7810 ID-1 / CR80, landscape, 85.60 x 54.00 mm) '
+        "or \"id1-portrait\" (same card ratio in portrait, 54.00 x 85.60 mm). "
+        "ID-1 files are named <slug>-id1.png / <slug>-id1-portrait.png.",
+    )
+    parser.add_argument(
         "--bio-text",
         metavar="TEXT",
         help='Hide the speaker bio and show this static text instead, e.g. '
@@ -231,8 +352,10 @@ def background_css(value: str) -> str:
 
 
 def page_html(s: dict, background: str, card_overrides: str, logo: str,
-              bio_text: str | None = None) -> str:
+              bio_text: str | None = None, card_height: int | None = None,
+              fmt: str = "portrait") -> str:
     card_css = f".speaker-card {{\n{card_overrides}\n}}\n" if card_overrides else ""
+    fmt_css = FORMATS[fmt][3]
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,7 +364,7 @@ def page_html(s: dict, background: str, card_overrides: str, logo: str,
 <style>
   html, body {{ background: {background} !important; }}
   body {{ margin: 0; padding: 0; }}
-{card_css}  .speaker-card__logo {{
+{card_css}{fmt_css}  .speaker-card__logo {{
     margin-top: auto;
     width: 170px;
     height: auto;
@@ -250,32 +373,73 @@ def page_html(s: dict, background: str, card_overrides: str, logo: str,
 </style>
 </head>
 <body>
-{card_html(s, logo, bio_text)}
+{card_html(s, logo, bio_text, card_height, fmt)}
 </body>
 </html>"""
+
+
+def open_card_page(browser, s: dict, background: str, card_overrides: str, logo: str,
+                   bio_text: str | None, card_height: int | None = None,
+                   fmt: str = "portrait"):
+    slug = slugify(s["name"])
+    tmp_file = TMP_DIR / f"{slug}.html"
+    tmp_file.write_text(
+        page_html(s, background, card_overrides, logo, bio_text, card_height, fmt),
+        encoding="utf-8",
+    )
+
+    card_width = FORMATS[fmt][0]
+    context = browser.new_context(
+        device_scale_factor=SCALE,
+        viewport={"width": card_width + 80, "height": 800},
+    )
+    page = context.new_page()
+    page.goto(
+        f"{ORIGIN}/scripts/speaker-cards/.tmp/{slug}.html",
+        wait_until="networkidle",
+    )
+    page.evaluate("document.fonts.ready.then(() => true)")
+    return context, page
+
+
+def uniform_card_height(browser, speakers: list, background: str, card_overrides: str,
+                        logo: str, bio_text: str | None) -> int:
+    """Measure every card's natural height and return one fixed height for all.
+
+    Heights depend only on speaker content and --bio-text (not on colors or the
+    logo variant), so they are cached across sample-template batches.
+    """
+    for s in speakers:
+        key = (slugify(s["name"]), bio_text)
+        if key in _HEIGHT_CACHE:
+            continue
+        context, page = open_card_page(browser, s, background, card_overrides, logo, bio_text)
+        _HEIGHT_CACHE[key] = page.locator(".speaker-card").bounding_box()["height"]
+        context.close()
+    return math.ceil(max(_HEIGHT_CACHE[(slugify(s["name"]), bio_text)] for s in speakers))
 
 
 def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, prefix: str = "") -> None:
     background = background_css(opts["background"])
     card_overrides = card_style_overrides(opts)
     logo = opts["logo"]
+    bio_text = opts.get("bio_text")
+    fmt = opts.get("format") or "portrait"
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    if fmt != "portrait":
+        _, card_height, _, _ = FORMATS[fmt]
+        prefix = f"{prefix}-{fmt}" if prefix else fmt
+        print(f"{fmt} format: {FORMATS[fmt][0]}x{card_height}px "
+              f"({FORMATS[fmt][0] * SCALE}x{card_height * SCALE}px at {SCALE}x)")
+    else:
+        card_height = uniform_card_height(browser, speakers, background, card_overrides, logo, bio_text)
+        print(f"Uniform card height: {card_height}px ({card_height * SCALE}px at {SCALE}x)")
 
     for s in speakers:
         slug = slugify(s["name"])
-        tmp_file = TMP_DIR / f"{slug}.html"
-        tmp_file.write_text(page_html(s, background, card_overrides, logo, opts.get("bio_text")), encoding="utf-8")
-
-        context = browser.new_context(
-            device_scale_factor=SCALE,
-            viewport={"width": CARD_WIDTH + 80, "height": 800},
-        )
-        page = context.new_page()
-        page.goto(
-            f"{ORIGIN}/scripts/speaker-cards/.tmp/{slug}.html",
-            wait_until="networkidle",
-        )
-        page.evaluate("document.fonts.ready.then(() => true)")
+        context, page = open_card_page(browser, s, background, card_overrides, logo,
+                                       bio_text, card_height, fmt)
         box = page.locator(".speaker-card").bounding_box()
         name = f"{slug}-{prefix}.png" if prefix else f"{slug}.png"
         out_file = out_dir / name
