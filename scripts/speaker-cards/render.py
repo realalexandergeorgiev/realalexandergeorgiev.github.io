@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Render BSides Frankfurt speaker cards as PNGs.
+"""Render BSides Frankfurt speaker/team cards as PNGs.
 
-Usage: python3 scripts/speaker-cards/render.py [--background OPTION]
+Usage: python3 scripts/speaker-cards/render.py [--source speakers|team] [--background OPTION]
 Options for --background: "transparent" (default), "page" (site bg color),
-                          or a hex color like "#1a1c1f".
-Output: static/mediakit/speaker-cards/<slug>.png (960px wide, uniform height,
+                           or a hex color like "#1a1c1f".
+Output: static/mediakit/speaker-cards/<slug>.png or
+        static/mediakit/team-cards/<slug>.png (960px wide, uniform height,
         3x scale). All cards share one fixed height (tallest card) so every
         image has identical dimensions.
 """
@@ -36,7 +37,11 @@ from playwright.sync_api import sync_playwright
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 TMP_DIR = SCRIPT_DIR / ".tmp"
-OUT_DIR = REPO_ROOT / "static" / "mediakit" / "speaker-cards"
+OUT_DIRS = {
+    "speakers": REPO_ROOT / "static" / "mediakit" / "speaker-cards",
+    "team": REPO_ROOT / "static" / "mediakit" / "team-cards",
+}
+OUT_DIR = OUT_DIRS["speakers"]  # default, kept for backwards compatibility
 PORT = 8765
 ORIGIN = f"http://127.0.0.1:{PORT}"
 CARD_WIDTH = 320
@@ -87,6 +92,7 @@ ID1_CSS = f"""
   .speaker-card--id1 .speaker-card__role {{ font-size: 0.6rem; }}
   .speaker-card--id1 .speaker-card__talk {{ font-size: 0.78rem; margin: 0; }}
   .speaker-card--id1 .speaker-card__bio {{ font-size: 0.72rem; }}
+  .speaker-card--id1 .speaker-card__badge {{ font-size: 0.5rem; padding: 2px 9px 2px 11px; }}
   .speaker-card--id1 .speaker-card__logo {{
     position: absolute;
     right: 16px;
@@ -122,10 +128,42 @@ ID1P_CSS = f"""
   .speaker-card--id1p .speaker-card__role {{ font-size: 0.58rem; }}
   .speaker-card--id1p .speaker-card__talk {{ font-size: 0.75rem; margin: 0; }}
   .speaker-card--id1p .speaker-card__bio {{ font-size: 0.7rem; }}
+  .speaker-card--id1p .speaker-card__badge {{ font-size: 0.5rem; padding: 2px 9px 2px 11px; }}
   .speaker-card--id1p .speaker-card__logo {{
     width: 110px;
     opacity: 0.9;
   }}
+"""
+
+DEFAULT_ACCENT = "#9acd32"
+
+GLOW_INNER_CSS = """
+  .speaker-card--glow-inner {
+    box-shadow: inset 0 0 25px 6px __G1__, inset 0 0 70px 20px __G2__;
+  }
+"""
+
+
+def glow_shadows(color: str) -> tuple[str, str]:
+    """Derive two translucent shadow colors from the glow color (tight/wide)."""
+    if re.fullmatch(r"#[0-9a-fA-F]{6}", color):
+        return color + "66", color + "30"
+    return color, color
+
+BADGE_CSS = """
+  .speaker-card__badge {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 3px 12px 3px 14px;
+    margin: 0;
+  }
 """
 
 # fmt name -> (card width px, fixed height px or None for auto, extra CSS class, extra CSS)
@@ -135,10 +173,10 @@ FORMATS = {
     "id1-portrait": (ID1P_WIDTH, ID1P_HEIGHT, "speaker-card--id1p", ID1P_CSS),
 }
 
-_HEIGHT_CACHE: dict[tuple[str, str | None], float] = {}
+_HEIGHT_CACHE: dict[tuple[str, str, str | None, str | None], float] = {}
 
-VERSION = "1.0.0"
-BUILD_DATE = "2026-08-14"
+VERSION = "1.7.0"
+BUILD_DATE = "2026-09-07"
 AUTHOR = "Alexander Georgiev + DeepSeek V4"
 TOOL_INFO = f"BSides Frankfurt Speaker-Card Renderer v{VERSION} (build {BUILD_DATE}) by {AUTHOR}"
 
@@ -195,8 +233,48 @@ def slugify(name: str) -> str:
     return name.strip("-")
 
 
+def load_people(source: str) -> list:
+    """Load card data for the given source.
+
+    "speakers" returns the list from data/speakers.yaml directly.
+    "team" flattens data/team.yaml (organisers + team) and maps the
+    team's "image" field onto "photo" so card_html() works unchanged.
+    Team entries have no talk/workshop/bio, so their cards show only
+    photo, name, role, an optional --bio-text line, and the logo.
+    """
+    if source == "team":
+        team_data = yaml.safe_load((REPO_ROOT / "data" / "team.yaml").read_text(encoding="utf-8"))
+        people = list(team_data.get("organisers", [])) + list(team_data.get("team", []))
+        normalized = []
+        for person in people:
+            entry = dict(person)
+            if "photo" not in entry and entry.get("image"):
+                entry["photo"] = entry["image"]
+            normalized.append(entry)
+        return normalized
+    return yaml.safe_load((REPO_ROOT / "data" / "speakers.yaml").read_text(encoding="utf-8"))
+
+
+def badge_for(source: str, s: dict, override: str | None) -> str | None:
+    """Resolve the badge pill text for a card.
+
+    An explicit --badge value wins (empty string hides the badge).
+    Otherwise: "TEAM" for team cards, "TRAINER" for speakers with a
+    workshop, "SPEAKER" for the rest.
+    """
+    if override is not None:
+        return override or None
+    if source == "team":
+        return "TEAM"
+    if s.get("workshop"):
+        return "TRAINER"
+    return "SPEAKER"
+
+
 def card_html(s: dict, logo: str, bio_text: str | None = None,
-              card_height: int | None = None, fmt: str = "portrait") -> str:
+              card_height: int | None = None, fmt: str = "portrait",
+              source: str = "speakers", badge: str | None = None,
+              glow_inner: str | None = None) -> str:
     if s.get("photo"):
         photo = (
             '<div class="speaker-card__photo">'
@@ -212,22 +290,34 @@ def card_html(s: dict, logo: str, bio_text: str | None = None,
         )
 
     talk = s.get("talk") or s.get("workshop")
-    parts = [f'<h3 class="speaker-card__name">{html.escape(s["name"])}</h3>']
+    parts = []
+    badge_text = badge_for(source, s, badge)
+    if badge_text:
+        parts.append(f'<span class="speaker-card__badge">{html.escape(badge_text)}</span>')
+    parts.append(f'<h3 class="speaker-card__name">{html.escape(s["name"])}</h3>')
     if s.get("role"):
         parts.append(f'<p class="speaker-card__role">{html.escape(s["role"])}</p>')
     if talk:
         parts.append(f'<p class="speaker-card__talk">"{html.escape(talk)}"</p>')
-    if s.get("bio"):
-        if bio_text is not None:
-            parts.append(f'<p class="speaker-card__bio">{html.escape(bio_text)}</p>')
-        else:
-            parts.append(
-                f'<p class="speaker-card__bio" title="{html.escape(s["bio"])}">{html.escape(s["bio"])}</p>'
-            )
+    if bio_text is not None:
+        parts.append(f'<p class="speaker-card__bio">{html.escape(bio_text)}</p>')
+    elif s.get("bio"):
+        parts.append(
+            f'<p class="speaker-card__bio" title="{html.escape(s["bio"])}">{html.escape(s["bio"])}</p>'
+        )
 
-    logo_file = "bsides_logo_white.png" if logo == "light" else "bsides_logo_black.png"
+    # Current website hero logo (SVG on transparent). Team cards always use
+    # the gold variant; speaker cards use white ("light") or white rendered
+    # black via CSS filter ("dark", for light cards), since no separate dark
+    # asset of the new design exists.
+    if source == "team":
+        logo_src = "/images/bsides-frankfurt-logo-gold.svg"
+        logo_filter = ""
+    else:
+        logo_src = "/images/bsides-frankfurt-logo-white.svg"
+        logo_filter = "" if logo == "light" else ' style="filter:brightness(0);"'
     logo = (
-        f'<img class="speaker-card__logo" src="/mediakit/logos/{logo_file}" '
+        f'<img class="speaker-card__logo" src="{logo_src}"{logo_filter} '
         'alt="BSides Frankfurt" loading="eager">'
     )
 
@@ -237,6 +327,8 @@ def card_html(s: dict, logo: str, bio_text: str | None = None,
         size += f";height:{card_height}px"
 
     card_class = "speaker-card" + (f" {fmt_class}" if fmt_class else "")
+    if glow_inner:
+        card_class += " speaker-card--glow-inner"
     return (
         f'<article class="{card_class}" style="{size}">{photo}'
         f'<div class="speaker-card__body">{"".join(parts)}</div>{logo}</article>'
@@ -245,7 +337,37 @@ def card_html(s: dict, logo: str, bio_text: str | None = None,
 
 def parse_args() -> argparse.Namespace:
     parser = InfoArgumentParser(
-        description="Render BSides Frankfurt speaker cards from data/speakers.yaml as PNGs."
+        description="Render BSides Frankfurt speaker/team cards as PNGs "
+        "(data/speakers.yaml or data/team.yaml).",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""manual single card (renders one card instead of the whole list):
+
+  --name NAME --role ROLE [--photo PATH] [--talk TITLE]
+  [--workshop TITLE] [--bio TEXT]
+
+  PATH is a repo web path (e.g. /images/team/max-mustermann.jpg) or an
+  http(s) URL. Without --photo the card shows initials instead.
+
+examples:
+  team member card
+    python3 render.py --source team --name "Erika Mustermann" \\
+        --role "Volunteer" --photo "/images/team/erika-mustermann.jpg" \\
+        --bio-text "BSidesFrankfurt Team 2026"
+
+  speaker card
+    python3 render.py --name "Dr. Evil" \\
+        --role "Security Researcher, ACME Corp" \\
+        --photo "/images/speakers/dr-evil.jpg" \\
+        --talk "Hacking Everything" \\
+        --bio "Dr. Evil has been hacking everything since 1999."
+""",
+    )
+    parser.add_argument(
+        "--source",
+        choices=["speakers", "team"],
+        default="speakers",
+        help='Card source: "speakers" (default, data/speakers.yaml) or "team" '
+        '(data/team.yaml, organisers + team, output to static/mediakit/team-cards/).',
     )
     parser.add_argument(
         "--background",
@@ -279,24 +401,25 @@ def parse_args() -> argparse.Namespace:
         "--logo",
         choices=["light", "dark"],
         default="light",
-        help='BSides logo variant: "light" (white, default, for dark cards) or "dark" '
-        "(black, for light cards).",
+        help='BSides logo variant (website hero SVG): "light" (white, default, '
+        'for dark cards) or "dark" (black via CSS filter, for light cards).',
     )
     parser.add_argument(
         "--samples",
         action="store_true",
         help="Render all predefined color samples (see SAMPLES) to "
-        "static/mediakit/speaker-cards/tests/.",
+        "<output-dir>/tests/.",
     )
     parser.add_argument(
         "--all-samples",
         action="store_true",
-        help="Render every speaker in all sample templates (named <slug>-<sample>.png).",
+        help="Render every person in all sample templates (named <slug>-<sample>.png).",
     )
     parser.add_argument(
         "--output",
         metavar="DIR",
-        help="Output directory (default: static/mediakit/speaker-cards/). "
+        help="Output directory (default: static/mediakit/speaker-cards/ or "
+        "static/mediakit/team-cards/ with --source team). "
         "--samples writes to <DIR>/tests/.",
     )
     parser.add_argument(
@@ -316,10 +439,89 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--bio-text",
         metavar="TEXT",
-        help='Hide the speaker bio and show this static text instead, e.g. '
-        '"September 10, 2026".',
+        help='Hide the bio and show this static text instead, e.g. '
+        '"September 10, 2026". With --source team (no bios) it adds '
+        'a text line to every card.',
+    )
+    parser.add_argument(
+        "--badge",
+        metavar="TEXT",
+        default=None,
+        help='Badge pill above the name. Default is automatic: "TEAM" for '
+        '--source team, "TRAINER" for speakers with a workshop, "SPEAKER" '
+        'for the rest. Use --badge "" to hide the badge.',
+    )
+    parser.add_argument(
+        "--glow-inner",
+        metavar="#RRGGBB",
+        nargs="?",
+        const="accent",
+        default=None,
+        help='Inner glow inside the card edges, fading from the border '
+        'toward the center (print-safe: nothing extends past the card, '
+        'image size unchanged). Bare --glow-inner uses the accent color; '
+        'otherwise pass a hex color, e.g. --glow-inner "#eb3812". '
+        'Ideal for printed ID-1 badges.',
+    )
+    group = parser.add_argument_group(
+        "manual single card",
+        "Render one card from command-line values instead of the YAML list "
+        "(requires --name; see examples below).",
+    )
+    group.add_argument(
+        "--name",
+        metavar="NAME",
+        help='Full name for a manual single card, e.g. "Erika Mustermann".',
+    )
+    group.add_argument(
+        "--role",
+        metavar="ROLE",
+        default=None,
+        help='Role/job title line, e.g. "Volunteer" or '
+        '"Security Researcher, ACME Corp".',
+    )
+    group.add_argument(
+        "--photo",
+        metavar="PATH",
+        default=None,
+        help='Photo: repo web path (e.g. "/images/team/erika-mustermann.jpg") '
+        "or http(s) URL. Without --photo the card shows initials.",
+    )
+    group.add_argument(
+        "--talk",
+        metavar="TITLE",
+        default=None,
+        help='Talk title (speakers), e.g. "Hacking Everything".',
+    )
+    group.add_argument(
+        "--workshop",
+        metavar="TITLE",
+        default=None,
+        help='Workshop title (marks the card with a TRAINER badge).',
+    )
+    group.add_argument(
+        "--bio",
+        metavar="TEXT",
+        default=None,
+        help="Bio text line (speakers).",
     )
     return parser.parse_args()
+
+
+def manual_person(args: argparse.Namespace) -> dict:
+    """Build a single card entry from the manual --name/--role/... flags."""
+    person = {"name": args.name}
+    if args.role:
+        person["role"] = args.role
+    if args.photo:
+        person["photo"] = args.photo
+    if args.talk:
+        person["talk"] = args.talk
+    if args.workshop:
+        person["workshop"] = args.workshop
+    if args.bio:
+        person["bio"] = args.bio
+    return person
 
 
 def parse_color(value: str, option: str) -> str:
@@ -351,11 +553,31 @@ def background_css(value: str) -> str:
     return parse_color(value, "background")
 
 
+def resolve_glow(opts: dict, key: str = "glow_inner") -> str | None:
+    """Resolve the --glow-inner option to a CSS color, or None when disabled.
+
+    A bare flag uses the accent color (--accent or the default green).
+    """
+    glow = opts.get(key)
+    if glow is None:
+        return None
+    if glow == "accent":
+        return opts.get("accent") or DEFAULT_ACCENT
+    return parse_color(glow, key.replace("_", "-"))
+
+
 def page_html(s: dict, background: str, card_overrides: str, logo: str,
               bio_text: str | None = None, card_height: int | None = None,
-              fmt: str = "portrait") -> str:
+              fmt: str = "portrait", source: str = "speakers",
+              badge: str | None = None,
+              glow_inner: str | None = None) -> str:
     card_css = f".speaker-card {{\n{card_overrides}\n}}\n" if card_overrides else ""
     fmt_css = FORMATS[fmt][3]
+    glow_css = ""
+    if glow_inner:
+        g1, g2 = glow_shadows(glow_inner)
+        glow_css += GLOW_INNER_CSS.replace("__G1__", g1).replace("__G2__", g2)
+    card = card_html(s, logo, bio_text, card_height, fmt, source, badge, glow_inner)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -364,7 +586,7 @@ def page_html(s: dict, background: str, card_overrides: str, logo: str,
 <style>
   html, body {{ background: {background} !important; }}
   body {{ margin: 0; padding: 0; }}
-{card_css}{fmt_css}  .speaker-card__logo {{
+{card_css}{fmt_css}{BADGE_CSS}{glow_css}  .speaker-card__logo {{
     margin-top: auto;
     width: 170px;
     height: auto;
@@ -373,18 +595,21 @@ def page_html(s: dict, background: str, card_overrides: str, logo: str,
 </style>
 </head>
 <body>
-{card_html(s, logo, bio_text, card_height, fmt)}
+{card}
 </body>
 </html>"""
 
 
 def open_card_page(browser, s: dict, background: str, card_overrides: str, logo: str,
                    bio_text: str | None, card_height: int | None = None,
-                   fmt: str = "portrait"):
+                   fmt: str = "portrait", source: str = "speakers",
+                   badge: str | None = None,
+                   glow_inner: str | None = None):
     slug = slugify(s["name"])
     tmp_file = TMP_DIR / f"{slug}.html"
     tmp_file.write_text(
-        page_html(s, background, card_overrides, logo, bio_text, card_height, fmt),
+        page_html(s, background, card_overrides, logo, bio_text, card_height,
+                  fmt, source, badge, glow_inner),
         encoding="utf-8",
     )
 
@@ -403,20 +628,26 @@ def open_card_page(browser, s: dict, background: str, card_overrides: str, logo:
 
 
 def uniform_card_height(browser, speakers: list, background: str, card_overrides: str,
-                        logo: str, bio_text: str | None) -> int:
+                        logo: str, bio_text: str | None, source: str = "speakers",
+                        badge: str | None = None,
+                        glow_inner: str | None = None) -> int:
     """Measure every card's natural height and return one fixed height for all.
 
-    Heights depend only on speaker content and --bio-text (not on colors or the
-    logo variant), so they are cached across sample-template batches.
+    Heights depend only on card content, the source, --bio-text and --badge
+    (not on colors, the inner glow or the logo variant), so they are cached
+    across sample-template batches.
     """
     for s in speakers:
-        key = (slugify(s["name"]), bio_text)
+        key = (source, slugify(s["name"]), bio_text, badge)
         if key in _HEIGHT_CACHE:
             continue
-        context, page = open_card_page(browser, s, background, card_overrides, logo, bio_text)
+        context, page = open_card_page(browser, s, background, card_overrides, logo,
+                                       bio_text, None, "portrait", source, badge,
+                                       glow_inner)
         _HEIGHT_CACHE[key] = page.locator(".speaker-card").bounding_box()["height"]
         context.close()
-    return math.ceil(max(_HEIGHT_CACHE[(slugify(s["name"]), bio_text)] for s in speakers))
+    return math.ceil(max(_HEIGHT_CACHE[(source, slugify(s["name"]), bio_text, badge)]
+                         for s in speakers))
 
 
 def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, prefix: str = "") -> None:
@@ -425,7 +656,12 @@ def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, pre
     logo = opts["logo"]
     bio_text = opts.get("bio_text")
     fmt = opts.get("format") or "portrait"
+    source = opts.get("source") or "speakers"
+    badge = opts.get("badge")
+    glow_inner = resolve_glow(opts, "glow_inner")
     out_dir.mkdir(parents=True, exist_ok=True)
+    if glow_inner:
+        print(f"Inner glow: {glow_inner} (inset, edge fading inward, print-safe)")
 
     if fmt != "portrait":
         _, card_height, _, _ = FORMATS[fmt]
@@ -433,13 +669,15 @@ def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, pre
         print(f"{fmt} format: {FORMATS[fmt][0]}x{card_height}px "
               f"({FORMATS[fmt][0] * SCALE}x{card_height * SCALE}px at {SCALE}x)")
     else:
-        card_height = uniform_card_height(browser, speakers, background, card_overrides, logo, bio_text)
+        card_height = uniform_card_height(browser, speakers, background, card_overrides,
+                                          logo, bio_text, source, badge, glow_inner)
         print(f"Uniform card height: {card_height}px ({card_height * SCALE}px at {SCALE}x)")
 
     for s in speakers:
         slug = slugify(s["name"])
         context, page = open_card_page(browser, s, background, card_overrides, logo,
-                                       bio_text, card_height, fmt)
+                                       bio_text, card_height, fmt, source, badge,
+                                       glow_inner)
         box = page.locator(".speaker-card").bounding_box()
         name = f"{slug}-{prefix}.png" if prefix else f"{slug}.png"
         out_file = out_dir / name
@@ -456,8 +694,13 @@ def render_cards(browser, speakers: list, opts: dict, out_dir: pathlib.Path, pre
 def main() -> None:
     args = parse_args()
     print(TOOL_INFO)
-    out_dir = pathlib.Path(args.output) if args.output else OUT_DIR
-    speakers = yaml.safe_load((REPO_ROOT / "data" / "speakers.yaml").read_text(encoding="utf-8"))
+    out_dir = pathlib.Path(args.output) if args.output else OUT_DIRS[args.source]
+    if args.name:
+        speakers = [manual_person(args)]
+        print(f"Manual card: {args.name} ({args.source} style) -> {out_dir}")
+    else:
+        speakers = load_people(args.source)
+        print(f"Source: {args.source} ({len(speakers)} cards) -> {out_dir}")
 
     socketserver.TCPServer.allow_reuse_address = True
     handler = functools.partial(QuietHandler, directory=str(REPO_ROOT))
@@ -480,7 +723,7 @@ def main() -> None:
                         for name, sample in SAMPLES.items():
                             render_cards(browser, speakers, {**vars(args), **sample}, out_dir / "tests", prefix=name)
                     if args.all_samples:
-                        print(f"Rendering all speakers in {len(SAMPLES)} sample templates ...")
+                        print(f"Rendering all {args.source} in {len(SAMPLES)} sample templates ...")
                         for name, sample in SAMPLES.items():
                             render_cards(browser, speakers, {**vars(args), **sample}, out_dir, prefix=name)
                     if not args.samples and not args.all_samples:
