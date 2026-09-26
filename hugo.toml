@@ -1,7 +1,7 @@
 # Build with Hugo v0.160+ extended.
 # To pin in Cloudflare Pages build env: set HUGO_VERSION=0.160.1
 baseURL = "https://bsidesfrankfurt.org/"
-languageCode = "en-us"
+locale = "en-US"
 title = "BSidesFrankfurt"
 enableRobotsTXT = true
 

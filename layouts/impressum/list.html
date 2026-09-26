@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $imprint := site.Data.impressum }}
+{{ $imprint := hugo.Data.impressum }}
 {{ partial "page-header.html" (dict
   "eyebrow" "Legal"
   "title" "Impressum"

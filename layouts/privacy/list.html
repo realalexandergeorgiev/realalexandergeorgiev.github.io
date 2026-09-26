@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $imprint := site.Data.impressum }}
+{{ $imprint := hugo.Data.impressum }}
 {{ partial "page-header.html" (dict
   "eyebrow" "Legal"
   "title" "Privacy Policy"
@@ -9,8 +9,8 @@
 <section>
   <div class="container" style="max-width: 760px;">
     <div class="article__body">
-      <p><em>Last updated: {{ site.Data.privacy.updated }}</em></p>
-      {{ range site.Data.privacy.sections }}
+      <p><em>Last updated: {{ hugo.Data.privacy.updated }}</em></p>
+      {{ range hugo.Data.privacy.sections }}
         <h2>{{ .heading }}</h2>
         {{ if eq .use "controller" }}
           <p>

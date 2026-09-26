@@ -834,6 +834,26 @@ section { padding: var(--space-8) 0; }
   background: var(--color-primary);
   border-color: var(--color-primary);
 }
+.speaker-card__links {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.speaker-card__links .speaker-card__link {
+  margin-top: 0;
+}
+.speaker-card__link--slides {
+  color: var(--color-bg);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.speaker-card__link--slides:hover {
+  color: var(--color-text);
+  background: transparent;
+  border-color: var(--color-primary);
+}
 
 /* Keynote speaker - subtle emphasis inside carousel */
 .speaker-card--keynote {
@@ -1121,6 +1141,41 @@ section { padding: var(--space-8) 0; }
   font-weight: bold;
 }
 .workshop-info__list strong { color: var(--color-text); }
+
+/* ============================================
+   Slides list (schedule page)
+   ============================================ */
+.slides-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.slides-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+.slides-list__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.slides-list__text strong { color: var(--color-text); }
+.slides-list__text span {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
 
 /* ============================================
    BSides Women page

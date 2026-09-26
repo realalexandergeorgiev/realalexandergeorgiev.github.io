@@ -1,6 +1,6 @@
 {{ $filter := "" }}
 {{ if (reflect.IsMap .) }}{{ with .filter }}{{ $filter = . }}{{ end }}{{ end }}
-{{ $all := site.Data.speakers }}
+{{ $all := hugo.Data.speakers }}
 {{ $list := slice }}
 {{ range $all }}
   {{ if eq $filter "workshop" }}
@@ -37,10 +37,21 @@
             {{ with $s.talk }}<p class="speaker-card__talk">"{{ . }}"</p>{{ end }}
           {{ end }}
           {{ with $s.bio }}<p class="speaker-card__bio" title="{{ . }}">{{ . }}</p>{{ end }}
-          {{ with $s.linkedin }}
-            <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} on LinkedIn">
-              <i class="fa-brands fa-linkedin"></i> LinkedIn
-            </a>
+          {{ if or $s.linkedin $s.slides }}
+          <div class="speaker-card__links">
+            {{ with $s.slides }}
+              {{ $href := . }}
+              {{ if not (or (hasPrefix . "http://") (hasPrefix . "https://")) }}{{ $href = (. | relURL) }}{{ end }}
+              <a href="{{ $href }}" class="speaker-card__link speaker-card__link--slides" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} slides">
+                <i class="fas fa-file-pdf"></i> Slides
+              </a>
+            {{ end }}
+            {{ with $s.linkedin }}
+              <a href="{{ . }}" class="speaker-card__link" target="_blank" rel="noopener noreferrer" aria-label="{{ $s.name }} on LinkedIn">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+            {{ end }}
+          </div>
           {{ end }}
         </div>
       </article>

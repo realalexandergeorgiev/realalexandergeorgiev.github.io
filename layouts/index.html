@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := site.Data.event }}
+{{ $event := hugo.Data.event }}
 
 <section class="hero">
   <div class="container hero__inner">
@@ -28,9 +28,9 @@
 
 <!-- Stats strip -->
 {{ $talkers := slice }}
-{{ range site.Data.speakers }}{{ if or .talk .keynote }}{{ $talkers = $talkers | append . }}{{ end }}{{ end }}
+{{ range hugo.Data.speakers }}{{ if or .talk .keynote }}{{ $talkers = $talkers | append . }}{{ end }}{{ end }}
 {{ $workshops := slice }}
-{{ range site.Data.speakers }}{{ with .workshop }}{{ $workshops = $workshops | append . }}{{ end }}{{ end }}
+{{ range hugo.Data.speakers }}{{ with .workshop }}{{ $workshops = $workshops | append . }}{{ end }}{{ end }}
 {{ $workshopCount := len ($workshops | uniq) }}
 <section style="padding-top: 0; padding-bottom: var(--space-7);">
   <div class="container">
@@ -72,7 +72,7 @@
 </section>
 
 <!-- Sponsors - grid only (spotlight removed) -->
-{{ $sponsorOpts := site.Data.sponsors.options | default dict }}
+{{ $sponsorOpts := hugo.Data.sponsors.options | default dict }}
 {{ $sponsorBg := $sponsorOpts.background | default "dark" }}
 {{ $sponsorClass := printf "sponsors sponsors--%s" $sponsorBg }}
 <section class="{{ $sponsorClass }}">

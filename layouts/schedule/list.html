@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $event := site.Data.event }}
+{{ $event := hugo.Data.event }}
 
 {{ partial "page-header.html" (dict
   "eyebrow" "2026 Conference"
@@ -70,6 +70,36 @@
   </div>
 </section>
 
+<!-- ============ SLIDES & EXTRAS ============ -->
+{{ $withSlides := slice }}
+{{ range hugo.Data.speakers }}{{ if .slides }}{{ $withSlides = $withSlides | append . }}{{ end }}{{ end }}
+{{ if $withSlides }}
+<section style="padding-top: 0;">
+  <div class="container" style="max-width: 860px;">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Downloads</span>
+      <h2 class="section-title section-title--center">Slides &amp; extras</h2>
+      <p class="lead" style="margin: 0 auto;">Slides shared by our speakers — more to come as they trickle in.</p>
+    </div>
+    <ul class="slides-list">
+      {{ range $withSlides }}
+        {{ $href := .slides }}
+        {{ if not (or (hasPrefix .slides "http://") (hasPrefix .slides "https://")) }}{{ $href = (.slides | relURL) }}{{ end }}
+        <li class="slides-list__item">
+          <div class="slides-list__text">
+            <strong>{{ with .talk }}{{ . }}{{ else }}{{ with .workshop }}{{ . }}{{ else }}Keynote{{ end }}{{ end }}</strong>
+            <span>{{ .name }}</span>
+          </div>
+          <a href="{{ $href }}" class="btn btn--sm btn--outline" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-file-pdf"></i> Slides
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
+
 <!-- ============ DAY 2 — WORKSHOPS ============ -->
 <section id="day-2" class="day-block">
   <span id="workshops" aria-hidden="true"></span>
@@ -87,7 +117,7 @@
 
     <div class="workshop-info" style="max-width: 860px; margin: 0 auto var(--space-5);">
       {{ $ws := slice }}
-      {{ range site.Data.speakers }}{{ with .workshop }}{{ $ws = $ws | append . }}{{ end }}{{ end }}
+      {{ range hugo.Data.speakers }}{{ with .workshop }}{{ $ws = $ws | append . }}{{ end }}{{ end }}
       {{ $wsCount := len ($ws | uniq) }}
       <p style="margin-bottom: var(--space-3); font-size: var(--fs-md); color: var(--color-text);">
         Expect <strong>{{ $wsCount }} workshops</strong> this year, targeting a mix of beginners and advanced topics.
